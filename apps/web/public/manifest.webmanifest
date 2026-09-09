@@ -1,0 +1,1 @@
+{"name":"PrayerTime","short_name":"PrayerTime","description":"Prayer times calculated locally, with transparent methods.","id":"/","start_url":"/","scope":"/","display":"standalone","background_color":"#f4f7fb","theme_color":"#076779","icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]}

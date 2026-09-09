@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-09",
+  "location": {"latitude_deg": 52.52, "longitude_deg": 13.405},
+  "timezone": "Europe/Berlin",
+  "profiles": {"fiqh": "fiqh.shafii@1", "calculation": "calc.mwl@1"},
+  "high_latitude": "one_seventh",
+  "rounding": "nearest_minute",
+  "adjustments_minutes": {},
+  "ramadan": null
+}

@@ -1,0 +1,20 @@
+/target/
+/dist/
+**/node_modules/
+**/dist/
+**/.vinext/
+**/.wrangler/
+**/.vite/
+**/.next/
+**/tsconfig.tsbuildinfo
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+/tmp/
+/output/
+*.pdf
+
+# Original research documents stay local; hosted source contains the app.
+/doc/

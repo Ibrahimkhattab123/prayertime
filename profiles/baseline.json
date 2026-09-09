@@ -1,0 +1,18 @@
+{
+  "package_version": "0.1.0-draft",
+  "status": "draft",
+  "source_status": "provider_attributed",
+  "source": "Paper chapters 18, 20, 31 and 39; not independently authority-verified",
+  "methods": [
+    {"id":"calc.mwl@1","name":"Muslim World League","fajr_angle":18.0,"isha_angle":17.0,"isha_minutes":null,"ramadan_minutes":null},
+    {"id":"calc.isna@1","name":"ISNA","fajr_angle":15.0,"isha_angle":15.0,"isha_minutes":null,"ramadan_minutes":null},
+    {"id":"calc.karachi@1","name":"Karachi","fajr_angle":18.0,"isha_angle":18.0,"isha_minutes":null,"ramadan_minutes":null},
+    {"id":"calc.umm_al_qura@1","name":"Umm al-Qura style","fajr_angle":18.5,"isha_angle":null,"isha_minutes":90.0,"ramadan_minutes":120.0}
+  ],
+  "fiqh": [
+    {"id":"fiqh.shafii@1","name":"Shafi‘i Asr","asr_factor":1.0},
+    {"id":"fiqh.hanafi_abu_hanifa@1","name":"Hanafi · Abu Hanifa Asr","asr_factor":2.0},
+    {"id":"fiqh.hanafi_sahibayn@1","name":"Hanafi · Sahibayn Asr","asr_factor":1.0}
+  ],
+  "limitations": ["Fiqh profiles currently resolve Asr only, not complete school-specific legal windows or shafaq opinions.","Method twilight angles are numerical conventions from the draft; they do not independently certify observed dawn or twilight.","Umm al-Qura style requires explicit Ramadan context; its fixed Isha interval uses raw solar sunset."]
+}

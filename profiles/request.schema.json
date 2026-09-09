@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PrayerTime 0.1 request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "date",
+    "location",
+    "timezone"
+  ],
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "1900-01-01 through 2100-12-31"
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "latitude_deg",
+        "longitude_deg"
+      ],
+      "properties": {
+        "latitude_deg": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude_deg": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      }
+    },
+    "timezone": {
+      "type": "string",
+      "minLength": 1,
+      "description": "IANA identifier in the embedded timezone database"
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fiqh",
+        "calculation"
+      ],
+      "properties": {
+        "fiqh": {
+          "enum": [
+            "fiqh.shafii@1",
+            "fiqh.hanafi_abu_hanifa@1",
+            "fiqh.hanafi_sahibayn@1"
+          ]
+        },
+        "calculation": {
+          "enum": [
+            "calc.mwl@1",
+            "calc.isna@1",
+            "calc.karachi@1",
+            "calc.umm_al_qura@1"
+          ]
+        }
+      }
+    },
+    "high_latitude": {
+      "enum": [
+        "none",
+        "middle_of_night",
+        "one_seventh",
+        "angle_based"
+      ]
+    },
+    "rounding": {
+      "enum": [
+        "nearest_minute",
+        "floor_minute",
+        "ceil_minute",
+        "none"
+      ]
+    },
+    "ramadan": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Explicit context, required boolean for Umm al-Qura-style method"
+    },
+    "adjustments_minutes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fajr": {
+          "type": "number",
+          "minimum": -120,
+          "maximum": 120
+        },
+        "dhuhr": {
+          "type": "number",
+          "minimum": -120,
+          "maximum": 120
+        },
+        "asr": {
+          "type": "number",
+          "minimum": -120,
+          "maximum": 120
+        },
+        "maghrib": {
+          "type": "number",
+          "minimum": -120,
+          "maximum": 120
+        },
+        "isha": {
+          "type": "number",
+          "minimum": -120,
+          "maximum": 120
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "profiles"
+        ],
+        "properties": {
+          "profiles": {
+            "required": [
+              "calculation"
+            ],
+            "properties": {
+              "calculation": {
+                "const": "calc.umm_al_qura@1"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "ramadan"
+        ],
+        "properties": {
+          "ramadan": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ]
+}

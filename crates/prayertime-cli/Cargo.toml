@@ -1,0 +1,13 @@
+[package]
+name = "prayertime-cli"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "prayertime"
+path = "src/main.rs"
+
+[dependencies]
+prayertime-core = { path = "../prayertime-core" }
+serde_json.workspace = true
+clap = { version = "4", features = ["derive"] }

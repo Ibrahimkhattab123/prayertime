@@ -1,0 +1,11 @@
+[package]
+name = "prayertime-core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+jiff.workspace = true
+jiff-tzdb.workspace = true
+sha2.workspace = true
