@@ -10,11 +10,15 @@ The production app has already been built in `dist/`:
 ./scripts/start.sh
 ```
 
-Open **http://localhost:8080**. Choose a city or enter coordinates and an IANA timezone, select the method and Asr convention, and calculate. The default location is Berlin; it is an editable example, not a detected location.
+Open **http://localhost:8080**. Search for a city and select a result, or choose **Use my location**. Both fill the coordinates and timezone automatically. Then select the method and Asr convention and calculate. The default location is Berlin; it is an editable example, not a detected location. Manual coordinates and timezone overrides are available under **Coordinates & timezone override**.
 
 The browser provides daily and monthly timetables, missing/estimated statuses, calculation explanations, JSON/CSV exports, saved settings, optional geolocation, and an offline service worker. Browser geolocation needs localhost or HTTPS. The date defaults to today in the selected saved timezone; the calculation core never reads the clock.
 
 Offline assets install on the production build's first successful load. The header reports “Ready offline” after the worker confirms installation. Browser UI/offline reload testing remains to be completed; the automated suite verifies offline asset caching and network-free WASM calculations.
+
+City searches go to [Open-Meteo](https://open-meteo.com/en/docs/geocoding-api) with [GeoNames](https://www.geonames.org/) attribution; the service returns each city's IANA timezone. New city searches need internet, while starter cities and your 20 most recently selected places remain available offline. The free endpoint is for noncommercial use and is subject to [Open-Meteo's usage limits and terms](https://open-meteo.com/en/terms).
+
+GPS and manual coordinate detection use bundled [tzf-wasm](https://github.com/ringsaturn/tzf-wasm) timezone boundaries on your device; the app does not send these coordinates to the city-search service. This adds about 9 MB of uncompressed offline assets. The boundary data is simplified to roughly 111-metre precision; check the visible zone near a boundary and use the override when needed. The Rust engine applies date-specific timezone rules and daylight saving time. GPS still depends on device support and permission. Close all app tabs and reopen the app to activate an installed update.
 
 ## Native CLI
 
@@ -75,7 +79,7 @@ Profiles are draft, provider-attributed representations of the paper. They are *
 ./scripts/check.sh
 ```
 
-The suite includes US Naval Observatory snapshots (16 independent reference records), seasonal inverse-altitude regressions, global ordering, method/Asr independence, fixed-Isha adjustment isolation, actual adjacent-night fallback, DST/date-line cases, invalid inputs, rounding/fingerprints and a full year at Berlin, Stockholm and Tromsø. Native/WASM parity exercises all five bindings with 16 detailed request comparisons. The service-worker test runs generated production code against an offline cache harness.
+The suite includes US Naval Observatory snapshots (16 independent reference records), seasonal inverse-altitude regressions, global ordering, method/Asr independence, fixed-Isha adjustment isolation, actual adjacent-night fallback, DST/date-line cases, invalid inputs, rounding/fingerprints and a full year at Berlin, Stockholm and Tromsø. Native/WASM parity exercises all five bindings with 16 detailed request comparisons. Location tests cover ambiguous cities, saved places, failed searches, retries and seven real coordinate-to-timezone lookups followed by Rust calculations with networking disabled. The service-worker test runs generated production code against an offline cache harness, including the timezone boundary assets.
 
 This evidence supports a development alpha. It does not constitute certification of the entire 39-chapter specification or observational/religious validation. No browser was available for interactive, visual, PWA-installation or actual offline-reload testing.
 

@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import {
   Sun,
@@ -40,17 +40,16 @@ import {
   type Prayer,
 } from '@/lib/engine';
 import { sameRequest, nextPrayer } from '@/lib/view-model';
+import { CitySearch } from '@/components/city-search';
+import {
+  starterPlaces,
+  readPlaces,
+  rememberPlace,
+  mergePlaces,
+  type Place,
+} from '@/lib/location';
+import { detectTimezone } from '@/lib/timezone';
 const STORAGE = 'prayertime-settings-v1';
-const cities = [
-  { name: 'Berlin', lat: 52.52, lon: 13.405, tz: 'Europe/Berlin' },
-  { name: 'Makkah', lat: 21.4225, lon: 39.8262, tz: 'Asia/Riyadh' },
-  { name: 'Cairo', lat: 30.0444, lon: 31.2357, tz: 'Africa/Cairo' },
-  { name: 'Karachi', lat: 24.8607, lon: 67.0011, tz: 'Asia/Karachi' },
-  { name: 'London', lat: 51.5074, lon: -0.1278, tz: 'Europe/London' },
-  { name: 'Singapore', lat: 1.3521, lon: 103.8198, tz: 'Asia/Singapore' },
-  { name: 'Cape Town', lat: -33.9249, lon: 18.4241, tz: 'Africa/Johannesburg' },
-  { name: 'Tromsø', lat: 69.6492, lon: 18.9553, tz: 'Europe/Oslo' },
-];
 const names: Record<string, string> = {
   fajr: 'Fajr',
   dhuhr: 'Dhuhr',
@@ -204,6 +203,32 @@ export default function Home() {
   const [calendarError, setCalendarError] = useState('');
   const [locationBusy, setLocationBusy] = useState(false);
   const [ready, setReady] = useState(false);
+  const [places, setPlaces] = useState<Place[]>(starterPlaces);
+  const [manualOpen, setManualOpen] = useState(false);
+  const calculationBlocked = busy || locationBusy || !request.timezone;
+  const locationSequence = useRef(0);
+  const cancelLocation = () => {
+    locationSequence.current++;
+    setLocationBusy(false);
+  };
+  const retainPlace = (place: Place) =>
+    setPlaces(mergePlaces(rememberPlace(place), starterPlaces));
+  const selectCity = (place: Place) => {
+    cancelLocation();
+    retainPlace(place);
+    setRequest((r) => ({
+      ...r,
+      location: {
+        latitude_deg: place.latitude,
+        longitude_deg: place.longitude,
+      },
+      timezone: place.timezone,
+    }));
+    setNotice(
+      `${place.name} selected. Timezone set to ${place.timezone}. Select “Calculate times” to update your timetable.`,
+    );
+  };
+
   const apply = useCallback(async (r: CalculationRequest, save = true) => {
     setBusy(true);
     setError('');
@@ -232,6 +257,7 @@ export default function Home() {
   }, []);
   useEffect(() => {
     let active = true;
+    setPlaces(mergePlaces(readPlaces(), starterPlaces));
     (async () => {
       let r = { ...defaults };
       try {
@@ -280,6 +306,7 @@ export default function Home() {
     window.addEventListener('offline', online);
     return () => {
       active = false;
+      locationSequence.current++;
       clearInterval(tick);
       window.removeEventListener('online', online);
       window.removeEventListener('offline', online);
@@ -314,20 +341,16 @@ export default function Home() {
     setNotice('');
   };
   const dirty = day && !sameRequest(request, day.request);
+  const matchPlace = (location: CalculationRequest['location']) =>
+    places.find(
+      (p) =>
+        p.latitude === location.latitude_deg &&
+        p.longitude === location.longitude_deg,
+    );
   const place = day
-    ? (cities.find(
-        (c) =>
-          c.lat === day.request.location.latitude_deg &&
-          c.lon === day.request.location.longitude_deg,
-      )?.name ?? 'Custom location')
+    ? (matchPlace(day.request.location)?.name ?? 'Custom location')
     : 'Berlin';
-  const city =
-    cities.find(
-      (c) =>
-        c.lat === request.location.latitude_deg &&
-        c.lon === request.location.longitude_deg &&
-        c.tz === request.timezone,
-    )?.name ?? 'custom';
+  const selectedCity = matchPlace(request.location) ?? null;
   const method = profiles?.methods.find(
     (m) => m.id === request.profiles.calculation,
   );
@@ -343,36 +366,99 @@ export default function Home() {
     : 0;
   const countdown = `${Math.floor(remaining / 3600)}h ${Math.floor((remaining % 3600) / 60)}m`;
   const navigate = async (delta: number) => {
-    if (!day) return;
+    if (!day || calculationBlocked) return;
     const r = { ...request, date: changeDate(day.request.date, delta) };
     setRequest(r);
     await apply(r).catch(() => {});
   };
+  const resolveCoordinates = async (
+    latitude: number,
+    longitude: number,
+    sequence: number,
+    label: string,
+  ) => {
+    try {
+      const match = await detectTimezone(latitude, longitude);
+      if (sequence !== locationSequence.current) return;
+      const selected: Place = {
+        id: `coordinates:${latitude}:${longitude}`,
+        name: label,
+        region: '',
+        country: '',
+        latitude,
+        longitude,
+        timezone: match.timezone,
+      };
+      retainPlace(selected);
+      setRequest((r) => ({
+        ...r,
+        location: { latitude_deg: latitude, longitude_deg: longitude },
+        timezone: match.timezone,
+      }));
+      setNotice(
+        match.candidates.length > 1
+          ? `Timezone set to ${match.timezone}. This location overlaps timezone boundaries; review the timezone under manual overrides.`
+          : `Location and timezone (${match.timezone}) detected. Select “Calculate times” to update your timetable.`,
+      );
+    } catch (e) {
+      if (sequence !== locationSequence.current) return;
+      // Keep the new coordinates, but never pair them silently with the old timezone.
+      setRequest((r) => ({
+        ...r,
+        location: { latitude_deg: latitude, longitude_deg: longitude },
+        timezone: '',
+      }));
+      setManualOpen(true);
+      setNotice(
+        `Timezone lookup failed: ${String(e instanceof Error ? e.message : e)} You can retry or enter a timezone below.`,
+      );
+    } finally {
+      if (sequence === locationSequence.current) setLocationBusy(false);
+    }
+  };
   const useLocation = () => {
     if (!navigator.geolocation) {
-      setNotice('Geolocation is unavailable. Enter coordinates manually.');
+      setNotice(
+        'Geolocation is unavailable. Search for a city or enter coordinates manually.',
+      );
       return;
     }
+    const sequence = ++locationSequence.current;
     setLocationBusy(true);
+    setNotice('Finding your location and timezone…');
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        edit({
-          location: {
-            latitude_deg: Number(pos.coords.latitude.toFixed(6)),
-            longitude_deg: Number(pos.coords.longitude.toFixed(6)),
-          },
-        });
-        setNotice('Coordinates updated. Check the timezone, then calculate.');
-        setLocationBusy(false);
+        if (sequence !== locationSequence.current) return;
+        void resolveCoordinates(
+          Number(pos.coords.latitude.toFixed(6)),
+          Number(pos.coords.longitude.toFixed(6)),
+          sequence,
+          'Current location',
+        );
       },
       () => {
+        if (sequence !== locationSequence.current) return;
         setNotice(
-          'Location permission was denied or unavailable. Manual coordinates still work.',
+          'Location permission was denied or unavailable. Search for a city instead.',
         );
         setLocationBusy(false);
       },
       { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 },
     );
+  };
+  const detectManualTimezone = () => {
+    const sequence = ++locationSequence.current;
+    setLocationBusy(true);
+    void resolveCoordinates(
+      request.location.latitude_deg,
+      request.location.longitude_deg,
+      sequence,
+      'Custom coordinates',
+    );
+  };
+  const editCoordinates = (location: CalculationRequest['location']) => {
+    cancelLocation();
+    edit({ location, timezone: '' });
   };
   const makeCalendar = async () => {
     if (!day) return;
@@ -425,6 +511,7 @@ export default function Home() {
               const r = (input as { request: CalculationRequest }).request;
               const d = await calculate(r);
               flushSync(() => {
+                cancelLocation();
                 setRequest(d.request);
                 setDay(d);
                 setMode('daily');
@@ -493,6 +580,7 @@ export default function Home() {
           className="settings"
           onSubmit={(e) => {
             e.preventDefault();
+            if (busy || locationBusy || !ready || !request.timezone) return;
             void apply(request).catch(() => {});
           }}
         >
@@ -500,88 +588,109 @@ export default function Home() {
             <MapPin size={18} />
             <h2>Location & date</h2>
           </div>
-          <Choice
-            label="City"
-            value={city}
-            items={[
-              ...cities.map((c) => [c.name, c.name] as [string, string]),
-              ['custom', 'Custom coordinates'],
-            ]}
-            onChange={(name) => {
-              const c = cities.find((c) => c.name === name);
-              if (c)
-                edit({
-                  location: { latitude_deg: c.lat, longitude_deg: c.lon },
-                  timezone: c.tz,
-                });
-            }}
+          <CitySearch
+            disabled={!ready}
+            value={selectedCity}
+            places={places}
+            offline={offline}
+            onSelect={selectCity}
+            onSearchStart={cancelLocation}
           />
-          <div className="coordinate-fields">
-            <label>
-              Latitude
-              <Input
-                required
-                type="number"
-                step="any"
-                min="-90"
-                max="90"
-                value={
-                  Number.isNaN(request.location.latitude_deg)
-                    ? ''
-                    : request.location.latitude_deg
-                }
-                onChange={(e) =>
-                  edit({
-                    location: {
-                      ...request.location,
-                      latitude_deg: e.target.valueAsNumber,
-                    },
-                  })
-                }
-              />
-            </label>
-            <label>
-              Longitude
-              <Input
-                required
-                type="number"
-                step="any"
-                min="-180"
-                max="180"
-                value={
-                  Number.isNaN(request.location.longitude_deg)
-                    ? ''
-                    : request.location.longitude_deg
-                }
-                onChange={(e) =>
-                  edit({
-                    location: {
-                      ...request.location,
-                      longitude_deg: e.target.valueAsNumber,
-                    },
-                  })
-                }
-              />
-            </label>
-          </div>
           <Button
             type="button"
             variant="outline"
             onClick={useLocation}
-            disabled={locationBusy}
+            disabled={locationBusy || !ready}
           >
             {locationBusy ? <LoaderCircle className="spin" /> : <LocateFixed />}
-            Use my location
+            {locationBusy ? 'Finding location & timezone…' : 'Use my location'}
           </Button>
-          <label>
-            Timezone
-            <Input
-              required
-              value={request.timezone}
-              placeholder="Europe/Berlin"
-              onChange={(e) => edit({ timezone: e.target.value })}
-            />
-          </label>
+          <div className="detected-timezone">
+            <span>Timezone</span>
+            <strong>{request.timezone || 'Not set'}</strong>
+            <small>Set automatically when you select a city or use GPS.</small>
+          </div>
+          <details
+            className="location-overrides"
+            open={manualOpen}
+            onToggle={(e) => setManualOpen(e.currentTarget.open)}
+          >
+            <summary>Coordinates & timezone override</summary>
+            <div className="coordinate-fields">
+              <label>
+                Latitude
+                <Input
+                  disabled={!ready}
+                  required
+                  type="number"
+                  step="any"
+                  min="-90"
+                  max="90"
+                  value={
+                    Number.isNaN(request.location.latitude_deg)
+                      ? ''
+                      : request.location.latitude_deg
+                  }
+                  onChange={(e) =>
+                    editCoordinates({
+                      ...request.location,
+                      latitude_deg: e.target.valueAsNumber,
+                    })
+                  }
+                />
+              </label>
+              <label>
+                Longitude
+                <Input
+                  disabled={!ready}
+                  required
+                  type="number"
+                  step="any"
+                  min="-180"
+                  max="180"
+                  value={
+                    Number.isNaN(request.location.longitude_deg)
+                      ? ''
+                      : request.location.longitude_deg
+                  }
+                  onChange={(e) =>
+                    editCoordinates({
+                      ...request.location,
+                      longitude_deg: e.target.valueAsNumber,
+                    })
+                  }
+                />
+              </label>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              disabled={locationBusy || !ready}
+              onClick={detectManualTimezone}
+            >
+              Detect timezone from coordinates
+            </Button>
+            <label>
+              Timezone override
+              <Input
+                disabled={!ready}
+                required
+                value={request.timezone}
+                placeholder="Europe/Berlin"
+                onChange={(e) => {
+                  cancelLocation();
+                  edit({ timezone: e.target.value });
+                }}
+              />
+            </label>
+            <p className="field-note">
+              You can override the detected zone near a boundary.{' '}
+              <a href="/timezone/NOTICE.txt" target="_blank" rel="noreferrer">
+                Timezone data attribution
+              </a>
+              .
+            </p>
+          </details>
           <label>
             Date
             <Input
@@ -694,7 +803,7 @@ export default function Home() {
           <Button
             type="submit"
             className="calculate-button"
-            disabled={busy || !ready}
+            disabled={busy || !ready || locationBusy || !request.timezone}
           >
             {busy ? <LoaderCircle className="spin" /> : <Sun size={18} />}{' '}
             {busy ? 'Calculating…' : 'Calculate times'}
@@ -706,7 +815,9 @@ export default function Home() {
           <Button
             type="button"
             variant="ghost"
+            disabled={busy}
             onClick={() => {
+              cancelLocation();
               const r = { ...defaults, date: today(defaults.timezone) };
               setRequest(r);
               try {
@@ -725,6 +836,7 @@ export default function Home() {
               <p>{error}</p>
               <Button
                 variant="outline"
+                disabled={calculationBlocked}
                 onClick={() => void apply(request).catch(() => {})}
               >
                 Try again
@@ -760,7 +872,11 @@ export default function Home() {
                   type="button"
                   variant="ghost"
                   aria-label="Previous day"
-                  disabled={!day || busy || day.request.date <= '1900-01-01'}
+                  disabled={
+                    !day ||
+                    calculationBlocked ||
+                    day.request.date <= '1900-01-01'
+                  }
                   onClick={() => void navigate(-1)}
                 >
                   <ChevronLeft />
@@ -769,7 +885,11 @@ export default function Home() {
                   type="button"
                   variant="ghost"
                   aria-label="Next day"
-                  disabled={!day || busy || day.request.date >= '2100-12-31'}
+                  disabled={
+                    !day ||
+                    calculationBlocked ||
+                    day.request.date >= '2100-12-31'
+                  }
                   onClick={() => void navigate(1)}
                 >
                   <ChevronRight />
@@ -786,7 +906,7 @@ export default function Home() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  disabled={!day}
+                  disabled={!day || calculationBlocked}
                   onClick={() => {
                     const r = { ...request, date: today(request.timezone) };
                     setRequest(r);

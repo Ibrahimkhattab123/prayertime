@@ -65,6 +65,8 @@ assert.ok(messages.some((m) => m.type === "OFFLINE_READY"));
 const stored = [...stores.values()][0];
 assert.ok(stored.has("/wasm/prayertime.js"));
 assert.ok(stored.has("/wasm/prayertime_bg.wasm"));
+assert.ok(stored.has("/timezone/tzf.js"));
+assert.ok(stored.has("/timezone/tzf_wasm_bg.wasm"));
 assert.ok([...stored.keys()].some((k) => k.endsWith(".css")));
 online = false;
 async function request(path, mode = "same-origin") {

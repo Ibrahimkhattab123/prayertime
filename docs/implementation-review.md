@@ -29,7 +29,7 @@ Chapter 39 consolidates earlier milestone lists. The first deliverable is a deve
 | DATA / PROV | Typed Serde requests, unknown-field rejection, embedded declarative package, JSON schema, structured provenance, canonical SHA-256 fingerprint | No arbitrary downloaded profiles, package signature/update or formal audit release channel |
 | VAL-001 etc. | Native tests, independent snapshots, full-year matrix, parity and offline contract checks | No fuzz campaign, broad ephemeris certification, external timetable review or cross-OS execution yet |
 | CLI M8 | Day/range/solar/explain/validate/profile inspection and three comparison commands | JSON interface only; no separate validated golden-data ingestion command |
-| WEB-001–013 | WASM calculations, daily/monthly views, manual and optional GPS inputs, persisted device settings, detailed records, offline assets, explicit estimate states | No connected browser for visual/interactivity/offline reload QA; no profile updater |
+| WEB-001–013 | WASM calculations, daily/monthly views, city search and GPS with automatic timezone selection, manual overrides, persisted device settings and recent places, detailed records, offline assets, explicit estimate states | New city searches need internet; no connected browser for visual/interactivity/offline reload QA; no profile updater |
 | API / mobile / release | Narrow binding functions and exported JSON are available | REST API, mobile/UniFFI, notifications, signed profile governance and 1.0 release are deferred |
 
 ## Numerical decisions

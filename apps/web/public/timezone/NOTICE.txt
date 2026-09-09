@@ -1,0 +1,10 @@
+Timezone lookup: tzf-wasm 1.2.4 (MIT)
+https://github.com/ringsaturn/tzf-wasm
+
+Geographic timezone boundary data: OpenStreetMap contributors, via timezone-boundary-builder and tzf-rel. ODbL 1.0.
+https://www.openstreetmap.org/copyright
+https://opendatacommons.org/licenses/odbl/1-0/
+https://github.com/evansiroky/timezone-boundary-builder
+https://github.com/ringsaturn/tzf-rel
+
+The simplified boundary data can differ from full boundaries by about 111 metres.
