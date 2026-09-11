@@ -61,6 +61,11 @@ const names: Record<string, string> = {
   maghrib: 'Maghrib',
   isha: 'Isha',
 };
+const solarColumns = [
+  ['sunrise', 'Sunrise'],
+  ['solar_transit', 'Solar noon'],
+  ['sunset', 'Sunset'],
+] as const;
 const subtitles: Record<string, string> = {
   fajr: 'Dawn',
   dhuhr: 'Midday',
@@ -1045,6 +1050,7 @@ export default function Home() {
                             'Date',
                             'Hijri date (Umm al-Qura)',
                             ...Object.values(names),
+                            ...solarColumns.map(([, label]) => label),
                           ],
                           ...calendar.map((d) => [
                             d.request.date,
@@ -1053,6 +1059,10 @@ export default function Home() {
                               p.displayed
                                 ? `${p.displayed.local} (${p.status})`
                                 : `Unavailable: ${p.unavailable_reason}`,
+                            ),
+                            ...solarColumns.map(
+                              ([key]) =>
+                                d.solar_local[key]?.local ?? 'Unavailable',
                             ),
                           ]),
                         ];
@@ -1097,13 +1107,17 @@ export default function Home() {
                         <table>
                           <caption className="sr-only">
                             Monthly prayer timetable with Gregorian and Umm
-                            al-Qura Hijri dates; asterisk marks estimated times.
+                            al-Qura Hijri dates, sunrise, solar noon and sunset;
+                            asterisk marks estimated times.
                           </caption>
                           <thead>
                             <tr>
                               <th>Gregorian / Hijri</th>
                               {Object.values(names).map((n) => (
                                 <th key={n}>{n}</th>
+                              ))}
+                              {solarColumns.map(([key, label]) => (
+                                <th key={key}>{label}</th>
                               ))}
                             </tr>
                           </thead>
@@ -1147,6 +1161,18 @@ export default function Home() {
                                       )}
                                   </td>
                                 ))}
+                                {solarColumns.map(([key]) => {
+                                  const instant = d.solar_local[key];
+                                  return (
+                                    <td
+                                      key={key}
+                                      title={instant?.local ?? 'Unavailable'}
+                                    >
+                                      {instant?.clock ?? '—'}
+                                      <DayOffset instant={instant ?? null} />
+                                    </td>
+                                  );
+                                })}
                               </tr>
                             ))}
                           </tbody>
