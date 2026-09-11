@@ -998,3 +998,31 @@ footer {
 .settings .location-overrides > .field-note {
   margin-top: 12px;
 }
+
+.hijri-date {
+  margin-top: 0.55rem;
+}
+.hijri-date p {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 1rem;
+}
+.hijri-date small {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--muted-foreground);
+  font-size: 0.72rem;
+}
+.explanation-body section {
+  margin: 1.2rem 0;
+}
+.explanation-body h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+.explanation-body section p {
+  margin: 0.55rem 0;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}

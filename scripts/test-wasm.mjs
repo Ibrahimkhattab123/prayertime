@@ -53,7 +53,9 @@ const cases = [
 let count = 0;
 try {
   for (const [date, lat, lon, timezone] of cases) {
-    for (const calculation of ["calc.mwl@1", "calc.umm_al_qura@1"]) {
+    for (const calculation of date === "2026-09-09" && timezone === "Europe/Berlin"
+      ? JSON.parse(listProfiles()).methods.map((m) => m.id)
+      : ["calc.mwl@1", "calc.umm_al_qura@1"]) {
       const request = {
         date,
         location: { latitude_deg: lat, longitude_deg: lon },
@@ -90,7 +92,7 @@ try {
       367,
     ),
   );
-  assert.equal(JSON.parse(listProfiles()).methods.length, 4);
+  assert.equal(JSON.parse(listProfiles()).methods.length, 18);
   console.log(
     `Native/WASM parity: ${count} requests pass; all 5 bindings exercised; no network after initialization.`,
   );

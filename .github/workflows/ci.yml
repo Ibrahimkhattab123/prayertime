@@ -36,6 +36,7 @@ jobs:
       - run: node scripts/test-view-model.mjs
       - run: node scripts/prepare-timezone.mjs
       - run: node scripts/test-location.mjs
+      - run: node scripts/test-explanations.mjs
       - run: npm --prefix apps/web run typecheck
       - run: npm --prefix apps/web run build
       - run: node scripts/test-offline.mjs

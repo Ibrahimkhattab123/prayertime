@@ -406,3 +406,67 @@ fn historical_second_offsets_round_the_local_clock() {
         assert_eq!(displayed.second(), 0);
     }
 }
+
+#[test]
+fn regional_method_parameters_match_attributed_snapshot() {
+    let snapshot: serde_json::Value =
+        serde_json::from_str(include_str!("../../../profiles/method-sources.json")).unwrap();
+    let package = core::profiles::list_profiles();
+    for (local, provider) in [
+        ("egypt", "EGYPT"),
+        ("gulf", "GULF"),
+        ("kuwait", "KUWAIT"),
+        ("qatar", "QATAR"),
+        ("singapore", "SINGAPORE"),
+        ("france", "FRANCE"),
+        ("turkey", "TURKEY"),
+        ("russia", "RUSSIA"),
+        ("dubai", "DUBAI"),
+        ("jakim", "JAKIM"),
+        ("tunisia", "TUNISIA"),
+        ("algeria", "ALGERIA"),
+        ("kemenag", "KEMENAG"),
+        ("morocco", "MOROCCO"),
+    ] {
+        let m = package
+            .methods
+            .iter()
+            .find(|m| m.id == format!("calc.{local}@1"))
+            .unwrap();
+        let params = &snapshot["methods"][provider]["params"];
+        assert_eq!(Some(m.fajr_angle), params["Fajr"].as_f64());
+        if params["Isha"].is_number() {
+            assert_eq!(m.isha_angle, params["Isha"].as_f64());
+        } else {
+            assert_eq!(params["Isha"].as_str(), Some("90 min"));
+            assert_eq!(m.isha_minutes, Some(90.0));
+            assert_eq!(m.ramadan_minutes, None);
+        }
+    }
+}
+
+#[test]
+fn all_methods_resolve_with_explicit_ramadan_and_keep_fixed_interval_base() {
+    for m in core::profiles::list_profiles().methods {
+        for ramadan in [None, Some(false), Some(true)] {
+            let mut r = request("2026-09-11", 30.0444, 31.2357, "Africa/Cairo");
+            r.profiles.calculation = m.id.clone();
+            r.ramadan = ramadan;
+            r.adjustments_minutes.insert("maghrib".into(), 10.0);
+            if m.ramadan_minutes.is_some() && ramadan.is_none() {
+                assert!(core::calculate_day(&r).is_err());
+                continue;
+            }
+            let d = core::calculate_day(&r).unwrap();
+            assert!(d.prayers.iter().all(|p| p.raw.is_some()), "{}", m.id);
+            if let Some(minutes) = m.isha_minutes {
+                let expected = if ramadan == Some(true) {
+                    m.ramadan_minutes.unwrap_or(minutes)
+                } else {
+                    minutes
+                };
+                assert_eq!(raw(&d, "isha") - raw(&d, "maghrib"), expected * 60.0);
+            }
+        }
+    }
+}

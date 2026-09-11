@@ -49,6 +49,8 @@ import {
   type Place,
 } from '@/lib/location';
 import { detectTimezone } from '@/lib/timezone';
+import { calculationExplanation } from '@/lib/explanations';
+import { hijriDateLabel } from '@/lib/hijri';
 const STORAGE = 'prayertime-settings-v1';
 const names: Record<string, string> = {
   fajr: 'Fajr',
@@ -133,14 +135,25 @@ function ruleText(p: Prayer) {
     ? 'Solar transit · no automatic delay'
     : 'Sun at −0.833° · standard horizon';
 }
-function Explanation({ p }: { p: Prayer }) {
+function Explanation({ p, day }: { p: Prayer; day: Day }) {
+  const explanation = calculationExplanation(p, day);
   return (
     <details className="explanation">
       <summary>
         How this time is calculated <ArrowUpRight size={14} />
       </summary>
       <div className="explanation-body">
-        <p>{ruleText(p)}.</p>
+        <p>
+          <strong>{ruleText(p)}.</strong>
+        </p>
+        {explanation.map((section) => (
+          <section key={section.title}>
+            <h4>{section.title}</h4>
+            {section.paragraphs.map((text) => (
+              <p key={text}>{text}</p>
+            ))}
+          </section>
+        ))}
         {p.fallback && (
           <p className="estimate-note">
             Estimated: {p.fallback.strategy.replaceAll('_', ' ')}. The primary
@@ -719,20 +732,32 @@ export default function Home() {
               edit({ profiles: { ...request.profiles, calculation: v } })
             }
           />
+          <p className="field-note">
+            Regional angle/interval presets; local authority timetables may
+            include additional corrections.{' '}
+            <a
+              href="https://aladhan.com/calculation-methods"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Method sources
+            </a>
+            .
+          </p>
           <Choice
             label="Asr convention"
             value={request.profiles.fiqh}
             items={
               profiles?.fiqh.map((f) => [f.id, f.name]) ?? [
-                ['fiqh.shafii@1', 'Shafi‘i Asr'],
+                ['fiqh.shafii@1', 'Shafi‘i, Maliki & Hanbali Asr'],
               ]
             }
             onChange={(v) =>
               edit({ profiles: { ...request.profiles, fiqh: v } })
             }
           />
-          {method?.isha_minutes !== null &&
-            method?.isha_minutes !== undefined && (
+          {method?.ramadan_minutes !== null &&
+            method?.ramadan_minutes !== undefined && (
               <Choice
                 label="Ramadan context (required)"
                 value={
@@ -866,6 +891,17 @@ export default function Home() {
                     ? dateLabel(day.request.date)
                     : 'Preparing your timetable'}
                 </h2>
+                {day && (
+                  <div
+                    className="hijri-date"
+                    title="Hijri calendar equivalent of the selected civil date, not a live sunset rollover. Ramadan context remains an explicit calculation setting."
+                  >
+                    <p>{hijriDateLabel(day.request.date)}</p>
+                    <small>
+                      Umm al-Qura calendar · local moon sighting may differ
+                    </small>
+                  </div>
+                )}
               </div>
               <div className="date-navigation">
                 <Button
@@ -957,7 +993,7 @@ export default function Home() {
                             </span>
                           </div>
                         </div>
-                        <Explanation p={p} />
+                        <Explanation p={p} day={day} />
                       </div>
                     ))
                   ) : (
@@ -1160,7 +1196,7 @@ export default function Home() {
                 {resultMethod?.fajr_angle}° for Fajr and{' '}
                 {resultMethod?.isha_angle !== null
                   ? `${resultMethod?.isha_angle}° for Isha`
-                  : `${day.request.ramadan ? 120 : 90} minutes after raw sunset for Isha`}
+                  : `${day.prayers.find((p) => p.name === 'isha')?.rule.minutes} minutes after raw sunset for Isha`}
                 . Asr uses factor{' '}
                 {
                   profiles?.fiqh.find((f) => f.id === day.request.profiles.fiqh)

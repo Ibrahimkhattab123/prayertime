@@ -162,7 +162,9 @@ pub fn calculate_day(request: &Request) -> Result<DayResult> {
         None => Rule::FixedInterval {
             base: "sunset".into(),
             minutes: if request.ramadan == Some(true) {
-                method.ramadan_minutes.unwrap()
+                method
+                    .ramadan_minutes
+                    .unwrap_or_else(|| method.isha_minutes.unwrap())
             } else {
                 method.isha_minutes.unwrap()
             },

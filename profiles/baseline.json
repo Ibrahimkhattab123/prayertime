@@ -1,18 +1,175 @@
 {
-  "package_version": "0.1.0-draft",
+  "package_version": "0.2.0-draft",
   "status": "draft",
   "source_status": "provider_attributed",
-  "source": "Paper chapters 18, 20, 31 and 39; not independently authority-verified",
+  "source": "Paper chapters 18, 20, 31 and 39; regional angle/interval mappings checked against https://api.aladhan.com/v1/methods on 2026-09-11. Provider-attributed parameter presets, not independently authority-verified timetables.",
   "methods": [
-    {"id":"calc.mwl@1","name":"Muslim World League","fajr_angle":18.0,"isha_angle":17.0,"isha_minutes":null,"ramadan_minutes":null},
-    {"id":"calc.isna@1","name":"ISNA","fajr_angle":15.0,"isha_angle":15.0,"isha_minutes":null,"ramadan_minutes":null},
-    {"id":"calc.karachi@1","name":"Karachi","fajr_angle":18.0,"isha_angle":18.0,"isha_minutes":null,"ramadan_minutes":null},
-    {"id":"calc.umm_al_qura@1","name":"Umm al-Qura style","fajr_angle":18.5,"isha_angle":null,"isha_minutes":90.0,"ramadan_minutes":120.0}
+    {
+      "id": "calc.mwl@1",
+      "name": "Muslim World League",
+      "fajr_angle": 18.0,
+      "isha_angle": 17.0,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.isna@1",
+      "name": "ISNA",
+      "fajr_angle": 15.0,
+      "isha_angle": 15.0,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.karachi@1",
+      "name": "Karachi",
+      "fajr_angle": 18.0,
+      "isha_angle": 18.0,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.umm_al_qura@1",
+      "name": "Umm al-Qura style",
+      "fajr_angle": 18.5,
+      "isha_angle": null,
+      "isha_minutes": 90.0,
+      "ramadan_minutes": 120.0
+    },
+    {
+      "id": "calc.egypt@1",
+      "name": "Egyptian General Authority of Survey",
+      "fajr_angle": 19.5,
+      "isha_angle": 17.5,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.gulf@1",
+      "name": "Gulf Region",
+      "fajr_angle": 19.5,
+      "isha_angle": null,
+      "isha_minutes": 90,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.kuwait@1",
+      "name": "Kuwait",
+      "fajr_angle": 18,
+      "isha_angle": 17.5,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.qatar@1",
+      "name": "Qatar",
+      "fajr_angle": 18,
+      "isha_angle": null,
+      "isha_minutes": 90,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.singapore@1",
+      "name": "Singapore · MUIS",
+      "fajr_angle": 20,
+      "isha_angle": 18,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.france@1",
+      "name": "France · Muslims of France",
+      "fajr_angle": 12,
+      "isha_angle": 12,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.turkey@1",
+      "name": "Turkey · angle preset (experimental)",
+      "fajr_angle": 18,
+      "isha_angle": 17,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.russia@1",
+      "name": "Russia",
+      "fajr_angle": 16,
+      "isha_angle": 15,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.dubai@1",
+      "name": "Dubai · research preset",
+      "fajr_angle": 18.2,
+      "isha_angle": 18.2,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.jakim@1",
+      "name": "Malaysia · JAKIM",
+      "fajr_angle": 20,
+      "isha_angle": 18,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.tunisia@1",
+      "name": "Tunisia",
+      "fajr_angle": 18,
+      "isha_angle": 18,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.algeria@1",
+      "name": "Algeria",
+      "fajr_angle": 18,
+      "isha_angle": 17,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.kemenag@1",
+      "name": "Indonesia · KEMENAG",
+      "fajr_angle": 20,
+      "isha_angle": 18,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    },
+    {
+      "id": "calc.morocco@1",
+      "name": "Morocco",
+      "fajr_angle": 19,
+      "isha_angle": 17,
+      "isha_minutes": null,
+      "ramadan_minutes": null
+    }
   ],
   "fiqh": [
-    {"id":"fiqh.shafii@1","name":"Shafi‘i Asr","asr_factor":1.0},
-    {"id":"fiqh.hanafi_abu_hanifa@1","name":"Hanafi · Abu Hanifa Asr","asr_factor":2.0},
-    {"id":"fiqh.hanafi_sahibayn@1","name":"Hanafi · Sahibayn Asr","asr_factor":1.0}
+    {
+      "id": "fiqh.shafii@1",
+      "name": "Shafi‘i, Maliki & Hanbali Asr",
+      "asr_factor": 1.0
+    },
+    {
+      "id": "fiqh.hanafi_abu_hanifa@1",
+      "name": "Hanafi · Abu Hanifa Asr",
+      "asr_factor": 2.0
+    },
+    {
+      "id": "fiqh.hanafi_sahibayn@1",
+      "name": "Hanafi · Sahibayn Asr",
+      "asr_factor": 1.0
+    }
   ],
-  "limitations": ["Fiqh profiles currently resolve Asr only, not complete school-specific legal windows or shafaq opinions.","Method twilight angles are numerical conventions from the draft; they do not independently certify observed dawn or twilight.","Umm al-Qura style requires explicit Ramadan context; its fixed Isha interval uses raw solar sunset."]
+  "limitations": [
+    "Fiqh profiles currently resolve Asr only, not complete school-specific legal windows or shafaq opinions.",
+    "Method twilight angles are numerical conventions from the draft; they do not independently certify observed dawn or twilight.",
+    "Umm al-Qura style requires explicit Ramadan context; its fixed Isha interval uses raw solar sunset.",
+    "Regional presets reproduce the listed twilight angles or raw-sunset interval only; authority-specific precautionary delays, seasonal corrections and local timetables are not implied. Gulf and Qatar keep 90 minutes in Ramadan."
+  ]
 }

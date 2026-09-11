@@ -65,8 +65,8 @@ Development builds do not register the offline worker. The static production out
 - Chapter 11 approximate solar model with iteration and a bounded search around seasonal transition cases.
 - Standard −0.833° horizon; sunrise, transit and sunset independent of religious settings.
 - Fajr, transit-based Dhuhr, shadow-factor Asr, sunset-based Maghrib, angle/fixed-interval Isha.
-- MWL, ISNA, Karachi, and Umm al-Qura-style draft methods. The last requires explicit Ramadan context (90/120 minutes from raw sunset).
-- Asr factors: Shafi‘i, Hanafi Abu Hanifa, Hanafi Sahibayn. These are **Asr-only profiles**, not complete fiqh implementations.
+- 18 draft method presets: MWL, ISNA, Karachi, Umm al-Qura style, Egypt, Gulf, Kuwait, Qatar, Singapore, France, Turkey, Russia, Dubai, Malaysia/JAKIM, Tunisia, Algeria, Indonesia/KEMENAG and Morocco. Umm al-Qura style requires explicit Ramadan context (90/120 minutes from raw sunset); Gulf and Qatar always use 90 minutes. These are angle/interval presets, not replicas of each authority’s complete timetable.
+- Asr factors: Shafi‘i/Maliki/Hanbali, Hanafi Abu Hanifa, Hanafi Sahibayn. These are **Asr-only profiles**, not complete fiqh implementations.
 - Missing-event-only middle-night, one-seventh and angle-portion estimates. Fajr uses the previous sunset/current sunrise; Isha uses current sunset/next sunrise. Missing polar reference nights remain unavailable.
 - Absolute UTC instants, embedded IANA tzdb, per-event offsets and final rounding; reproducible SHA-256 configuration fingerprints.
 - Dates 1900–2100; ranges of 1–366 days. A range has one explicit Ramadan context for every included day.
@@ -79,7 +79,7 @@ Profiles are draft, provider-attributed representations of the paper. They are *
 ./scripts/check.sh
 ```
 
-The suite includes US Naval Observatory snapshots (16 independent reference records), seasonal inverse-altitude regressions, global ordering, method/Asr independence, fixed-Isha adjustment isolation, actual adjacent-night fallback, DST/date-line cases, invalid inputs, rounding/fingerprints and a full year at Berlin, Stockholm and Tromsø. Native/WASM parity exercises all five bindings with 16 detailed request comparisons. Location tests cover ambiguous cities, saved places, failed searches, retries and seven real coordinate-to-timezone lookups followed by Rust calculations with networking disabled. The service-worker test runs generated production code against an offline cache harness, including the timezone boundary assets.
+The suite includes US Naval Observatory snapshots (16 independent reference records), seasonal inverse-altitude regressions, global ordering, method/Asr independence, fixed-Isha adjustment isolation, actual adjacent-night fallback, DST/date-line cases, invalid inputs, rounding/fingerprints and a full year at Berlin, Stockholm and Tromsø. Native/WASM parity exercises all five bindings with 32 detailed request comparisons. Location tests cover ambiguous cities, saved places, failed searches, retries and seven real coordinate-to-timezone lookups followed by Rust calculations with networking disabled. The service-worker test runs generated production code against an offline cache harness, including the timezone boundary assets.
 
 This evidence supports a development alpha. It does not constitute certification of the entire 39-chapter specification or observational/religious validation. No browser was available for interactive, visual, PWA-installation or actual offline-reload testing.
 
@@ -95,3 +95,11 @@ scripts/                 build, start, parity and offline checks
 docs/                    review, supported requirements and limitations
 doc/doc-eng/             original theory and specification, preserved
 ```
+
+## Explanations and Hijri date
+
+Each prayer explanation describes its actual criterion, solar-position and hour-angle equations, recorded solver values, estimation (when used), timezone conversion, offsets and rounding. It reads the calculated result so changing unfinished settings does not rewrite the explanation of the previous timetable.
+
+The Hijri date beneath the Gregorian heading uses the browser’s explicit `islamic-umalqura` calendar for the selected civil date. It is a calendar equivalent, not a live sunset rollover or confirmation of local moon sighting; it never supplies the engine’s Ramadan context. Unsupported calendars show “Hijri date unavailable”.
+
+The 14 added regional presets are checked against the dated provider snapshot in [method-sources.json](profiles/method-sources.json). Specialized Moonsighting models, Tehran/Qom twilight-based Maghrib and legal-window semantics, and Lisbon/Jordan method-specific delays remain outside this preset set. No substitute method is silently used for them.

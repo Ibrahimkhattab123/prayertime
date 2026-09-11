@@ -1,0 +1,175 @@
+{
+  "url": "https://api.aladhan.com/v1/methods",
+  "retrieved": "2026-09-11",
+  "scope": "Provider parameter mappings only; no authority certification or hidden timetable corrections.",
+  "methods": {
+    "EGYPT": {
+      "id": 5,
+      "name": "Egyptian General Authority of Survey",
+      "params": {
+        "Fajr": 19.5,
+        "Isha": 17.5
+      },
+      "location": {
+        "latitude": 30.0444196,
+        "longitude": 31.2357116
+      }
+    },
+    "GULF": {
+      "id": 8,
+      "name": "Gulf Region",
+      "params": {
+        "Fajr": 19.5,
+        "Isha": "90 min"
+      },
+      "location": {
+        "latitude": 24.1323638,
+        "longitude": 53.3199527
+      }
+    },
+    "KUWAIT": {
+      "id": 9,
+      "name": "Kuwait",
+      "params": {
+        "Fajr": 18,
+        "Isha": 17.5
+      },
+      "location": {
+        "latitude": 29.375859,
+        "longitude": 47.9774052
+      }
+    },
+    "QATAR": {
+      "id": 10,
+      "name": "Qatar",
+      "params": {
+        "Fajr": 18,
+        "Isha": "90 min"
+      },
+      "location": {
+        "latitude": 25.2854473,
+        "longitude": 51.5310398
+      }
+    },
+    "SINGAPORE": {
+      "id": 11,
+      "name": "Majlis Ugama Islam Singapura, Singapore",
+      "params": {
+        "Fajr": 20,
+        "Isha": 18
+      },
+      "location": {
+        "latitude": 1.352083,
+        "longitude": 103.819836
+      }
+    },
+    "FRANCE": {
+      "id": 12,
+      "name": "Union Organization Islamic de France",
+      "params": {
+        "Fajr": 12,
+        "Isha": 12
+      },
+      "location": {
+        "latitude": 48.856614,
+        "longitude": 2.3522219
+      }
+    },
+    "TURKEY": {
+      "id": 13,
+      "name": "Diyanet İşleri Başkanlığı, Turkey (experimental)",
+      "params": {
+        "Fajr": 18,
+        "Isha": 17
+      },
+      "location": {
+        "latitude": 39.9333635,
+        "longitude": 32.8597419
+      }
+    },
+    "RUSSIA": {
+      "id": 14,
+      "name": "Spiritual Administration of Muslims of Russia",
+      "params": {
+        "Fajr": 16,
+        "Isha": 15
+      },
+      "location": {
+        "latitude": 54.73479099999999,
+        "longitude": 55.9578555
+      }
+    },
+    "DUBAI": {
+      "id": 16,
+      "name": "Dubai (experimental)",
+      "params": {
+        "Fajr": 18.2,
+        "Isha": 18.2
+      },
+      "location": {
+        "latitude": 25.0762677,
+        "longitude": 55.087404
+      }
+    },
+    "JAKIM": {
+      "id": 17,
+      "name": "Jabatan Kemajuan Islam Malaysia (JAKIM)",
+      "params": {
+        "Fajr": 20,
+        "Isha": 18
+      },
+      "location": {
+        "latitude": 3.139003,
+        "longitude": 101.686855
+      }
+    },
+    "TUNISIA": {
+      "id": 18,
+      "name": "Tunisia",
+      "params": {
+        "Fajr": 18,
+        "Isha": 18
+      },
+      "location": {
+        "latitude": 36.8064948,
+        "longitude": 10.1815316
+      }
+    },
+    "ALGERIA": {
+      "id": 19,
+      "name": "Algeria",
+      "params": {
+        "Fajr": 18,
+        "Isha": 17
+      },
+      "location": {
+        "latitude": 36.753768,
+        "longitude": 3.0587561
+      }
+    },
+    "KEMENAG": {
+      "id": 20,
+      "name": "Kementerian Agama Republik Indonesia",
+      "params": {
+        "Fajr": 20,
+        "Isha": 18
+      },
+      "location": {
+        "latitude": -6.2087634,
+        "longitude": 106.845599
+      }
+    },
+    "MOROCCO": {
+      "id": 21,
+      "name": "Morocco",
+      "params": {
+        "Fajr": 19,
+        "Isha": 17
+      },
+      "location": {
+        "latitude": 33.9715904,
+        "longitude": -6.8498129
+      }
+    }
+  }
+}
