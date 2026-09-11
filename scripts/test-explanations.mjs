@@ -75,3 +75,21 @@ assert.equal(hijriDateLabel("not-a-date"), "Hijri date unavailable");
 console.log(
   "Explanation and Hijri checks pass: actual rules, fixed intervals, estimates, unavailable events, month transitions and timezone-independent civil-date display.",
 );
+
+const { fiqhExplanation } = await import("../apps/web/lib/fiqh.ts");
+for (const name of ["fajr", "dhuhr", "asr", "maghrib", "isha"]) {
+  assert.ok(fiqhExplanation(name, "fiqh.shafii@1").length >= 2, name);
+}
+assert.match(fiqhExplanation("asr", "fiqh.hanafi_abu_hanifa@1").at(-1), /two-shadow/);
+assert.match(fiqhExplanation("asr", "fiqh.hanafi_sahibayn@1").at(-1), /Sahibayn one-shadow/);
+assert.match(
+  fiqhExplanation("isha", "fiqh.hanafi_abu_hanifa@1").join(" "),
+  /does not automatically/,
+);
+const { calculateRange } = await import("../apps/web/public/wasm/prayertime.js");
+const month = JSON.parse(calculateRange(JSON.stringify({ ...request, date: "2024-03-01" }), 31));
+const labels = month.map((d) => hijriDateLabel(d.request.date));
+assert.equal(new Set(labels).size, 31);
+assert.match(labels[10], /^1 Ramadan 1445 AH$/);
+assert.ok(labels.every((label) => label !== "Hijri date unavailable"));
+console.log("Fiqh overview and full-month Hijri conversion checks pass.");

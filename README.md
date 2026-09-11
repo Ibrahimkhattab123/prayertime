@@ -103,3 +103,7 @@ Each prayer explanation describes its actual criterion, solar-position and hour-
 The Hijri date beneath the Gregorian heading uses the browser’s explicit `islamic-umalqura` calendar for the selected civil date. It is a calendar equivalent, not a live sunset rollover or confirmation of local moon sighting; it never supplies the engine’s Ramadan context. Unsupported calendars show “Hijri date unavailable”.
 
 The 14 added regional presets are checked against the dated provider snapshot in [method-sources.json](profiles/method-sources.json). Specialized Moonsighting models, Tehran/Qom twilight-based Maghrib and legal-window semantics, and Lisbon/Jordan method-specific delays remain outside this preset set. No substitute method is silently used for them.
+
+The month table shows each Gregorian date with its Umm al-Qura Hijri equivalent, including in CSV exports. The header theme selector supports System, Light and Dark; your preference is stored separately from calculation settings. Green (`#076849`) and gold (`#dfaf2b`) accent actions and navigation while reading surfaces use neutral theme colors. Theme checks exercise pre-paint selection, unavailable storage and text contrast in both palettes.
+
+Prayer explanations also include a sourced Sunni fiqh overview. This educational text distinguishes start signs and selected school differences; it does not implement complete legal windows, change the numerical engine or infer an Isha criterion from the Asr selector.

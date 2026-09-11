@@ -51,6 +51,8 @@ import {
 import { detectTimezone } from '@/lib/timezone';
 import { calculationExplanation } from '@/lib/explanations';
 import { hijriDateLabel } from '@/lib/hijri';
+import { ThemePicker } from '@/components/theme-picker';
+import { fiqhExplanation, fiqhSources } from '@/lib/fiqh';
 const STORAGE = 'prayertime-settings-v1';
 const names: Record<string, string> = {
   fajr: 'Fajr',
@@ -143,6 +145,28 @@ function Explanation({ p, day }: { p: Prayer; day: Day }) {
         How this time is calculated <ArrowUpRight size={14} />
       </summary>
       <div className="explanation-body">
+        <section className="fiqh-note">
+          <h4>When is this prayer? The fiqh perspective</h4>
+          {fiqhExplanation(p.name, day.request.profiles.fiqh).map((text) => (
+            <p key={text}>{text}</p>
+          ))}
+          <p className="muted">
+            The Asr setting selects an Asr convention, not a complete school
+            profile. Overview based on Chapter 18 of the research paper.
+          </p>
+          <details className="fiqh-sources">
+            <summary>References</summary>
+            <ul>
+              {fiqhSources.map((source) => (
+                <li key={source.url}>
+                  <a href={source.url} target="_blank" rel="noreferrer">
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </section>
         <p>
           <strong>{ruleText(p)}.</strong>
         </p>
@@ -558,6 +582,7 @@ export default function Home() {
           <span>PrayerTime</span>
         </a>
         <div className="header-meta">
+          <ThemePicker />
           <span className="local-status">
             <span className="status-dot" />
             {offline
@@ -1016,9 +1041,14 @@ export default function Home() {
                       onClick={() => {
                         if (!calendar) return;
                         const rows = [
-                          ['Date', ...Object.values(names)],
+                          [
+                            'Date',
+                            'Hijri date (Umm al-Qura)',
+                            ...Object.values(names),
+                          ],
                           ...calendar.map((d) => [
                             d.request.date,
+                            hijriDateLabel(d.request.date),
                             ...d.prayers.map((p) =>
                               p.displayed
                                 ? `${p.displayed.local} (${p.status})`
@@ -1043,6 +1073,10 @@ export default function Home() {
                       CSV
                     </Button>
                   </div>
+                  <p className="field-note month-calendar-note">
+                    Hijri dates use the Umm al-Qura calendar for each civil
+                    date; local moon sighting may differ.
+                  </p>
                   {day?.request.profiles.calculation ===
                     'calc.umm_al_qura@1' && (
                     <p className="notice">
@@ -1062,12 +1096,12 @@ export default function Home() {
                       <div className="table-scroll">
                         <table>
                           <caption className="sr-only">
-                            Monthly prayer timetable; asterisk marks estimated
-                            times.
+                            Monthly prayer timetable with Gregorian and Umm
+                            al-Qura Hijri dates; asterisk marks estimated times.
                           </caption>
                           <thead>
                             <tr>
-                              <th>Date</th>
+                              <th>Gregorian / Hijri</th>
                               {Object.values(names).map((n) => (
                                 <th key={n}>{n}</th>
                               ))}
@@ -1083,7 +1117,12 @@ export default function Home() {
                                     : ''
                                 }
                               >
-                                <th scope="row">{d.request.date.slice(-2)}</th>
+                                <th scope="row" className="month-date">
+                                  <time dateTime={d.request.date}>
+                                    {d.request.date}
+                                  </time>
+                                  <span>{hijriDateLabel(d.request.date)}</span>
+                                </th>
                                 {d.prayers.map((p) => (
                                   <td
                                     key={p.name}
