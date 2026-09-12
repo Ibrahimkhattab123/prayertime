@@ -1078,5 +1078,121 @@
   "PrayerTime · Daily prayer timetable": [
     "PrayerTime · Tägliche Gebetszeiten",
     "مواقيت الصلاة · الجدول اليومي"
+  ],
+  "Windows": [
+    "Zeitfenster",
+    "الفترات"
+  ],
+  "Prayer windows": [
+    "Gebetszeitfenster",
+    "فترات الصلاة"
+  ],
+  "Prayer-window profile": [
+    "Profil für Gebetszeitfenster",
+    "ملف فترات الصلاة"
+  ],
+  "Off": [
+    "Aus",
+    "إيقاف"
+  ],
+  "Shafi‘i windows · draft": [
+    "Schafiitische Zeitfenster · Entwurf",
+    "الفترات الشافعية · مسودة"
+  ],
+  "Window boundaries are separate from the timetable Asr convention and minute adjustments.": [
+    "Die Zeitfenster sind unabhängig von der Asr-Konvention und den Minutenkorrekturen des Zeitplans.",
+    "حدود الفترات مستقلة عن طريقة العصر وتعديلات الدقائق في الجدول."
+  ],
+  "Choose “Shafi‘i windows · draft” in Calculation to show start and end boundaries.": [
+    "Wähle unter Berechnung „Schafiitische Zeitfenster · Entwurf“, um Beginn und Ende anzuzeigen.",
+    "اختر «الفترات الشافعية · مسودة» في إعدادات الحساب لعرض حدود البداية والنهاية."
+  ],
+  "This reference view uses one-shadow Asr independently of your timetable choice. Dawn and red twilight use the selected method’s angles as provisional proxies; they are not observed signs or a reviewed school profile.": [
+    "Diese Referenzansicht verwendet für Asr die einfache Schattenlänge, unabhängig vom Zeitplan. Morgendämmerung und rote Abenddämmerung werden vorläufig durch die Winkel der gewählten Methode angenähert; dies sind keine beobachteten Zeichen und kein geprüftes Rechtsschulprofil.",
+    "تستخدم هذه المقارنة للعصر ظل المثل مستقلاً عن اختيار الجدول. تُقَرَّب علامات الفجر والشفق الأحمر مؤقتاً بزوايا الطريقة المختارة؛ وليست علامات مرصودة أو ملفاً مذهبياً مُراجعاً."
+  ],
+  "True dawn · selected angle proxy": [
+    "Wahre Morgendämmerung · gewählte Winkelnäherung",
+    "الفجر الصادق · تقريب بالزاوية المختارة"
+  ],
+  "After solar transit": [
+    "Nach dem Sonnentransit",
+    "بعد الزوال"
+  ],
+  "Noon shadow + one object-height": [
+    "Mittagsschatten + eine Objekthöhe",
+    "فيء الزوال + مثل طول الجسم"
+  ],
+  "Red twilight · selected angle proxy": [
+    "Rote Abenddämmerung · gewählte Winkelnäherung",
+    "الشفق الأحمر · تقريب بالزاوية المختارة"
+  ],
+  "True dawn on the following date": [
+    "Wahre Morgendämmerung am Folgetag",
+    "الفجر الصادق في اليوم التالي"
+  ],
+  "One third of sunset to the following dawn": [
+    "Ein Drittel von Sonnenuntergang bis zur folgenden Morgendämmerung",
+    "ثلث المدة من الغروب إلى الفجر التالي"
+  ],
+  "Derived": [
+    "Abgeleitet",
+    "مشتق"
+  ],
+  "Incomplete": [
+    "Unvollständig",
+    "غير مكتمل"
+  ],
+  "Conflicting boundaries": [
+    "Widersprüchliche Grenzen",
+    "حدود متعارضة"
+  ],
+  "Fixed-minute Isha does not identify the end of red twilight.": [
+    "Eine feste Minutenzahl für Ischa bestimmt nicht das Ende der roten Abenddämmerung.",
+    "تحديد العشاء بدقائق ثابتة لا يحدد غياب الشفق الأحمر."
+  ],
+  "These boundaries do not form a valid interval. Review the method and estimation policy.": [
+    "Diese Grenzen bilden kein gültiges Zeitfenster. Prüfe die Methode und die Schätzregel.",
+    "هذه الحدود لا تشكّل فترة صالحة. راجع الطريقة وسياسة التقدير."
+  ],
+  "Starts": [
+    "Beginn",
+    "البداية"
+  ],
+  "Preferred until": [
+    "Bevorzugt bis",
+    "وقت الفضيلة حتى"
+  ],
+  "Outer end": [
+    "Äußerste Grenze",
+    "الحد النهائي"
+  ],
+  "Times use your display rounding, but window ordering uses unrounded instants. Timetable minute adjustments do not move these boundaries. Begin Dhuhr after transit; no precautionary delay is added.": [
+    "Die Anzeige verwendet deine Rundung; die Reihenfolge wird mit ungerundeten Zeitpunkten geprüft. Minutenkorrekturen des Zeitplans verschieben diese Grenzen nicht. Dhuhr beginnt nach dem Transit; ein Sicherheitsabstand wird nicht hinzugefügt.",
+    "تُعرض الأوقات وفق التقريب المختار، لكن ترتيب الحدود يعتمد على اللحظات غير المقرّبة. تعديلات دقائق الجدول لا تغيّر هذه الحدود. يبدأ الظهر بعد الزوال؛ ولا تضاف مهلة احتياطية."
+  ],
+  "An outer end does not mean every part of the interval is equally recommended. Only Isha’s first-third preferred boundary is included in this draft; other preferred, choice and necessity periods are unspecified. Maghrib follows the extended-time opinion.": [
+    "Die äußerste Grenze bedeutet nicht, dass jeder Teil des Zeitfensters gleichermaßen empfohlen ist. Dieser Entwurf enthält nur die bevorzugte Ischa-Grenze am Ende des ersten Nachtdrittels; andere Vorzugs-, Wahl- und Notzeiten sind nicht festgelegt. Maghrib folgt der Auffassung einer ausgedehnten Gebetszeit.",
+    "الحد النهائي لا يعني تساوي أجزاء الفترة في الأفضلية. تشمل هذه المسودة حد فضيلة العشاء عند ثلث الليل فقط؛ ولم تُحدَّد بقية أوقات الفضيلة والاختيار والضرورة. ويتبع المغرب القول بامتداد وقته."
+  ],
+  "Window sources and scope": [
+    "Quellen und Umfang der Zeitfenster",
+    "مصادر الفترات ونطاقها"
+  ],
+  "The Ship to Salvation · prayer boundaries": [
+    "Safinat an-Nadscha · Gebetszeitgrenzen",
+    "سفينة النجاة · حدود أوقات الصلاة"
+  ],
+  "SeekersGuidance · Isha end and preferred time": [
+    "SeekersGuidance · Ischa-Ende und bevorzugte Zeit",
+    "SeekersGuidance · نهاية العشاء ووقت الفضيلة"
+  ],
+  "SeekersGuidance · twilight angle limitations": [
+    "SeekersGuidance · Grenzen der Dämmerungswinkel",
+    "SeekersGuidance · حدود استخدام زوايا الشفق"
+  ],
+  "Fiqh selection currently determines Asr only. The optional Shafi‘i window profile is separate; full school variants are not implemented.": [
+    "Die Fiqh-Auswahl bestimmt derzeit nur Asr. Das optionale schafiitische Zeitfensterprofil ist davon unabhängig; die vollständigen Rechtsschulvarianten sind nicht umgesetzt.",
+    "يحدد اختيار الفقه العصر فقط حالياً. ملف الفترات الشافعية الاختياري مستقل؛ ولم تُنفَّذ جميع الاختلافات المذهبية."
   ]
 }

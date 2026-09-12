@@ -1168,3 +1168,64 @@ html[dir='rtl'] .fingerprint {
   direction: ltr;
   text-align: left;
 }
+
+.window-view {
+  padding-block: 1.5rem;
+}
+.window-view > h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.window-view > p {
+  margin-block: 0.75rem;
+}
+.window-list {
+  display: grid;
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+.window-card {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+.window-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+.window-card h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.window-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1.25rem;
+}
+.window-points dt {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+.window-boundary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+.window-boundary strong {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+}
+.window-date {
+  font-variant-numeric: tabular-nums;
+}
+.window-status {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}

@@ -26,3 +26,6 @@ assert.equal(prayers[0].name, "dhuhr");
 console.log(
   "View-model regressions: request property order, changed settings, tuned next-prayer order and unavailable events pass.",
 );
+
+assert.equal(sameRequest({ window_profile: undefined }, { window_profile: "none" }), true);
+assert.equal(sameRequest({ window_profile: "none" }, { window_profile: "shafii_draft" }), false);

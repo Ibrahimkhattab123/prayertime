@@ -10,7 +10,14 @@ function canonical(value: unknown): unknown {
   return value;
 }
 export function sameRequest(a: CalculationRequest, b: CalculationRequest) {
-  return JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
+  return (
+    JSON.stringify(
+      canonical({ ...a, window_profile: a.window_profile ?? 'none' }),
+    ) ===
+    JSON.stringify(
+      canonical({ ...b, window_profile: b.window_profile ?? 'none' }),
+    )
+  );
 }
 export function nextPrayer(prayers: Prayer[], now: number): Prayer | null {
   return (

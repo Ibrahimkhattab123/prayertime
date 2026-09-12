@@ -302,7 +302,7 @@ dependencies = [
 
 [[package]]
 name = "prayertime-cli"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "clap",
  "prayertime-core",
@@ -311,7 +311,7 @@ dependencies = [
 
 [[package]]
 name = "prayertime-core"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "jiff",
  "jiff-tzdb",
@@ -322,7 +322,7 @@ dependencies = [
 
 [[package]]
 name = "prayertime-wasm"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "prayertime-core",
  "serde_json",

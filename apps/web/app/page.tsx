@@ -61,6 +61,7 @@ import { Localized, LanguagePicker, useLanguage } from '@/components/language';
 import { localeFor, translate } from '@/lib/i18n';
 import { completeConfiguration, CalculationRevision } from '@/lib/automatic';
 import { ThemePicker } from '@/components/theme-picker';
+import { PrayerWindows } from '@/components/prayer-windows';
 import { fiqhExplanation, fiqhSources } from '@/lib/fiqh';
 const STORAGE = 'prayertime-settings-v1';
 const names: Record<string, string> = {
@@ -847,6 +848,21 @@ export default function Home() {
                 edit({ profiles: { ...request.profiles, fiqh: v } })
               }
             />
+            <Choice
+              label="Prayer-window profile"
+              value={request.window_profile ?? 'none'}
+              items={[
+                ['none', 'Off'],
+                ['shafii_draft', 'Shafi‘i windows · draft'],
+              ]}
+              onChange={(v) =>
+                edit({ window_profile: v as 'none' | 'shafii_draft' })
+              }
+            />
+            <p className="field-note">
+              Window boundaries are separate from the timetable Asr convention
+              and minute adjustments.
+            </p>
             {method?.ramadan_minutes !== null &&
               method?.ramadan_minutes !== undefined && (
                 <Choice
@@ -1028,6 +1044,7 @@ export default function Home() {
                   <TabsList>
                     <TabsTrigger value="daily">Day</TabsTrigger>
                     <TabsTrigger value="month">Month</TabsTrigger>
+                    <TabsTrigger value="windows">Windows</TabsTrigger>
                     <TabsTrigger value="research">Details</TabsTrigger>
                   </TabsList>
                   <Button
@@ -1257,6 +1274,11 @@ export default function Home() {
                       * Estimated from the selected night fraction. —
                       Unavailable.
                     </p>
+                  </TabsContent>
+                )}
+                {mode === 'windows' && day && (
+                  <TabsContent value="windows">
+                    <PrayerWindows day={day} />
                   </TabsContent>
                 )}
                 {mode === 'research' && day && (

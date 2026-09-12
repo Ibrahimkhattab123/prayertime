@@ -56,6 +56,8 @@ pub struct Request {
     /// Required for the conditional fixed-interval method. Never inferred from Gregorian date.
     #[serde(default)]
     pub ramadan: Option<bool>,
+    #[serde(default)]
+    pub window_profile: crate::windows::WindowProfile,
 }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Error {
@@ -131,5 +133,6 @@ pub struct DayResult {
     pub solar_local: BTreeMap<String, Option<CivilInstant>>,
     /// A sunset-to-next-sunrise midpoint, not a legal end of Isha.
     pub solar_night_midpoint: Option<CivilInstant>,
+    pub windows: Option<crate::windows::WindowSchedule>,
     pub warnings: Vec<String>,
 }

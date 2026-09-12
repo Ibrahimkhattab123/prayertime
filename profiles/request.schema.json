@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "PrayerTime 0.1 request",
+  "title": "PrayerTime 0.2 request",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -59,7 +59,21 @@
             "calc.mwl@1",
             "calc.isna@1",
             "calc.karachi@1",
-            "calc.umm_al_qura@1"
+            "calc.umm_al_qura@1",
+            "calc.egypt@1",
+            "calc.gulf@1",
+            "calc.kuwait@1",
+            "calc.qatar@1",
+            "calc.singapore@1",
+            "calc.france@1",
+            "calc.turkey@1",
+            "calc.russia@1",
+            "calc.dubai@1",
+            "calc.jakim@1",
+            "calc.tunisia@1",
+            "calc.algeria@1",
+            "calc.kemenag@1",
+            "calc.morocco@1"
           ]
         }
       }
@@ -117,6 +131,14 @@
           "maximum": 120
         }
       }
+    },
+    "window_profile": {
+      "enum": [
+        "none",
+        "shafii_draft"
+      ],
+      "default": "none",
+      "description": "Optional draft Shafii windows, independent of the timetable Asr convention"
     }
   },
   "allOf": [

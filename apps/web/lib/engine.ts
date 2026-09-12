@@ -6,6 +6,7 @@ export type CalculationRequest = {
   high_latitude: string;
   rounding: string;
   ramadan: boolean | null;
+  window_profile?: 'none' | 'shafii_draft';
   adjustments_minutes: Record<string, number>;
 };
 export type Instant = {
@@ -36,6 +37,22 @@ export type Prayer = {
   } | null;
   adjustments: { minutes: number; category: string }[];
 };
+export type WindowBoundary = {
+  criterion: string;
+  status: string;
+  raw: Instant | null;
+  displayed: Instant | null;
+  unavailable_reason: string | null;
+};
+export type PrayerWindow = {
+  prayer: string;
+  status: string;
+  start: WindowBoundary;
+  absolute_end: WindowBoundary;
+  preferred_until: WindowBoundary | null;
+  choice_until: WindowBoundary | null;
+  necessity_until: WindowBoundary | null;
+};
 export type Day = {
   request: CalculationRequest;
   fingerprint: string;
@@ -47,6 +64,10 @@ export type Day = {
   solar: Record<string, unknown>;
   solar_local: Record<string, Instant | null>;
   solar_night_midpoint: Instant | null;
+  windows?: {
+    definition: { id: string; status: string; sources: string[] };
+    windows: PrayerWindow[];
+  } | null;
   warnings: string[];
 };
 export type Profiles = {
@@ -110,6 +131,7 @@ export const defaults: CalculationRequest = {
   high_latitude: 'none',
   rounding: 'nearest_minute',
   ramadan: null,
+  window_profile: 'none',
   adjustments_minutes: {},
 };
 export function today(timezone: string) {

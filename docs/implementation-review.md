@@ -7,7 +7,7 @@ Chapter 39 consolidates earlier milestone lists. The first deliverable is a deve
 ## What the review changed
 
 1. **One engine.** Rust remains canonical. JavaScript performs input, display, persistence and downloads only. The browser invokes the same crate through wasm-bindgen. Three crates expose the architecture; domain, civil, astronomy, rules and profile modules may be split into more crates as the code grows (Chapters 24, 28, 29, 38).
-2. **Asr is not the whole fiqh profile.** Chapter 18 corrects simplified earlier Ja‘fari/shadow claims. Current selectors explicitly say “Asr convention.” Full Sunni subwindows, shafaq opinions and shared-interval Ja‘fari semantics are deferred (Chapters 14, 18, 31, 33).
+2. **Asr is not the whole fiqh profile.** Chapter 18 corrects simplified earlier Ja‘fari/shadow claims. Current selectors explicitly say “Asr convention.” An opt-in draft Shafi‘i window profile now supplies outer boundaries and Isha’s first-third preferred endpoint; full Sunni subwindows, shafaq opinions and shared-interval Ja‘fari semantics remain deferred (Chapters 14, 18, 31, 33).
 3. **Methods are provisional data.** `profiles/baseline.json` contains parameters and source status. No preset is described as official/verified. The draft does not supply released, independently reviewed authority packages (Chapters 20, 26, 36).
 4. **Night adjacency matters.** Date D's Fajr estimate uses sunset(D−1)→sunrise(D); Isha uses sunset(D)→sunrise(D+1). Existing astronomical twilight is never capped by the missing-event policy. No reference night means unavailable (Chapters 12, 16, 17, 19, 32).
 5. **Raw dependencies are preserved.** Fixed Isha uses raw solar sunset. Maghrib tuning cannot change sunset, the solar-night midpoint or Isha. The UI exposes the interval base, rounding and adjustment history (Chapters 15, 16, 34).
@@ -21,7 +21,7 @@ Chapter 39 consolidates earlier milestone lists. The first deliverable is a deve
 | CORE-001–010 | Pure Rust modules; CLI/WASM call the same `calculate_day`; no I/O/current clock in core | Workspace has three crates instead of the proposed eventual crate split |
 | AST-001–017 | Chapter 11 model, JD, solar coordinates/EOT, transit, generic crossing, raw precision; 16 USNO reference records and inverse checks | Fixed −0.833° horizon; no elevation, meteorology, terrain or ephemeris model |
 | RULE-001–014 | Typed AtEvent, SolarDepression, ShadowFactor, FixedInterval; profile-driven compilation | Night fractions are the separate high-latitude resolver. Arbitrary user rule graphs, interval-rule DSL/cycles and white-shafaq requests are not accepted |
-| FIQ-001–012 | Explicit versioned Asr-only choices and limitation metadata | Full legal windows, shared intervals, preferred/necessity fields and legal Isha endpoints not implemented |
+| FIQ-001–012 | Asr-only timetable choices plus an independent opt-in Shafi‘i window definition; raw/displayed endpoints, Isha first third and next-dawn end, partial unavailability and ordering checks | Draft angle mappings need qualified review; other preferred/choice/necessity boundaries and shared intervals remain unspecified |
 | MTH-001–007 | 18 versioned, independently selected draft angle/interval methods with provider-attributed source status | No institutional verification or externally installable profile packages |
 | HLT-001–008 | Three explicit fractions plus none; only absent-event trigger; primary event and night endpoints retained; 1,095-day high-latitude regression | No polar reference schedules, nearest-date/location policy, capping or smoothing |
 | TIME-001–007 | Absolute UTC arithmetic; embedded IANA version; DST, skipped-date and UTC+14 tests | Date range limited to 1900–2100; system timezone discovery outside core |
@@ -57,3 +57,14 @@ The offline test evaluates the generated service worker against a cache harness 
 3. Expand independent astronomy cases around near-tangent high-latitude events; separate solver-error variants from physical absence at the type level.
 4. Implement explicit legal windows/shared intervals and reviewed adjustment targets, then add rule-graph configuration and semantic validation.
 5. Add signed/validated profile package releases. Only after that broaden polar policies, REST and mobile adapters.
+
+
+## M4 increment: explicit draft Shafi‘i windows
+
+`windows.rs` separates profile definitions from resolved boundaries. The optional request field defaults to none, preserving old requests and saved settings. The reference profile is independent of the timetable’s Asr-only choice and does not modify its five starts. Source attribution is embedded and included in the fingerprint. The result schema and engine are 0.2.0.
+
+The [Ship to Salvation translation](https://islamqa.org/shafii/qibla-shafii/33839/) provides the basic five boundaries. [SeekersGuidance’s Isha answer](https://seekersguidance.org/answers/prayer-shafii-fiqh/when-does-the-time-for-isha-end/) supports the next-dawn outer end and first-third preferred end. Its [twilight discussion](https://seekersguidance.org/answers/prayer-shafii-fiqh/at-which-angle-do-fajr-and-isha-start-respectively/) explains why a fixed global angle cannot establish observed red twilight. Using the selected angle as a draft proxy is an implementation assumption, not an authority endorsement. Fixed intervals therefore do not resolve that boundary. Maghrib uses the extended-time opinion; other intra-school views are not encoded.
+
+The first-third calculation uses sunset to next dawn, separate from the pre-existing sunset-to-sunrise midpoint. Next-day resolution uses the civil date and embedded timezone rules. Range-edge failures become unavailable next-day boundaries, not failures of otherwise available current-day events. Invalid order is retained and flagged rather than clamped; estimates keep their status. Timetable offsets are never legal-boundary adjustments. Other preferred/choice/necessity fields are null (unspecified).
+
+Regression coverage includes next-dawn dependencies over both DST changes and the date line, offset and Asr independence, unsupported fixed intervals, polar partial availability, the maximum supported date, and conflicting estimated subwindows. Native/WASM parity exercises the enabled profile with all 18 methods. This delivers the first M4 increment, not the full M4 exit gate: shared/order-based legal structures and reviewed multi-school profiles remain future work.

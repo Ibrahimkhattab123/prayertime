@@ -62,6 +62,7 @@ try {
         timezone,
         profiles: { calculation, fiqh: "fiqh.hanafi_abu_hanifa@1" },
         ramadan: false,
+        window_profile: "shafii_draft",
         high_latitude: "angle_based",
         adjustments_minutes: { maghrib: 10 },
       };

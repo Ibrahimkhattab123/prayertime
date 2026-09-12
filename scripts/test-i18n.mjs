@@ -53,7 +53,7 @@ const templates = JSON.parse(
 );
 for (const [key, values] of Object.entries({ ...messages, ...templates }))
   assert.ok(values.length === 2 && values.every((v) => typeof v === "string" && v.length > 0), key);
-for (const file of ["app/page.tsx", "components/city-search.tsx", "components/theme-picker.tsx"]) {
+for (const file of ["app/page.tsx", "components/city-search.tsx", "components/theme-picker.tsx", "components/prayer-windows.tsx"]) {
   const source = await readFile(join(root, "apps/web", file), "utf8");
   const ast = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   function check(node) {
@@ -107,7 +107,7 @@ try {
       join(temp, "lib/locales/" + name + ".json"),
       await readFile(join(root, "apps/web/lib/locales/" + name + ".json")),
     );
-  for (const file of ["lib/i18n.ts", "components/language.tsx"]) {
+  for (const file of ["lib/i18n.ts", "components/language.tsx", "components/prayer-windows.tsx"]) {
     const source = await readFile(join(root, "apps/web", file), "utf8");
     const out = ts
       .transpileModule(source, {
@@ -117,13 +117,25 @@ try {
           target: ts.ScriptTarget.ES2022,
         },
       })
-      .outputText.replaceAll("@/lib/i18n", "../lib/i18n.js");
+      .outputText.replaceAll("@/lib/i18n", "../lib/i18n.js")
+      .replaceAll("@/components/language", "./language.js");
     await writeFile(join(temp, file.replace(/\.tsx?$/, ".js")), out);
   }
   const { LanguageProvider, Localized } = await import(
     pathToFileURL(join(temp, "components/language.js"))
   );
+  const { PrayerWindows } = await import(pathToFileURL(join(temp, "components/prayer-windows.js")));
   for (const language of ["de", "ar"]) {
+    const windowDay = JSON.parse(calculateDay(JSON.stringify({ ...base, window_profile: "shafii_draft" })));
+    const windowHtml = renderToStaticMarkup(h(LanguageProvider, { initialLanguage: language }, h(PrayerWindows, { day: windowDay })));
+    assert.equal((windowHtml.match(/class="window-card"/g) ?? []).length, 5);
+    for (const key of ["Prayer windows", "Preferred until", "Outer end", "True dawn on the following date", "One third of sunset to the following dawn"])
+      assert.ok(windowHtml.includes(translate(key, language)), key);
+    assert.ok(windowHtml.includes("2026-09-13"));
+    assert.ok(windowHtml.includes(windowDay.windows.definition.sources[0]));
+    const fixed = JSON.parse(calculateDay(JSON.stringify({ ...base, window_profile: "shafii_draft", profiles: { ...base.profiles, calculation: "calc.umm_al_qura@1" }, ramadan: false })));
+    const fixedHtml = renderToStaticMarkup(h(LanguageProvider, { initialLanguage: language }, h(PrayerWindows, { day: fixed })));
+    assert.ok(fixedHtml.includes(translate("Fixed-minute Isha does not identify the end of red twilight.", language)));
     const html = renderToStaticMarkup(
       h(
         LanguageProvider,

@@ -1,0 +1,16 @@
+{
+  "id": "windows.shafii@1",
+  "status": "draft_unreviewed",
+  "sources": [
+    "https://islamqa.org/shafii/qibla-shafii/33839/",
+    "https://seekersguidance.org/answers/prayer-shafii-fiqh/when-does-the-time-for-isha-end/",
+    "https://seekersguidance.org/answers/prayer-shafii-fiqh/at-which-angle-do-fajr-and-isha-start-respectively/"
+  ],
+  "windows": [
+    {"prayer":"fajr","start":"true_dawn","absolute_end":"sunrise","preferred_until":null,"choice_until":null,"necessity_until":null},
+    {"prayer":"dhuhr","start":"after_transit","absolute_end":"one_shadow","preferred_until":null,"choice_until":null,"necessity_until":null},
+    {"prayer":"asr","start":"one_shadow","absolute_end":"sunset","preferred_until":null,"choice_until":null,"necessity_until":null},
+    {"prayer":"maghrib","start":"sunset","absolute_end":"red_twilight_proxy","preferred_until":null,"choice_until":null,"necessity_until":null},
+    {"prayer":"isha","start":"red_twilight_proxy","absolute_end":"next_true_dawn","preferred_until":"first_third_of_night","choice_until":null,"necessity_until":null}
+  ]
+}

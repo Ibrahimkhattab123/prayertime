@@ -5,6 +5,7 @@ pub mod civil;
 pub mod model;
 pub mod profiles;
 pub mod rules;
+pub mod windows;
 pub use model::*;
 
 use astronomy::{Direction, Event, Latitude, Longitude};
@@ -118,6 +119,13 @@ fn fallback(
     ))
 }
 pub fn calculate_day(request: &Request) -> Result<DayResult> {
+    let mut day = calculate_day_without_windows(request)?;
+    if request.window_profile != windows::WindowProfile::None {
+        day.windows = Some(windows::calculate(&day)?);
+    }
+    Ok(day)
+}
+fn calculate_day_without_windows(request: &Request) -> Result<DayResult> {
     validate_configuration(request)?;
     let date = civil::date(&request.date)?;
     let tz = civil::timezone(&request.timezone)?;
@@ -202,7 +210,7 @@ pub fn calculate_day(request: &Request) -> Result<DayResult> {
         ),
         ("isha", "method_twilight_convention", isha),
     ];
-    let mut warnings=vec!["Draft profiles: provider-attributed conventions; not authority-verified.".into(),"Fiqh selection currently determines Asr only. Full legal windows and red/white shafaq variants are not implemented.".into(),"Standard -0.833° horizon; no terrain, elevation or weather model. Dhuhr uses transit without an automatic precautionary delay.".into()];
+    let mut warnings=vec!["Draft profiles: provider-attributed conventions; not authority-verified.".into(),"Fiqh selection currently determines Asr only. The optional Shafi‘i window profile is separate; full school variants are not implemented.".into(),"Standard -0.833° horizon; no terrain, elevation or weather model. Dhuhr uses transit without an automatic precautionary delay.".into()];
     let mut prayers = Vec::new();
     for (name, criterion, rule) in plan {
         let primary = rules::evaluate(&rule, midnight, lat, lon);
@@ -330,10 +338,10 @@ pub fn calculate_day(request: &Request) -> Result<DayResult> {
     if method.ramadan_minutes.is_none() {
         normalized.ramadan = None;
     }
-    let canonical=serde_json::to_vec(&serde_json::json!({"encoding":"prayertime-fingerprint-v1","request":normalized,"engine":env!("CARGO_PKG_VERSION"),"astronomy":astronomy::MODEL,"tzdb":civil::tzdb_version(),"profiles":package})).map_err(|e|Error::new("SERIALIZATION_ERROR",e.to_string()))?;
+    let canonical=serde_json::to_vec(&serde_json::json!({"encoding":"prayertime-fingerprint-v1","request":normalized,"engine":env!("CARGO_PKG_VERSION"),"astronomy":astronomy::MODEL,"tzdb":civil::tzdb_version(),"profiles":package,"window_definition":windows::DEFINITION})).map_err(|e|Error::new("SERIALIZATION_ERROR",e.to_string()))?;
     let fingerprint = format!("sha256:{:x}", Sha256::digest(canonical));
     Ok(DayResult {
-        schema_version: "0.1.0".into(),
+        schema_version: "0.2.0".into(),
         engine_version: env!("CARGO_PKG_VERSION").into(),
         astronomy_model: astronomy::MODEL.into(),
         timezone_database: civil::tzdb_version(),
@@ -344,6 +352,7 @@ pub fn calculate_day(request: &Request) -> Result<DayResult> {
         solar,
         solar_local,
         solar_night_midpoint: midpoint,
+        windows: None,
         warnings,
     })
 }

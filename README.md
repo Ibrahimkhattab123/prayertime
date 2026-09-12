@@ -71,7 +71,7 @@ Development builds do not register the offline worker. The static production out
 - Absolute UTC instants, embedded IANA tzdb, per-event offsets and final rounding; reproducible SHA-256 configuration fingerprints.
 - Dates 1900–2100; ranges of 1–366 days. A range has one explicit Ramadan context for every included day.
 
-Profiles are draft, provider-attributed representations of the paper. They are **not independently authority-verified**. Legal prayer windows, full shafaq semantics, shared Ja‘fari intervals, polar reference schedules, terrain/weather corrections, notifications, mobile bindings and REST hosting are not implemented in this alpha. See [the review and implementation map](docs/implementation-review.md).
+Profiles are draft, provider-attributed representations of the paper. They are **not independently authority-verified**. Full multi-school prayer windows, observed shafaq semantics, shared Ja‘fari intervals, polar reference schedules, terrain/weather corrections, notifications, mobile bindings and REST hosting are not implemented in this alpha. See [the review and implementation map](docs/implementation-review.md).
 
 ## Validation
 
@@ -113,3 +113,12 @@ Prayer explanations also include a sourced Sunni fiqh overview. This educational
 Choose English, Deutsch or العربية in the header. The preference is saved on this device. Arabic uses right-to-left layout; Gregorian and Hijri dates use the selected locale. Labels, messages, method names, calculation explanations and fiqh overviews have bundled German and Arabic translations and remain available offline. Raw JSON, calculation identifiers, timezone IDs and input values retain their canonical form. City searches ask the provider for the selected language.
 
 Completed configuration edits automatically recalculate after a 300 ms typing delay. Incomplete fields retain the last result; validation messages explain rejected inputs. Changing configuration invalidates earlier calculations and monthly results so they cannot overwrite a newer request. The Recalculate button remains available for retrying.
+
+
+### Prayer windows (M4, first increment)
+
+In **Calculation → Prayer-window profile**, select **Shafi‘i windows · draft**, then open **Windows**. The opt-in profile shows five starts and outer ends, plus Isha’s preferred first-third boundary. The CLI and WASM accept `"window_profile": "shafii_draft"`; omitted or `"none"` preserves the timetable-only mode. Results use schema 0.2.0.
+
+This reference profile uses one-shadow Asr independently of the timetable Asr setting. Dawn and red twilight use the selected method’s angles as provisional proxies, not verified observations. Fixed-minute Isha leaves the red-twilight boundary unavailable. The first third runs from raw sunset to the next civil date’s raw dawn; daylight-saving changes are handled in UTC. All endpoints retain raw and displayed instants. User timetable offsets cannot move them.
+
+A missing endpoint leaves other endpoints visible. Estimates and conflicting boundary order are explicit. Null preferred/choice/necessity fields mean unspecified. Only Isha’s preferred endpoint is supplied in this increment; other subwindows, shared intervals and additional schools remain deferred. The profile is a research draft requiring qualified review, with source links embedded in `profiles/windows-shafii.json` and shown in the app.
