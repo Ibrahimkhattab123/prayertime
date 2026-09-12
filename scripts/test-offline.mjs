@@ -9,6 +9,8 @@ const handlers = new Map();
 const stores = new Map();
 let online = true;
 let claimed = false;
+let windows = 1;
+let skipped = 0;
 const messages = [];
 const assetPath = (u) => resolve(root, u === "/" ? "index.html" : u.replace(/^\//, ""));
 const fetchAsset = async (u) => {
@@ -46,10 +48,12 @@ const self = {
       claimed = true;
     },
     async matchAll() {
-      return [{ postMessage: (m) => messages.push(m) }];
+      return Array.from({ length: windows }, () => ({ postMessage: (m) => messages.push(m) }));
     },
   },
-  async skipWaiting() {},
+  async skipWaiting() {
+    skipped++;
+  },
   addEventListener: (type, fn) => handlers.set(type, fn),
 };
 vm.runInNewContext(source, { self, caches, fetch: fetchAsset, URL, Response });
@@ -59,6 +63,7 @@ async function lifecycle(name) {
   await pending;
 }
 await lifecycle("install");
+assert.equal(skipped, 0, "installation must not interrupt open sessions");
 await lifecycle("activate");
 assert.equal(claimed, true);
 assert.ok(messages.some((m) => m.type === "OFFLINE_READY"));
@@ -68,6 +73,29 @@ assert.ok(stored.has("/wasm/prayertime_bg.wasm"));
 assert.ok(stored.has("/timezone/tzf.js"));
 assert.ok(stored.has("/timezone/tzf_wasm_bg.wasm"));
 assert.ok([...stored.keys()].some((k) => k.endsWith(".css")));
+for (const icon of [
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+  "/icons/icon-maskable-512.png",
+  "/icons/apple-touch-icon.png",
+])
+  assert.ok(stored.has(icon), icon);
+async function activateUpdate() {
+  let pending;
+  handlers.get("message")({
+    data: { type: "ACTIVATE_UPDATE" },
+    source: { postMessage: (m) => messages.push(m) },
+    waitUntil: (p) => (pending = p),
+  });
+  await pending;
+}
+windows = 2;
+await activateUpdate();
+assert.equal(skipped, 0);
+assert.equal(messages.at(-1).type, "UPDATE_BLOCKED");
+windows = 1;
+await activateUpdate();
+assert.equal(skipped, 1);
 online = false;
 async function request(path, mode = "same-origin") {
   let response;

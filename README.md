@@ -18,7 +18,7 @@ Offline assets install on the production build's first successful load. The head
 
 City searches go to [Open-Meteo](https://open-meteo.com/en/docs/geocoding-api) with [GeoNames](https://www.geonames.org/) attribution; the service returns each city's IANA timezone. New city searches need internet, while starter cities and your 20 most recently selected places remain available offline. The free endpoint is for noncommercial use and is subject to [Open-Meteo's usage limits and terms](https://open-meteo.com/en/terms).
 
-GPS and manual coordinate detection use bundled [tzf-wasm](https://github.com/ringsaturn/tzf-wasm) timezone boundaries on your device; the app does not send these coordinates to the city-search service. This adds about 9 MB of uncompressed offline assets. The boundary data is simplified to roughly 111-metre precision; check the visible zone near a boundary and use the override when needed. The Rust engine applies date-specific timezone rules and daylight saving time. GPS still depends on device support and permission. Close all app tabs and reopen the app to activate an installed update.
+GPS and manual coordinate detection use bundled [tzf-wasm](https://github.com/ringsaturn/tzf-wasm) timezone boundaries on your device; the app does not send these coordinates to the city-search service. This adds about 9 MB of uncompressed offline assets. The boundary data is simplified to roughly 111-metre precision; check the visible zone near a boundary and use the override when needed. The Rust engine applies date-specific timezone rules and daylight saving time. GPS still depends on device support and permission. When a new version is ready, use Update now after closing other PrayerTime tabs or app windows. Initial upgrades from versions without this button require closing all app tabs once.
 
 ## Native CLI
 
@@ -133,3 +133,23 @@ The CLI/WASM request accepts `window_profile`: `shafii_draft`, `hanafi_abu_hanif
 All calculated boundaries retain raw and displayed instants. Fractions use raw sunset to the next civil date’s dawn, including DST changes. User timetable offsets never move window boundaries. Unknown brightness, white-twilight mapping, yellowing, star visibility and prayer durations remain explicitly unavailable; no angle or duration is invented. In particular, the reserved final intervals in the Maliki account are not replaced by unrestricted sunset/dawn deadlines. Fixed-minute Isha does not resolve red twilight. Null optional fields mean unspecified.
 
 Sources are embedded in the `profiles/windows-*.json` files and linked in the app. German/Arabic text and offline calculation cover all six accounts. Full shared-time validity rules, personal-excuse adjudication and Ja‘fari profiles remain future work.
+
+
+## Phone installation and public hosting
+
+The production app includes 192/512 px icons, a maskable Android icon, an Apple touch icon, standalone metadata, and an Install PrayerTime button with English, German and Arabic instructions. Android browsers can show their native install prompt; iPhone users can use Safari → Share → Add to Home Screen. Wait for Ready offline before disconnecting. Settings remain on the device; new city searches require internet.
+
+Updates wait for an explicit Update now action. Activation is blocked while other app windows are open, and the button is disabled while configuration changes or calculations are pending. Automated tests cover worker caching and update lifecycle; physical Android/iPhone installation, airplane-mode relaunch, and settings persistence still require device testing.
+
+The existing Sites deployment supports public access and a custom domain. Connect a domain only after obtaining its actual hostname and configuring the DNS records supplied by the host. Changing origins does not migrate installed apps or local settings: choose the permanent domain before asking users to install broadly.
+
+For Cloudflare Pages, build with Node 22.13+ using:
+
+```sh
+npm ci --prefix apps/web
+npm --prefix apps/web run build
+```
+
+Publish the root `dist/` directory as a static Pages project over HTTPS. The repository contains the built prayer-engine WASM, so this frontend build does not require Rust. Rebuild WASM with the project scripts whenever the Rust core changes. No server, database or API secrets are required for hosting this build.
+
+Run `node scripts/prepare-icons.mjs` after changing the SVG icon (requires the web dependencies). Run `scripts/check.sh` for the complete validation suite. Native home-screen widgets remain a separate Android/iOS development stage.

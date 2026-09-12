@@ -1,88 +1,28 @@
 {
-  "Language": [
-    "Sprache",
-    "اللغة"
-  ],
-  "Fajr": [
-    "Fadschr",
-    "الفجر"
-  ],
-  "Dhuhr": [
-    "Dhuhr",
-    "الظهر"
-  ],
-  "Asr": [
-    "Asr",
-    "العصر"
-  ],
-  "Maghrib": [
-    "Maghrib",
-    "المغرب"
-  ],
-  "Isha": [
-    "Ischa",
-    "العشاء"
-  ],
-  "Sunrise": [
-    "Sonnenaufgang",
-    "الشروق"
-  ],
-  "Solar noon": [
-    "Sonnenhöchststand",
-    "الزوال الشمسي"
-  ],
-  "Sunset": [
-    "Sonnenuntergang",
-    "الغروب"
-  ],
-  "Dawn": [
-    "Morgendämmerung",
-    "الفجر الصادق"
-  ],
-  "Midday": [
-    "Mittag",
-    "الظهر"
-  ],
-  "Afternoon": [
-    "Nachmittag",
-    "بعد الظهر"
-  ],
-  "Night": [
-    "Nacht",
-    "الليل"
-  ],
-  "No estimation": [
-    "Keine Schätzung",
-    "دون تقدير"
-  ],
-  "Middle of the night": [
-    "Mitte der Nacht",
-    "نصف الليل"
-  ],
-  "One seventh of the night": [
-    "Ein Siebtel der Nacht",
-    "سُبع الليل"
-  ],
+  "Language": ["Sprache", "اللغة"],
+  "Fajr": ["Fadschr", "الفجر"],
+  "Dhuhr": ["Dhuhr", "الظهر"],
+  "Asr": ["Asr", "العصر"],
+  "Maghrib": ["Maghrib", "المغرب"],
+  "Isha": ["Ischa", "العشاء"],
+  "Sunrise": ["Sonnenaufgang", "الشروق"],
+  "Solar noon": ["Sonnenhöchststand", "الزوال الشمسي"],
+  "Sunset": ["Sonnenuntergang", "الغروب"],
+  "Dawn": ["Morgendämmerung", "الفجر الصادق"],
+  "Midday": ["Mittag", "الظهر"],
+  "Afternoon": ["Nachmittag", "بعد الظهر"],
+  "Night": ["Nacht", "الليل"],
+  "No estimation": ["Keine Schätzung", "دون تقدير"],
+  "Middle of the night": ["Mitte der Nacht", "نصف الليل"],
+  "One seventh of the night": ["Ein Siebtel der Nacht", "سُبع الليل"],
   "Angle-based night portion": [
     "Winkelabhängiger Nachtanteil",
     "جزء من الليل بحسب الزاوية"
   ],
-  "middle of night": [
-    "Mitte der Nacht",
-    "نصف الليل"
-  ],
-  "middle of the night": [
-    "Mitte der Nacht",
-    "نصف الليل"
-  ],
-  "one seventh": [
-    "Ein Siebtel",
-    "السُبع"
-  ],
-  "angle based": [
-    "Winkelabhängig",
-    "بحسب الزاوية"
-  ],
+  "middle of night": ["Mitte der Nacht", "نصف الليل"],
+  "middle of the night": ["Mitte der Nacht", "نصف الليل"],
+  "one seventh": ["Ein Siebtel", "السُبع"],
+  "angle based": ["Winkelabhängig", "بحسب الزاوية"],
   "Solar transit · no automatic delay": [
     "Sonnenhöchststand · kein automatischer Zuschlag",
     "الزوال الشمسي · دون تأخير تلقائي"
@@ -103,14 +43,8 @@
     "Die Asr-Einstellung wählt nur die Asr-Regel, kein vollständiges Rechtsschulprofil. Überblick nach Kapitel 18 der Forschungsarbeit.",
     "يحدد إعداد العصر معيار صلاة العصر فقط، وليس ملفًا كاملًا للمذهب. يستند العرض إلى الفصل 18 من البحث."
   ],
-  "References": [
-    "Quellen",
-    "المراجع"
-  ],
-  "Estimated:": [
-    "Geschätzt:",
-    "تقديري:"
-  ],
+  "References": ["Quellen", "المراجع"],
+  "Estimated:": ["Geschätzt:", "تقديري:"],
   ". The primary event is absent (": [
     ". Das ursprüngliche Ereignis tritt nicht ein (",
     ". لا يتحقق الحدث الأصلي ("
@@ -123,30 +57,15 @@
     "Stunden; der gewählte Anteil beträgt",
     "ساعة؛ والنسبة المختارة هي"
   ],
-  "No time can be resolved:": [
-    "Keine Zeit bestimmbar:",
-    "تعذّر تحديد الوقت:"
-  ],
+  "No time can be resolved:": ["Keine Zeit bestimmbar:", "تعذّر تحديد الوقت:"],
   ". Choose an explicit estimation policy for missing twilight. Basic night fractions cannot resolve a missing sunrise or sunset.": [
     ". Wählen Sie eine Schätzregel für fehlende Dämmerung. Einfache Nachtanteile helfen nicht bei fehlendem Sonnenauf- oder -untergang.",
     ". اختر سياسة تقدير لغياب الشفق. لا تكفي نسب الليل البسيطة عند غياب الشروق أو الغروب."
   ],
-  "Raw UTC": [
-    "Unveränderte UTC-Zeit",
-    "الوقت الخام بتوقيت UTC"
-  ],
-  "Local instant": [
-    "Lokaler Zeitpunkt",
-    "الوقت المحلي"
-  ],
-  "Timetable adjustment": [
-    "Zeitkorrektur",
-    "تعديل الوقت"
-  ],
-  "None": [
-    "Keine",
-    "لا يوجد"
-  ],
+  "Raw UTC": ["Unveränderte UTC-Zeit", "الوقت الخام بتوقيت UTC"],
+  "Local instant": ["Lokaler Zeitpunkt", "الوقت المحلي"],
+  "Timetable adjustment": ["Zeitkorrektur", "تعديل الوقت"],
+  "None": ["Keine", "لا يوجد"],
   "Display rounding is applied after calculation and adjustment.": [
     "Die Anzeigerundung erfolgt nach Berechnung und Korrektur.",
     "يُطبَّق تقريب العرض بعد الحساب والتعديلات."
@@ -163,10 +82,7 @@
     "Die Offline-Installation ist fehlgeschlagen. Die Berechnung funktioniert weiter, solange diese Seite geöffnet ist.",
     "فشل التثبيت للعمل دون إنترنت. يستمر الحساب ما دامت الصفحة مفتوحة."
   ],
-  "Custom location": [
-    "Eigener Standort",
-    "موقع مخصص"
-  ],
+  "Custom location": ["Eigener Standort", "موقع مخصص"],
   "Geolocation is unavailable. Search for a city or enter coordinates manually.": [
     "Standortbestimmung ist nicht verfügbar. Suchen Sie eine Stadt oder geben Sie Koordinaten ein.",
     "تحديد الموقع غير متاح. ابحث عن مدينة أو أدخل الإحداثيات يدويًا."
@@ -175,34 +91,16 @@
     "Standort und Zeitzone werden ermittelt…",
     "جارٍ تحديد موقعك والمنطقة الزمنية…"
   ],
-  "Current location": [
-    "Aktueller Standort",
-    "الموقع الحالي"
-  ],
+  "Current location": ["Aktueller Standort", "الموقع الحالي"],
   "Location permission was denied or unavailable. Search for a city instead.": [
     "Standortzugriff wurde abgelehnt oder ist nicht verfügbar. Suchen Sie stattdessen eine Stadt.",
     "رُفض إذن الموقع أو تعذّر تحديده. ابحث عن مدينة بدلًا من ذلك."
   ],
-  "Custom coordinates": [
-    "Eigene Koordinaten",
-    "إحداثيات مخصصة"
-  ],
-  "PrayerTime home": [
-    "PrayerTime Startseite",
-    "الصفحة الرئيسية لمواقيت الصلاة"
-  ],
-  "Offline": [
-    "Offline",
-    "دون اتصال"
-  ],
-  "Ready offline": [
-    "Offline bereit",
-    "جاهز دون اتصال"
-  ],
-  "On-device calculation": [
-    "Berechnung auf diesem Gerät",
-    "الحساب على جهازك"
-  ],
+  "Custom coordinates": ["Eigene Koordinaten", "إحداثيات مخصصة"],
+  "PrayerTime home": ["PrayerTime Startseite", "الصفحة الرئيسية لمواقيت الصلاة"],
+  "Offline": ["Offline", "دون اتصال"],
+  "Ready offline": ["Offline bereit", "جاهز دون اتصال"],
+  "On-device calculation": ["Berechnung auf diesem Gerät", "الحساب على جهازك"],
   "0.1 · Development alpha": [
     "0.1 · Entwicklungsversion",
     "0.1 · نسخة تطوير أولية"
@@ -211,42 +109,21 @@
     "IHRE TÄGLICHEN GEBETSZEITEN",
     "مواقيت صلاتك اليومية"
   ],
-  "A day, in prayer.": [
-    "Ein Tag im Gebet.",
-    "يومٌ مع الصلاة."
-  ],
+  "A day, in prayer.": ["Ein Tag im Gebet.", "يومٌ مع الصلاة."],
   "Local calculations. Clear methods. Every time explained.": [
     "Lokale Berechnung. Transparente Methoden. Jede Zeit erklärt.",
     "حساب محلي. طرق واضحة. شرح لكل وقت."
   ],
-  "UP NEXT": [
-    "ALS NÄCHSTES",
-    "الصلاة القادمة"
-  ],
-  "· estimated": [
-    "· geschätzt",
-    "· تقديري"
-  ],
-  "Location & date": [
-    "Standort und Datum",
-    "الموقع والتاريخ"
-  ],
+  "UP NEXT": ["ALS NÄCHSTES", "الصلاة القادمة"],
+  "· estimated": ["· geschätzt", "· تقديري"],
+  "Location & date": ["Standort und Datum", "الموقع والتاريخ"],
   "Finding location & timezone…": [
     "Standort und Zeitzone werden ermittelt…",
     "جارٍ تحديد الموقع والمنطقة الزمنية…"
   ],
-  "Use my location": [
-    "Meinen Standort verwenden",
-    "استخدم موقعي"
-  ],
-  "Timezone": [
-    "Zeitzone",
-    "المنطقة الزمنية"
-  ],
-  "Not set": [
-    "Nicht festgelegt",
-    "غير محددة"
-  ],
+  "Use my location": ["Meinen Standort verwenden", "استخدم موقعي"],
+  "Timezone": ["Zeitzone", "المنطقة الزمنية"],
+  "Not set": ["Nicht festgelegt", "غير محددة"],
   "Set automatically when you select a city or use GPS.": [
     "Wird bei Stadtauswahl oder GPS automatisch bestimmt.",
     "تُحدد تلقائيًا عند اختيار مدينة أو استخدام GPS."
@@ -255,22 +132,13 @@
     "Koordinaten und manuelle Zeitzone",
     "الإحداثيات وتعديل المنطقة الزمنية"
   ],
-  "Latitude": [
-    "Breitengrad",
-    "خط العرض"
-  ],
-  "Longitude": [
-    "Längengrad",
-    "خط الطول"
-  ],
+  "Latitude": ["Breitengrad", "خط العرض"],
+  "Longitude": ["Längengrad", "خط الطول"],
   "Detect timezone from coordinates": [
     "Zeitzone aus Koordinaten bestimmen",
     "تحديد المنطقة الزمنية من الإحداثيات"
   ],
-  "Timezone override": [
-    "Manuelle Zeitzone",
-    "تعيين المنطقة الزمنية يدويًا"
-  ],
+  "Timezone override": ["Manuelle Zeitzone", "تعيين المنطقة الزمنية يدويًا"],
   "You can override the detected zone near a boundary.": [
     "An einer Zeitzonengrenze können Sie die erkannte Zone ändern.",
     "يمكن تعديل المنطقة المكتشفة عند الاقتراب من حدودها."
@@ -279,34 +147,16 @@
     "Quellen der Zeitzonendaten",
     "مصادر بيانات المناطق الزمنية"
   ],
-  "Date": [
-    "Datum",
-    "التاريخ"
-  ],
-  "Calculation": [
-    "Berechnung",
-    "الحساب"
-  ],
-  "Calculation method": [
-    "Berechnungsmethode",
-    "طريقة الحساب"
-  ],
-  "Muslim World League": [
-    "Islamische Weltliga",
-    "رابطة العالم الإسلامي"
-  ],
+  "Date": ["Datum", "التاريخ"],
+  "Calculation": ["Berechnung", "الحساب"],
+  "Calculation method": ["Berechnungsmethode", "طريقة الحساب"],
+  "Muslim World League": ["Islamische Weltliga", "رابطة العالم الإسلامي"],
   "Regional angle/interval presets; local authority timetables may include additional corrections.": [
     "Regionale Winkel- und Intervallvorgaben; örtliche Gebetskalender können weitere Korrekturen enthalten.",
     "إعدادات إقليمية للزوايا والفترات؛ قد تتضمن الجداول المحلية تعديلات إضافية."
   ],
-  "Method sources": [
-    "Quellen der Methoden",
-    "مصادر الطرق"
-  ],
-  "Asr convention": [
-    "Asr-Konvention",
-    "معيار العصر"
-  ],
+  "Method sources": ["Quellen der Methoden", "مصادر الطرق"],
+  "Asr convention": ["Asr-Konvention", "معيار العصر"],
   "Shafi‘i, Maliki & Hanbali Asr": [
     "Asr: Schafiitisch, malikitisch und hanbalitisch",
     "العصر: الشافعي والمالكي والحنبلي"
@@ -323,82 +173,37 @@
     "Ramadan-Angabe (erforderlich)",
     "تحديد رمضان (مطلوب)"
   ],
-  "Select explicitly": [
-    "Bitte ausdrücklich auswählen",
-    "اختر صراحةً"
-  ],
+  "Select explicitly": ["Bitte ausdrücklich auswählen", "اختر صراحةً"],
   "Not Ramadan · 90 minutes": [
     "Kein Ramadan · 90 Minuten",
     "خارج رمضان · 90 دقيقة"
   ],
-  "Ramadan · 120 minutes": [
-    "Ramadan · 120 Minuten",
-    "رمضان · 120 دقيقة"
-  ],
-  "Missing twilight": [
-    "Fehlende Dämmerung",
-    "غياب الفجر أو الشفق"
-  ],
+  "Ramadan · 120 minutes": ["Ramadan · 120 Minuten", "رمضان · 120 دقيقة"],
+  "Missing twilight": ["Fehlende Dämmerung", "غياب الفجر أو الشفق"],
   "Estimation applies only when an angle event is absent. Polar days may remain unresolved.": [
     "Schätzung gilt nur bei fehlendem Winkelereignis. Polartage können weiterhin unbestimmbar bleiben.",
     "يُستخدم التقدير فقط عند غياب الحدث الزاوي. قد تبقى الحالات القطبية دون حل."
   ],
-  "Adjustments & rounding": [
-    "Korrekturen und Rundung",
-    "التعديلات والتقريب"
-  ],
-  "Display rounding": [
-    "Anzeigerundung",
-    "تقريب العرض"
-  ],
-  "Nearest minute": [
-    "Nächste Minute",
-    "أقرب دقيقة"
-  ],
-  "Round up": [
-    "Aufrunden",
-    "تقريب لأعلى"
-  ],
-  "Round down": [
-    "Abrunden",
-    "تقريب لأسفل"
-  ],
-  "No rounding": [
-    "Keine Rundung",
-    "دون تقريب"
-  ],
+  "Adjustments & rounding": ["Korrekturen und Rundung", "التعديلات والتقريب"],
+  "Display rounding": ["Anzeigerundung", "تقريب العرض"],
+  "Nearest minute": ["Nächste Minute", "أقرب دقيقة"],
+  "Round up": ["Aufrunden", "تقريب لأعلى"],
+  "Round down": ["Abrunden", "تقريب لأسفل"],
+  "No rounding": ["Keine Rundung", "دون تقريب"],
   "Offsets tune the timetable. Raw sunset and dependent rules stay unchanged.": [
     "Korrekturen passen den Kalender an. Der rohe Sonnenuntergang und abhängige Regeln bleiben unverändert.",
     "تُعدّل الإزاحات الجدول، دون تغيير الغروب الخام أو القواعد المعتمدة عليه."
   ],
-  "minutes": [
-    "Minuten",
-    "دقائق"
-  ],
-  "Calculating…": [
-    "Wird berechnet…",
-    "جارٍ الحساب…"
-  ],
-  "Recalculate": [
-    "Neu berechnen",
-    "إعادة الحساب"
-  ],
+  "minutes": ["Minuten", "دقائق"],
+  "Calculating…": ["Wird berechnet…", "جارٍ الحساب…"],
+  "Recalculate": ["Neu berechnen", "إعادة الحساب"],
   "Changes apply automatically. Settings are saved on this device after calculation. Your coordinates stay here.": [
     "Änderungen werden automatisch angewendet. Einstellungen werden nach der Berechnung auf diesem Gerät gespeichert. Ihre Koordinaten bleiben hier.",
     "تُطبق التغييرات تلقائيًا. تُحفظ الإعدادات على هذا الجهاز بعد الحساب، وتبقى إحداثياتك هنا."
   ],
-  "Reset settings": [
-    "Einstellungen zurücksetzen",
-    "إعادة ضبط الإعدادات"
-  ],
-  "Unable to calculate": [
-    "Berechnung nicht möglich",
-    "تعذّر الحساب"
-  ],
-  "Try again": [
-    "Erneut versuchen",
-    "حاول مجددًا"
-  ],
+  "Reset settings": ["Einstellungen zurücksetzen", "إعادة ضبط الإعدادات"],
+  "Unable to calculate": ["Berechnung nicht möglich", "تعذّر الحساب"],
+  "Try again": ["Erneut versuchen", "حاول مجددًا"],
   "Settings changed. The timetable updates automatically when the configuration is valid.": [
     "Einstellungen geändert. Der Kalender aktualisiert sich automatisch, sobald die Angaben gültig sind.",
     "تغيرت الإعدادات. يُحدَّث الجدول تلقائيًا عندما تكون المدخلات صالحة."
@@ -415,54 +220,18 @@
     "Umm-al-Qura-Kalender · örtliche Mondsichtung kann abweichen",
     "تقويم أم القرى · قد تختلف الرؤية المحلية للهلال"
   ],
-  "Previous day": [
-    "Vorheriger Tag",
-    "اليوم السابق"
-  ],
-  "Next day": [
-    "Nächster Tag",
-    "اليوم التالي"
-  ],
-  "Day": [
-    "Tag",
-    "اليوم"
-  ],
-  "Month": [
-    "Monat",
-    "الشهر"
-  ],
-  "Details": [
-    "Details",
-    "التفاصيل"
-  ],
-  "Today": [
-    "Heute",
-    "اليوم الحالي"
-  ],
-  "Daily timetable": [
-    "Täglicher Gebetskalender",
-    "الجدول اليومي"
-  ],
-  "NEXT": [
-    "NÄCHSTES",
-    "القادمة"
-  ],
-  "Calculated": [
-    "Berechnet",
-    "محسوب"
-  ],
-  "Fixed interval": [
-    "Festes Intervall",
-    "فترة ثابتة"
-  ],
-  "Estimated": [
-    "Geschätzt",
-    "تقديري"
-  ],
-  "Unavailable": [
-    "Nicht verfügbar",
-    "غير متاح"
-  ],
+  "Previous day": ["Vorheriger Tag", "اليوم السابق"],
+  "Next day": ["Nächster Tag", "اليوم التالي"],
+  "Day": ["Tag", "اليوم"],
+  "Month": ["Monat", "الشهر"],
+  "Details": ["Details", "التفاصيل"],
+  "Today": ["Heute", "اليوم الحالي"],
+  "Daily timetable": ["Täglicher Gebetskalender", "الجدول اليومي"],
+  "NEXT": ["NÄCHSTES", "القادمة"],
+  "Calculated": ["Berechnet", "محسوب"],
+  "Fixed interval": ["Festes Intervall", "فترة ثابتة"],
+  "Estimated": ["Geschätzt", "تقديري"],
+  "Unavailable": ["Nicht verfügbar", "غير متاح"],
   "Loading the local calculation engine…": [
     "Lokale Berechnung wird geladen…",
     "جارٍ تحميل محرك الحساب المحلي…"
@@ -471,10 +240,7 @@
     "Die Berechnung ist nicht bereit. Beachten Sie die Meldung oben.",
     "محرك الحساب غير جاهز. راجع الرسالة أعلاه."
   ],
-  "timetable": [
-    "Gebetskalender",
-    "جدول المواقيت"
-  ],
+  "timetable": ["Gebetskalender", "جدول المواقيت"],
   "Hijri date (Umm al-Qura)": [
     "Hidschri-Datum (Umm al-Qura)",
     "التاريخ الهجري (أم القرى)"
@@ -499,50 +265,23 @@
     "Monatlicher Gebetskalender mit gregorianischen und Hidschri-Daten, Sonnenaufgang, Sonnenhöchststand und Sonnenuntergang; Sternchen kennzeichnen Schätzungen.",
     "جدول شهري بالتاريخين الميلادي والهجري، والشروق والزوال والغروب؛ تشير النجمة إلى الأوقات التقديرية."
   ],
-  "Gregorian / Hijri": [
-    "Gregorianisch / Hidschri",
-    "ميلادي / هجري"
-  ],
+  "Gregorian / Hijri": ["Gregorianisch / Hidschri", "ميلادي / هجري"],
   "* Estimated from the selected night fraction. — Unavailable.": [
     "* Aus dem gewählten Nachtanteil geschätzt. — Nicht verfügbar.",
     "* مقدَّر من نسبة الليل المختارة. — غير متاح."
   ],
-  "Calculation record": [
-    "Berechnungsprotokoll",
-    "سجل الحساب"
-  ],
+  "Calculation record": ["Berechnungsprotokoll", "سجل الحساب"],
   "Each result retains its raw instant, adjustment history and estimation basis.": [
     "Jedes Ergebnis bewahrt den ursprünglichen Zeitpunkt, die Korrekturen und die Schätzgrundlage.",
     "تحتفظ كل نتيجة بالوقت الخام وسجل التعديلات وأساس التقدير."
   ],
-  "Method": [
-    "Methode",
-    "الطريقة"
-  ],
-  "Asr profile": [
-    "Asr-Profil",
-    "معيار العصر"
-  ],
-  "Astronomy": [
-    "Astronomie",
-    "الفلك"
-  ],
-  "Timezone data": [
-    "Zeitzonendaten",
-    "بيانات المنطقة الزمنية"
-  ],
-  "Profiles": [
-    "Profile",
-    "الملفات"
-  ],
-  "· provider attributed": [
-    "· Anbieterzuordnung",
-    "· منسوب إلى المزوّد"
-  ],
-  "Fingerprint": [
-    "Prüfsumme",
-    "بصمة الحساب"
-  ],
+  "Method": ["Methode", "الطريقة"],
+  "Asr profile": ["Asr-Profil", "معيار العصر"],
+  "Astronomy": ["Astronomie", "الفلك"],
+  "Timezone data": ["Zeitzonendaten", "بيانات المنطقة الزمنية"],
+  "Profiles": ["Profile", "الملفات"],
+  "· provider attributed": ["· Anbieterzuordnung", "· منسوب إلى المزوّد"],
+  "Fingerprint": ["Prüfsumme", "بصمة الحساب"],
   "Download calculation JSON": [
     "Berechnung als JSON herunterladen",
     "تنزيل الحساب بصيغة JSON"
@@ -555,14 +294,8 @@
     "Die Methode hinter Ihrem Tag",
     "الطريقة المستخدمة ليومك"
   ],
-  "uses": [
-    "verwendet",
-    "تستخدم"
-  ],
-  "° for Fajr and": [
-    "° für Fadschr und",
-    "° للفجر و"
-  ],
+  "uses": ["verwendet", "تستخدم"],
+  "° for Fajr and": ["° für Fadschr und", "° للفجر و"],
   ". Asr uses factor": [
     ". Asr verwendet den Faktor",
     ". ويستخدم العصر المعامل"
@@ -587,10 +320,7 @@
     "Sonnenuntergang bis nächster Sonnenaufgang; kein rechtliches Ischa-Ende.",
     "من الغروب إلى الشروق التالي؛ ليس نهاية شرعية لوقت العشاء."
   ],
-  "Research in the open": [
-    "Offene Forschung",
-    "بحث مفتوح"
-  ],
+  "Research in the open": ["Offene Forschung", "بحث مفتوح"],
   "Draft conventions · No authority verification claimed": [
     "Vorläufige Konventionen · keine behauptete behördliche Prüfung",
     "معايير أولية · دون ادعاء اعتماد جهة رسمية"
@@ -603,18 +333,12 @@
     "Zeitüberschreitung bei der Stadtsuche. Erneut versuchen oder GPS verwenden.",
     "انتهت مهلة البحث عن المدينة. حاول مجددًا أو استخدم GPS."
   ],
-  "Search city": [
-    "Stadt suchen",
-    "ابحث عن مدينة"
-  ],
+  "Search city": ["Stadt suchen", "ابحث عن مدينة"],
   "City or town, e.g. Hamburg": [
     "Stadt oder Ort, z. B. Hamburg",
     "مدينة أو بلدة، مثل هامبورغ"
   ],
-  "Searching…": [
-    "Suche läuft…",
-    "جارٍ البحث…"
-  ],
+  "Searching…": ["Suche läuft…", "جارٍ البحث…"],
   "Select a city to set coordinates and timezone.": [
     "Wählen Sie eine Stadt für Koordinaten und Zeitzone.",
     "اختر مدينة لتحديد الإحداثيات والمنطقة الزمنية."
@@ -627,34 +351,16 @@
     "Keine Stadt gefunden. Versuchen Sie einen Nachbarort oder ergänzen Sie das Land.",
     "لم تُعثر على مدن. جرّب مدينة قريبة أو أضف اسم البلد."
   ],
-  "Search by": [
-    "Suche über",
-    "البحث عبر"
-  ],
+  "Search by": ["Suche über", "البحث عبر"],
   ". City queries use the internet.": [
     ". Stadtsuchen benötigen Internet.",
     ". يتطلب البحث عن المدن الاتصال بالإنترنت."
   ],
-  "Theme": [
-    "Design",
-    "المظهر"
-  ],
-  "Colour theme": [
-    "Farbschema",
-    "نمط الألوان"
-  ],
-  "System": [
-    "System",
-    "النظام"
-  ],
-  "Light": [
-    "Hell",
-    "فاتح"
-  ],
-  "Dark": [
-    "Dunkel",
-    "داكن"
-  ],
+  "Theme": ["Design", "المظهر"],
+  "Colour theme": ["Farbschema", "نمط الألوان"],
+  "System": ["System", "النظام"],
+  "Light": ["Hell", "فاتح"],
+  "Dark": ["Dunkel", "داكن"],
   "City search returned an invalid response. Try again.": [
     "Ungültige Antwort bei der Stadtsuche. Bitte erneut versuchen.",
     "أعاد البحث عن المدينة استجابة غير صالحة. حاول مجددًا."
@@ -675,38 +381,17 @@
     "Keine Zeitzone für diesen Ort gefunden. Wählen Sie eine nahe Stadt oder setzen Sie die Zeitzone manuell.",
     "لم تُحدد منطقة زمنية هنا. اختر مدينة قريبة أو عيّن المنطقة الزمنية يدويًا."
   ],
-  "ISNA": [
-    "ISNA",
-    "الجمعية الإسلامية لأمريكا الشمالية"
-  ],
-  "Karachi": [
-    "Karatschi",
-    "كراتشي"
-  ],
-  "Umm al-Qura style": [
-    "Umm-al-Qura-Konvention",
-    "أسلوب أم القرى"
-  ],
+  "ISNA": ["ISNA", "الجمعية الإسلامية لأمريكا الشمالية"],
+  "Karachi": ["Karatschi", "كراتشي"],
+  "Umm al-Qura style": ["Umm-al-Qura-Konvention", "أسلوب أم القرى"],
   "Egyptian General Authority of Survey": [
     "Ägyptische Vermessungsbehörde",
     "الهيئة المصرية العامة للمساحة"
   ],
-  "Gulf Region": [
-    "Golfregion",
-    "منطقة الخليج"
-  ],
-  "Kuwait": [
-    "Kuwait",
-    "الكويت"
-  ],
-  "Qatar": [
-    "Katar",
-    "قطر"
-  ],
-  "Singapore · MUIS": [
-    "Singapur · MUIS",
-    "سنغافورة · المجلس الإسلامي"
-  ],
+  "Gulf Region": ["Golfregion", "منطقة الخليج"],
+  "Kuwait": ["Kuwait", "الكويت"],
+  "Qatar": ["Katar", "قطر"],
+  "Singapore · MUIS": ["Singapur · MUIS", "سنغافورة · المجلس الإسلامي"],
   "France · Muslims of France": [
     "Frankreich · Muslime Frankreichs",
     "فرنسا · مسلمو فرنسا"
@@ -715,34 +400,16 @@
     "Türkei · Winkelvorgabe (experimentell)",
     "تركيا · زوايا تجريبية"
   ],
-  "Russia": [
-    "Russland",
-    "روسيا"
-  ],
-  "Dubai · research preset": [
-    "Dubai · Forschungsvorgabe",
-    "دبي · إعداد بحثي"
-  ],
-  "Malaysia · JAKIM": [
-    "Malaysia · JAKIM",
-    "ماليزيا · جاكيم"
-  ],
-  "Tunisia": [
-    "Tunesien",
-    "تونس"
-  ],
-  "Algeria": [
-    "Algerien",
-    "الجزائر"
-  ],
+  "Russia": ["Russland", "روسيا"],
+  "Dubai · research preset": ["Dubai · Forschungsvorgabe", "دبي · إعداد بحثي"],
+  "Malaysia · JAKIM": ["Malaysia · JAKIM", "ماليزيا · جاكيم"],
+  "Tunisia": ["Tunesien", "تونس"],
+  "Algeria": ["Algerien", "الجزائر"],
   "Indonesia · KEMENAG": [
     "Indonesien · KEMENAG",
     "إندونيسيا · وزارة الشؤون الدينية"
   ],
-  "Morocco": [
-    "Marokko",
-    "المغرب"
-  ],
+  "Morocco": ["Marokko", "المغرب"],
   "Draft profiles: provider-attributed conventions; not authority-verified.": [
     "Vorläufige Profile: Anbieterzugeordnete Konventionen, nicht behördlich bestätigt.",
     "ملفات أولية بمعايير منسوبة إلى المزوّد، غير معتمدة رسميًا."
@@ -863,10 +530,7 @@
     "Eine hanafitische Asr-Auswahl wählt nicht automatisch Ischa nach weißer Dämmerung. Die unabhängige Berechnungsmethode liefert einen Winkel oder ein festes Intervall als numerische Konvention. Die App beobachtet weder Schafaq noch berechnet sie vollständige fiqhrechtliche Zeitfenster.",
     "اختيار العصر الحنفي لا يختار تلقائيًا العشاء عند غياب الشفق الأبيض. تحدد طريقة الحساب المستقلة زاوية أو فترة ثابتة كمعيار عددي؛ ولا يرصد التطبيق الشفق ولا يحسب الفترات الفقهية الكاملة."
   ],
-  "The criterion": [
-    "Das Kriterium",
-    "المعيار"
-  ],
+  "The criterion": ["Das Kriterium", "المعيار"],
   "How the engine finds the time": [
     "So bestimmt die Berechnung den Zeitpunkt",
     "كيف يحدد المحرك الوقت"
@@ -927,14 +591,8 @@
     "den gewünschten Dämmerungswinkel",
     "زاوية الشفق المطلوبة"
   ],
-  "that shadow altitude": [
-    "diese Schattenhöhe",
-    "ارتفاع الشمس الموافق للظل"
-  ],
-  "sunset": [
-    "Sonnenuntergang",
-    "الغروب"
-  ],
+  "that shadow altitude": ["diese Schattenhöhe", "ارتفاع الشمس الموافق للظل"],
+  "sunset": ["Sonnenuntergang", "الغروب"],
   "subtract this for the morning crossing": [
     "für den morgendlichen Übergang abziehen",
     "تُطرح لعبور الصباح"
@@ -963,30 +621,12 @@
     "Darul Iftaa · Hanafitische Asr-Positionen",
     "دار الإفتاء · أقوال الحنفية في العصر"
   ],
-  "day": [
-    "Tag",
-    "يوم"
-  ],
-  "fajr": [
-    "Fadschr",
-    "الفجر"
-  ],
-  "dhuhr": [
-    "Dhuhr",
-    "الظهر"
-  ],
-  "asr": [
-    "Asr",
-    "العصر"
-  ],
-  "maghrib": [
-    "Maghrib",
-    "المغرب"
-  ],
-  "isha": [
-    "Ischa",
-    "العشاء"
-  ],
+  "day": ["Tag", "يوم"],
+  "fajr": ["Fadschr", "الفجر"],
+  "dhuhr": ["Dhuhr", "الظهر"],
+  "asr": ["Asr", "العصر"],
+  "maghrib": ["Maghrib", "المغرب"],
+  "isha": ["Ischa", "العشاء"],
   "Use a valid ISO date: YYYY-MM-DD": [
     "Gültiges ISO-Datum verwenden: JJJJ-MM-TT",
     "استخدم تاريخًا صحيحًا بالصيغة YYYY-MM-DD"
@@ -1019,26 +659,11 @@
     "Ramadan-Angabe erforderlich",
     "يلزم تحديد رمضان"
   ],
-  "INVALID_TIMEZONE": [
-    "Ungültige Zeitzone",
-    "منطقة زمنية غير صالحة"
-  ],
-  "INVALID_DATE": [
-    "Ungültiges Datum",
-    "تاريخ غير صالح"
-  ],
-  "INVALID_LATITUDE": [
-    "Ungültiger Breitengrad",
-    "خط عرض غير صالح"
-  ],
-  "INVALID_LONGITUDE": [
-    "Ungültiger Längengrad",
-    "خط طول غير صالح"
-  ],
-  "INVALID_ADJUSTMENT": [
-    "Ungültige Korrektur",
-    "تعديل غير صالح"
-  ],
+  "INVALID_TIMEZONE": ["Ungültige Zeitzone", "منطقة زمنية غير صالحة"],
+  "INVALID_DATE": ["Ungültiges Datum", "تاريخ غير صالح"],
+  "INVALID_LATITUDE": ["Ungültiger Breitengrad", "خط عرض غير صالح"],
+  "INVALID_LONGITUDE": ["Ungültiger Längengrad", "خط طول غير صالح"],
+  "INVALID_ADJUSTMENT": ["Ungültige Korrektur", "تعديل غير صالح"],
   "reference night unavailable": [
     "Referenznacht nicht verfügbar",
     "الليلة المرجعية غير متاحة"
@@ -1067,34 +692,16 @@
     "Sonne für die Schattenregel unter dem Horizont",
     "الشمس تحت الأفق لحساب الظل"
   ],
-  "in": [
-    "in",
-    "بعد"
-  ],
-  "d": [
-    "T",
-    "ي"
-  ],
+  "in": ["in", "بعد"],
+  "d": ["T", "ي"],
   "PrayerTime · Daily prayer timetable": [
     "PrayerTime · Tägliche Gebetszeiten",
     "مواقيت الصلاة · الجدول اليومي"
   ],
-  "Windows": [
-    "Zeitfenster",
-    "الفترات"
-  ],
-  "Prayer windows": [
-    "Gebetszeitfenster",
-    "فترات الصلاة"
-  ],
-  "Prayer-window profile": [
-    "Profil für Gebetszeitfenster",
-    "ملف فترات الصلاة"
-  ],
-  "Off": [
-    "Aus",
-    "إيقاف"
-  ],
+  "Windows": ["Zeitfenster", "الفترات"],
+  "Prayer windows": ["Gebetszeitfenster", "فترات الصلاة"],
+  "Prayer-window profile": ["Profil für Gebetszeitfenster", "ملف فترات الصلاة"],
+  "Off": ["Aus", "إيقاف"],
   "Shafi‘i windows · draft": [
     "Schafiitische Zeitfenster · Entwurf",
     "الفترات الشافعية · مسودة"
@@ -1115,10 +722,7 @@
     "Wahre Morgendämmerung · gewählte Winkelnäherung",
     "الفجر الصادق · تقريب بالزاوية المختارة"
   ],
-  "After solar transit": [
-    "Nach dem Sonnentransit",
-    "بعد الزوال"
-  ],
+  "After solar transit": ["Nach dem Sonnentransit", "بعد الزوال"],
   "Noon shadow + one object-height": [
     "Mittagsschatten + eine Objekthöhe",
     "فيء الزوال + مثل طول الجسم"
@@ -1135,18 +739,9 @@
     "Ein Drittel von Sonnenuntergang bis zur folgenden Morgendämmerung",
     "ثلث المدة من الغروب إلى الفجر التالي"
   ],
-  "Derived": [
-    "Abgeleitet",
-    "مشتق"
-  ],
-  "Incomplete": [
-    "Unvollständig",
-    "غير مكتمل"
-  ],
-  "Conflicting boundaries": [
-    "Widersprüchliche Grenzen",
-    "حدود متعارضة"
-  ],
+  "Derived": ["Abgeleitet", "مشتق"],
+  "Incomplete": ["Unvollständig", "غير مكتمل"],
+  "Conflicting boundaries": ["Widersprüchliche Grenzen", "حدود متعارضة"],
   "Fixed-minute Isha does not identify the end of red twilight.": [
     "Eine feste Minutenzahl für Ischa bestimmt nicht das Ende der roten Abenddämmerung.",
     "تحديد العشاء بدقائق ثابتة لا يحدد غياب الشفق الأحمر."
@@ -1155,18 +750,9 @@
     "Diese Grenzen bilden kein gültiges Zeitfenster. Prüfe die Methode und die Schätzregel.",
     "هذه الحدود لا تشكّل فترة صالحة. راجع الطريقة وسياسة التقدير."
   ],
-  "Starts": [
-    "Beginn",
-    "البداية"
-  ],
-  "Preferred until": [
-    "Bevorzugt bis",
-    "وقت الفضيلة حتى"
-  ],
-  "Outer end": [
-    "Äußerste Grenze",
-    "الحد النهائي"
-  ],
+  "Starts": ["Beginn", "البداية"],
+  "Preferred until": ["Bevorzugt bis", "وقت الفضيلة حتى"],
+  "Outer end": ["Äußerste Grenze", "الحد النهائي"],
   "Times use your display rounding, but window ordering uses unrounded instants. Timetable minute adjustments do not move these boundaries. Begin Dhuhr after transit; no precautionary delay is added.": [
     "Die Anzeige verwendet deine Rundung; die Reihenfolge wird mit ungerundeten Zeitpunkten geprüft. Minutenkorrekturen des Zeitplans verschieben diese Grenzen nicht. Dhuhr beginnt nach dem Transit; ein Sicherheitsabstand wird nicht hinzugefügt.",
     "تُعرض الأوقات وفق التقريب المختار، لكن ترتيب الحدود يعتمد على اللحظات غير المقرّبة. تعديلات دقائق الجدول لا تغيّر هذه الحدود. يبدأ الظهر بعد الزوال؛ ولا تضاف مهلة احتياطية."
@@ -1207,10 +793,7 @@
     "Keine Uhrzeit: Ein geprüftes örtliches Helligkeitskriterium ist erforderlich.",
     "لا توجد ساعة محددة: يلزم معيار محلي مُتحقَّق منه لدرجة الإضاءة."
   ],
-  "Preferred time": [
-    "Bevorzugte Zeit",
-    "الوقت الأفضل"
-  ],
+  "Preferred time": ["Bevorzugte Zeit", "الوقت الأفضل"],
   "SeekersGuidance · Asr preferred endpoint": [
     "SeekersGuidance · bevorzugte Asr-Grenze",
     "SeekersGuidance · نهاية الوقت المختار للعصر"
@@ -1271,18 +854,12 @@
     "Hälfte der Zeit von Sonnenuntergang bis zur folgenden Morgendämmerung",
     "نصف المدة من الغروب إلى الفجر التالي"
   ],
-  "End of white twilight": [
-    "Ende der weißen Dämmerung",
-    "غياب الشفق الأبيض"
-  ],
+  "End of white twilight": ["Ende der weißen Dämmerung", "غياب الشفق الأبيض"],
   "Sunlight becomes yellow or weak": [
     "Sonnenlicht wird gelb oder schwach",
     "اصفرار ضوء الشمس أو ضعفه"
   ],
-  "Stars become visible": [
-    "Sterne werden sichtbar",
-    "ظهور النجوم"
-  ],
+  "Stars become visible": ["Sterne werden sichtbar", "ظهور النجوم"],
   "Time for Maghrib preparation and prayer": [
     "Zeit für Vorbereitung und Maghrib-Gebet",
     "مدة التحضير لصلاة المغرب وأدائها"
@@ -1319,26 +896,11 @@
     "Die Zeitfensterprofile sind unabhängig von der Asr-Konvention des Zeitplans. Morgendämmerung und rote Abenddämmerung werden vorläufig durch Winkel angenähert. Nicht modellierte Zeichen bleiben ohne Uhrzeit; diese Entwürfe benötigen fachkundige Prüfung.",
     "ملفات الفترات مستقلة عن طريقة العصر في الجدول. تُقرَّب علامتا الفجر والشفق الأحمر بزوايا مؤقتة. وتبقى العلامات غير المنمذجة دون وقت محسوب؛ وتحتاج هذه المسودات إلى مراجعة أهل الاختصاص."
   ],
-  "Preferred from": [
-    "Bevorzugt ab",
-    "الوقت المستحب من"
-  ],
-  "Ordinary time until": [
-    "Reguläre Zeit bis",
-    "الوقت الاختياري حتى"
-  ],
-  "Disliked delay after": [
-    "Verpönter Aufschub nach",
-    "تُكره المماطلة بعد"
-  ],
-  "Necessity time from": [
-    "Notzeit ab",
-    "وقت الضرورة من"
-  ],
-  "Necessity time until": [
-    "Notzeit bis",
-    "وقت الضرورة حتى"
-  ],
+  "Preferred from": ["Bevorzugt ab", "الوقت المستحب من"],
+  "Ordinary time until": ["Reguläre Zeit bis", "الوقت الاختياري حتى"],
+  "Disliked delay after": ["Verpönter Aufschub nach", "تُكره المماطلة بعد"],
+  "Necessity time from": ["Notzeit ab", "وقت الضرورة من"],
+  "Necessity time until": ["Notzeit bis", "وقت الضرورة حتى"],
   "Outer end (conditional)": [
     "Äußerste Grenze (bedingt)",
     "الحد النهائي (مشروط)"
@@ -1466,5 +1028,65 @@
   "This Hanbali account ends ordinary Isha at the first third of the sunset-to-dawn night, then necessity time continues to dawn.": [
     "Nach dieser hanbalitischen Auffassung endet die reguläre Ischa-Zeit nach dem ersten Drittel der Nacht von Sonnenuntergang bis Morgendämmerung; danach reicht die Notzeit bis zur Morgendämmerung.",
     "ينتهي وقت العشاء الاختياري عند الثلث الأول من الليل المحسوب من الغروب إلى الفجر وفق هذا القول الحنبلي، ثم يمتد وقت الضرورة إلى الفجر."
-  ]
+  ],
+  "Install PrayerTime": ["PrayerTime installieren", "تثبيت PrayerTime"],
+  "A new version is ready.": [
+    "Eine neue Version ist verfügbar.",
+    "يتوفر إصدار جديد."
+  ],
+  "Updating…": ["Wird aktualisiert…", "جارٍ التحديث…"],
+  "Update now": ["Jetzt aktualisieren", "التحديث الآن"],
+  "Finish your configuration changes before updating.": [
+    "Schließe deine Einstellungsänderungen vor dem Update ab.",
+    "أكمل تغييرات الإعدادات قبل التحديث."
+  ],
+  "Close other PrayerTime tabs or app windows, then try Update now again.": [
+    "Schließe andere PrayerTime-Tabs oder App-Fenster und versuche es erneut.",
+    "أغلق علامات تبويب PrayerTime أو نوافذ التطبيق الأخرى، ثم حاول التحديث مجددًا."
+  ],
+  "The update has not activated yet. Close other PrayerTime windows and try again.": [
+    "Das Update ist noch nicht aktiv. Schließe andere PrayerTime-Fenster und versuche es erneut.",
+    "لم يُفعّل التحديث بعد. أغلق نوافذ PrayerTime الأخرى وحاول مجددًا."
+  ],
+  "Installation requested. Open PrayerTime from your home screen when it appears.": [
+    "Installation angefordert. Öffne PrayerTime über den Startbildschirm, sobald es dort erscheint.",
+    "طُلب التثبيت. افتح PrayerTime من الشاشة الرئيسية عندما يظهر."
+  ],
+  "Keep PrayerTime on your home screen and use saved calculations offline.": [
+    "Nutze PrayerTime auf deinem Startbildschirm und gespeicherte Berechnungen auch offline.",
+    "أضف PrayerTime إلى شاشتك الرئيسية واستخدم الحسابات المحفوظة دون إنترنت."
+  ],
+  "Installation needs a secure HTTPS address. Open the published website to install.": [
+    "Die Installation benötigt eine sichere HTTPS-Adresse. Öffne dafür die veröffentlichte Website.",
+    "يتطلب التثبيت عنوان HTTPS آمنًا. افتح الموقع المنشور للتثبيت."
+  ],
+  "Open this website in Safari.": [
+    "Öffne diese Website in Safari.",
+    "افتح هذا الموقع في Safari."
+  ],
+  "Open Share, then choose Add to Home Screen.": [
+    "Öffne Teilen und wähle Zum Home-Bildschirm.",
+    "افتح قائمة المشاركة، ثم اختر إضافة إلى الشاشة الرئيسية."
+  ],
+  "Enable Open as Web App if shown, then tap Add.": [
+    "Aktiviere Als Web-App öffnen, falls angezeigt, und tippe auf Hinzufügen.",
+    "فعّل الفتح كتطبيق ويب إذا ظهر الخيار، ثم اضغط إضافة."
+  ],
+  "Open this website in Chrome, Edge, or another browser that supports app installation.": [
+    "Öffne diese Website in Chrome, Edge oder einem anderen Browser, der App-Installationen unterstützt.",
+    "افتح هذا الموقع في Chrome أو Edge أو متصفح آخر يدعم تثبيت التطبيقات."
+  ],
+  "Open the browser menu and choose Install app or Add to Home Screen, if available.": [
+    "Öffne das Browsermenü und wähle App installieren oder Zum Startbildschirm hinzufügen, falls verfügbar.",
+    "افتح قائمة المتصفح واختر تثبيت التطبيق أو إضافة إلى الشاشة الرئيسية، إن توفر الخيار."
+  ],
+  "If you opened a link inside another app, open it in your phone’s browser first.": [
+    "Wenn du den Link in einer anderen App geöffnet hast, öffne ihn zuerst im Browser deines Handys.",
+    "إذا فتحت الرابط داخل تطبيق آخر، فافتحه أولًا في متصفح هاتفك."
+  ],
+  "Wait for “Ready offline” before disconnecting. New city searches still need internet.": [
+    "Warte auf „Offline bereit“, bevor du die Verbindung trennst. Neue Städtesuchen benötigen weiterhin Internet.",
+    "انتظر ظهور «جاهز دون اتصال» قبل قطع الاتصال. البحث عن مدن جديدة يتطلب الإنترنت."
+  ],
+  "Close": ["Schließen", "إغلاق"]
 }
