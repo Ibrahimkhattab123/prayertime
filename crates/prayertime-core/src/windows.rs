@@ -17,6 +17,8 @@ pub enum Criterion {
     Sunrise,
     AfterTransit,
     OneShadow,
+    TwoShadows,
+    DaylightBrightness,
     Sunset,
     RedTwilightProxy,
     NextTrueDawn,
@@ -25,6 +27,7 @@ pub enum Criterion {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct WindowDefinition {
     pub prayer: String,
+    pub preferred_guidance: String,
     pub start: Criterion,
     pub absolute_end: Criterion,
     pub preferred_until: Option<Criterion>,
@@ -49,6 +52,7 @@ pub struct Boundary {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PrayerWindow {
     pub prayer: String,
+    pub preferred_guidance: String,
     /// available, estimated, incomplete, or invalid_order; never silently reorder.
     pub status: String,
     pub start: Boundary,
@@ -72,6 +76,7 @@ pub fn calculate(day: &DayResult) -> Result<WindowSchedule> {
     let lon = astronomy::Longitude::new(request.location.longitude_deg)?;
     let midnight = civil::solar_midnight(date, &tz, lon)?;
     let asr = astronomy::shadow(midnight, lat, lon, 1.0);
+    let preferred_asr = astronomy::shadow(midnight, lat, lon, 2.0);
     // Calculate the next civil day, not a local clock plus 24 hours (DST).
     let next = civil::shifted(date, 1).and_then(|d| {
         let mut r = request.clone();
@@ -110,6 +115,16 @@ pub fn calculate(day: &DayResult) -> Result<WindowSchedule> {
             Criterion::Sunrise => event("sunrise"),
             Criterion::AfterTransit => event("solar_transit"),
             Criterion::OneShadow => (asr.instant(), "astronomical".into(), asr.reason()),
+            Criterion::TwoShadows => (
+                preferred_asr.instant(),
+                "astronomical".into(),
+                preferred_asr.reason(),
+            ),
+            Criterion::DaylightBrightness => (
+                None,
+                "unavailable".into(),
+                Some("DAYLIGHT_BRIGHTNESS_NOT_MODELED".into()),
+            ),
             Criterion::Sunset => event("sunset"),
             Criterion::RedTwilightProxy => {
                 if matches!(
@@ -192,6 +207,7 @@ pub fn calculate(day: &DayResult) -> Result<WindowSchedule> {
         };
         windows.push(PrayerWindow {
             prayer: d.prayer.clone(),
+            preferred_guidance: d.preferred_guidance.clone(),
             status: status.into(),
             start,
             absolute_end: end,

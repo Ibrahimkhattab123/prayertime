@@ -1229,3 +1229,18 @@ html[dir='rtl'] .fingerprint {
   font-size: 0.875rem;
   color: var(--muted-foreground);
 }
+
+.preferred-guidance {
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+.preferred-guidance h5 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.preferred-guidance p {
+  font-size: 1rem;
+  line-height: 1.6;
+}

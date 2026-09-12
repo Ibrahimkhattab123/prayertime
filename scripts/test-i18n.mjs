@@ -129,9 +129,15 @@ try {
     const windowDay = JSON.parse(calculateDay(JSON.stringify({ ...base, window_profile: "shafii_draft" })));
     const windowHtml = renderToStaticMarkup(h(LanguageProvider, { initialLanguage: language }, h(PrayerWindows, { day: windowDay })));
     assert.equal((windowHtml.match(/class="window-card"/g) ?? []).length, 5);
-    for (const key of ["Prayer windows", "Preferred until", "Outer end", "True dawn on the following date", "One third of sunset to the following dawn"])
+    for (const key of ["Prayer windows", "Preferred until", "Outer end", "True dawn on the following date", "One third of sunset to the following dawn", "Noon shadow + twice the object-height", "Daylight becomes bright (isfar)", "No clock time: a validated local brightness criterion is needed."])
       assert.ok(windowHtml.includes(translate(key, language)), key);
     assert.ok(windowHtml.includes("2026-09-13"));
+    for (const w of windowDay.windows.windows) {
+      assert.notEqual(translate(w.preferred_guidance,language),w.preferred_guidance);
+      assert.ok(windowHtml.includes(translate(w.preferred_guidance,language)));
+    }
+    assert.ok(windowHtml.includes(windowDay.windows.windows[2].preferred_until.displayed.clock));
+    assert.equal(windowDay.windows.windows[0].preferred_until.displayed,null);
     assert.ok(windowHtml.includes(windowDay.windows.definition.sources[0]));
     const fixed = JSON.parse(calculateDay(JSON.stringify({ ...base, window_profile: "shafii_draft", profiles: { ...base.profiles, calculation: "calc.umm_al_qura@1" }, ramadan: false })));
     const fixedHtml = renderToStaticMarkup(h(LanguageProvider, { initialLanguage: language }, h(PrayerWindows, { day: fixed })));

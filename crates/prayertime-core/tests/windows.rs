@@ -8,7 +8,8 @@ fn boundaries_preserve_raw_dependencies_and_ignore_timetable_tuning() {
     let d = core::calculate_day(&r).unwrap();
     let w = &d.windows.as_ref().unwrap().windows;
     assert_eq!(w.len(), 5);
-    assert!(w.iter().all(|w| w.status == "available"));
+    assert_eq!(w[0].status, "incomplete");
+    assert!(w[1..].iter().all(|w| w.status == "available"));
     assert_eq!(
         w[0].absolute_end.raw.as_ref().unwrap().unix_seconds,
         d.solar["sunrise"].instant().unwrap()
@@ -36,7 +37,14 @@ fn boundaries_preserve_raw_dependencies_and_ignore_timetable_tuning() {
             .abs()
             < 1e-6
     );
-    assert!(w[0].preferred_until.is_none());
+    let brightness = w[0].preferred_until.as_ref().unwrap();
+    assert!(brightness.raw.is_none() && brightness.displayed.is_none());
+    assert_eq!(
+        brightness.unavailable_reason.as_deref(),
+        Some("DAYLIGHT_BRIGHTNESS_NOT_MODELED")
+    );
+    assert!(w[1].preferred_until.is_none() && w[3].preferred_until.is_none());
+    assert!(w.iter().all(|w| !w.preferred_guidance.is_empty()));
     assert!(w
         .iter()
         .all(|w| w.choice_until.is_none() && w.necessity_until.is_none()));
@@ -127,4 +135,47 @@ fn estimates_are_marked_and_conflicting_intervals_are_not_repaired() {
     let w = core::calculate_day(&r).unwrap().windows.unwrap().windows;
     assert_eq!(w[4].status, "invalid_order");
     assert!(w[4].preferred_until.as_ref().unwrap().raw.is_some());
+}
+
+#[test]
+fn asr_preferred_boundary_solves_two_shadows_and_rounds_only_for_display() {
+    for (date, lat, lon, tz) in [
+        ("2026-09-12", 52.52, 13.405, "Europe/Berlin"),
+        ("2026-03-29", 21.4225, 39.8262, "Asia/Riyadh"),
+        ("2026-12-21", -33.87, 151.21, "Australia/Sydney"),
+    ] {
+        let mut r = request(date, lat, lon, tz);
+        let d = core::calculate_day(&r).unwrap();
+        let w = &d.windows.as_ref().unwrap().windows[2];
+        let preferred = w.preferred_until.as_ref().unwrap();
+        let t = preferred.raw.as_ref().unwrap().unix_seconds;
+        assert_eq!(preferred.status, "astronomical");
+        assert!(w.start.raw.as_ref().unwrap().unix_seconds < t);
+        assert!(t < w.absolute_end.raw.as_ref().unwrap().unix_seconds);
+        // Independent trigonometric check of the defining shadow ratio.
+        let position = core::astronomy::coordinates(t);
+        let altitude = core::astronomy::altitude(
+            t,
+            core::astronomy::Latitude::new(lat).unwrap(),
+            core::astronomy::Longitude::new(lon).unwrap(),
+        );
+        let noon_shadow = (lat - position.declination_deg).to_radians().abs().tan();
+        assert!((1.0 / altitude.to_radians().tan() - noon_shadow - 2.0).abs() < 0.001);
+        r.rounding = Rounding::CeilMinute;
+        let ceil = core::calculate_day(&r).unwrap();
+        let b = ceil.windows.as_ref().unwrap().windows[2]
+            .preferred_until
+            .as_ref()
+            .unwrap();
+        assert_eq!(b.raw.as_ref().unwrap().unix_seconds, t);
+        assert!(b.displayed.as_ref().unwrap().unix_seconds >= t);
+    }
+    let r = request("2026-12-21", 69.6492, 18.9553, "Europe/Oslo");
+    let d = core::calculate_day(&r).unwrap();
+    let b = d.windows.unwrap().windows[2]
+        .preferred_until
+        .clone()
+        .unwrap();
+    assert!(b.raw.is_none());
+    assert_eq!(b.status, "unavailable");
 }

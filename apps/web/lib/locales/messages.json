@@ -1194,5 +1194,57 @@
   "Fiqh selection currently determines Asr only. The optional Shafi‘i window profile is separate; full school variants are not implemented.": [
     "Die Fiqh-Auswahl bestimmt derzeit nur Asr. Das optionale schafiitische Zeitfensterprofil ist davon unabhängig; die vollständigen Rechtsschulvarianten sind nicht umgesetzt.",
     "يحدد اختيار الفقه العصر فقط حالياً. ملف الفترات الشافعية الاختياري مستقل؛ ولم تُنفَّذ جميع الاختلافات المذهبية."
+  ],
+  "Noon shadow + twice the object-height": [
+    "Mittagsschatten + doppelte Objekthöhe",
+    "فيء الزوال + مثلي طول الجسم"
+  ],
+  "Daylight becomes bright (isfar)": [
+    "Es wird hell (Isfar)",
+    "انتشار ضوء النهار (الإسفار)"
+  ],
+  "No clock time: a validated local brightness criterion is needed.": [
+    "Keine Uhrzeit: Ein geprüftes örtliches Helligkeitskriterium ist erforderlich.",
+    "لا توجد ساعة محددة: يلزم معيار محلي مُتحقَّق منه لدرجة الإضاءة."
+  ],
+  "Preferred time": [
+    "Bevorzugte Zeit",
+    "الوقت الأفضل"
+  ],
+  "SeekersGuidance · Asr preferred endpoint": [
+    "SeekersGuidance · bevorzugte Asr-Grenze",
+    "SeekersGuidance · نهاية الوقت المختار للعصر"
+  ],
+  "SeekersGuidance · Fajr preferred endpoint": [
+    "SeekersGuidance · bevorzugte Fajr-Grenze",
+    "SeekersGuidance · نهاية الوقت المختار للفجر"
+  ],
+  "Reliance of the Traveller · f2.1–f2.2": [
+    "Reliance of the Traveller · f2.1–f2.2",
+    "عمدة السالك · f2.1–f2.2"
+  ],
+  "The preferred period ends as daylight becomes bright (isfar), before sunrise. This draft has no validated brightness model, so it does not assign that sign a clock time or substitute the sunrise boundary.": [
+    "Die bevorzugte Zeit endet mit zunehmender Tageshelligkeit (Isfar), vor Sonnenaufgang. Dieser Entwurf hat kein geprüftes Helligkeitsmodell. Daher wird diesem Zeichen keine Uhrzeit zugeordnet und nicht ersatzweise der Sonnenaufgang verwendet.",
+    "ينتهي الوقت المختار عند الإسفار، قبل الشروق. لا تتضمن هذه المسودة نموذجاً مُتحقَّقاً منه للإضاءة، لذلك لا تعيّن لهذه العلامة ساعة محددة ولا تستبدلها بحد الشروق."
+  ],
+  "Pray promptly after the time enters, allowing for the necessary preparation. This early-performance recommendation is not a separate fixed-minute deadline; the one-shadow boundary remains the outer end.": [
+    "Bete zeitnah nach Eintritt der Gebetszeit und der nötigen Vorbereitung. Diese Empfehlung zum frühen Gebet ist keine gesonderte Frist in Minuten; die einfache Schattenlänge bleibt die äußerste Grenze.",
+    "تُستحب المبادرة بالصلاة بعد دخول الوقت مع إتاحة التحضير اللازم. هذه التوصية بالتبكير ليست موعداً نهائياً مستقلاً بدقائق ثابتة؛ ويبقى ظل المثل هو الحد النهائي."
+  ],
+  "The preferred period ends at the noon shadow plus twice the object’s height. The later permissible period continues to sunset. This two-shadow endpoint does not change the one-shadow start in this Shafi‘i profile.": [
+    "Die bevorzugte Zeit endet beim Mittagsschatten zuzüglich der doppelten Objekthöhe. Die spätere zulässige Zeit reicht bis Sonnenuntergang. Diese Grenze ändert nicht den Beginn bei einfacher Schattenlänge in diesem schafiitischen Profil.",
+    "ينتهي الوقت المختار عندما يبلغ الظل فيء الزوال مضافاً إليه مثلي طول الجسم. ويستمر وقت الجواز بعده حتى الغروب. هذا الحد عند المثلين لا يغيّر بداية العصر عند المثل في هذا الملف الشافعي."
+  ],
+  "Pray promptly after sunset with the necessary preparation. No universal minute cutoff is assigned to this recommendation. The extended-time opinion used here retains the end of red twilight as the outer boundary.": [
+    "Bete zeitnah nach Sonnenuntergang mit der nötigen Vorbereitung. Dieser Empfehlung wird keine allgemeingültige Minutengrenze zugewiesen. Nach der hier verwendeten Auffassung der ausgedehnten Gebetszeit bleibt das Ende der roten Abenddämmerung die äußerste Grenze.",
+    "تُستحب المبادرة بالصلاة بعد الغروب مع التحضير اللازم. لا تُحدَّد لهذه التوصية مهلة عامة بالدقائق. ويُبقي القول بامتداد الوقت المعتمد هنا غياب الشفق الأحمر حداً نهائياً."
+  ],
+  "The preferred period ends at the first third of the night, measured here from sunset to the following true dawn. The outer boundary remains that following dawn.": [
+    "Die bevorzugte Zeit endet nach dem ersten Nachtdrittel, hier gemessen von Sonnenuntergang bis zur folgenden wahren Morgendämmerung. Die äußerste Grenze bleibt diese Morgendämmerung.",
+    "ينتهي الوقت المختار عند ثلث الليل الأول، المحسوب هنا من الغروب إلى الفجر الصادق التالي. ويبقى ذلك الفجر الحد النهائي."
+  ],
+  "An outer end does not mean every part of the interval is equally recommended. Asr and Isha have calculated preferred endpoints. Fajr’s brightness endpoint is shown without a clock time; Dhuhr and Maghrib have early-performance guidance. Choice and necessity subwindows remain unspecified.": [
+    "Die äußerste Grenze bedeutet nicht, dass jeder Teil des Zeitfensters gleichermaßen empfohlen ist. Für Asr und Ischa werden bevorzugte Endpunkte berechnet. Fajrs Helligkeitsgrenze wird ohne Uhrzeit angezeigt; für Dhuhr und Maghrib gibt es Hinweise zum frühen Gebet. Weitere Wahl- und Notzeitfenster sind nicht festgelegt.",
+    "الحد النهائي لا يعني تساوي أجزاء الفترة في الأفضلية. تُحسب نهايتا الوقت المختار للعصر والعشاء. ويُعرض حد الإسفار للفجر دون ساعة محددة، مع إرشادات التبكير للظهر والمغرب. ولم تُحدَّد فترات الاختيار والضرورة الفرعية الأخرى."
   ]
 }

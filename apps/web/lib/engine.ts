@@ -46,6 +46,7 @@ export type WindowBoundary = {
 };
 export type PrayerWindow = {
   prayer: string;
+  preferred_guidance: string;
   status: string;
   start: WindowBoundary;
   absolute_end: WindowBoundary;

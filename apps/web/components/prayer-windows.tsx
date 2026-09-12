@@ -7,6 +7,8 @@ const criteria: Record<string, string> = {
   sunrise: 'Sunrise',
   after_transit: 'After solar transit',
   one_shadow: 'Noon shadow + one object-height',
+  two_shadows: 'Noon shadow + twice the object-height',
+  daylight_brightness: 'Daylight becomes bright (isfar)',
   sunset: 'Sunset',
   red_twilight_proxy: 'Red twilight · selected angle proxy',
   next_true_dawn: 'True dawn on the following date',
@@ -46,8 +48,16 @@ function Boundary({ boundary }: { boundary: WindowBoundary }) {
             Fixed-minute Isha does not identify the end of red twilight.
           </span>
         )}
+        {boundary.unavailable_reason === 'DAYLIGHT_BRIGHTNESS_NOT_MODELED' && (
+          <span>
+            No clock time: a validated local brightness criterion is needed.
+          </span>
+        )}
         {boundary.unavailable_reason &&
-          boundary.unavailable_reason !== 'FIXED_INTERVAL_NOT_RED_TWILIGHT' && (
+          ![
+            'FIXED_INTERVAL_NOT_RED_TWILIGHT',
+            'DAYLIGHT_BRIGHTNESS_NOT_MODELED',
+          ].includes(boundary.unavailable_reason) && (
             <span className="field-note">{boundary.unavailable_reason}</span>
           )}
       </div>
@@ -108,6 +118,10 @@ export function PrayerWindows({ day }: { day: Day }) {
                       </dd>
                     </div>
                   </dl>
+                  <div className="preferred-guidance">
+                    <h5>Preferred time</h5>
+                    <p>{w.preferred_guidance}</p>
+                  </div>
                 </article>
               ))}
             </div>
@@ -119,10 +133,10 @@ export function PrayerWindows({ day }: { day: Day }) {
             </p>
             <p className="field-note">
               An outer end does not mean every part of the interval is equally
-              recommended. Only Isha’s first-third preferred boundary is
-              included in this draft; other preferred, choice and necessity
-              periods are unspecified. Maghrib follows the extended-time
-              opinion.
+              recommended. Asr and Isha have calculated preferred endpoints.
+              Fajr’s brightness endpoint is shown without a clock time; Dhuhr
+              and Maghrib have early-performance guidance. Choice and necessity
+              subwindows remain unspecified.
             </p>
             <details className="fiqh-sources">
               <summary>Window sources and scope</summary>
@@ -135,6 +149,9 @@ export function PrayerWindows({ day }: { day: Day }) {
                           'The Ship to Salvation · prayer boundaries',
                           'SeekersGuidance · Isha end and preferred time',
                           'SeekersGuidance · twilight angle limitations',
+                          'SeekersGuidance · Asr preferred endpoint',
+                          'SeekersGuidance · Fajr preferred endpoint',
+                          'Reliance of the Traveller · f2.1–f2.2',
                         ][i]
                       }
                     </a>
