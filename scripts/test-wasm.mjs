@@ -53,6 +53,7 @@ const cases = [
 let count = 0;
 try {
   for (const [date, lat, lon, timezone] of cases) {
+    for (const window_profile of ["shafii_draft", "hanafi_abu_hanifa_draft", "hanafi_sahibayn_draft", "maliki_risala_draft", "hanbali_umdat_draft", "hanbali_third_draft"]) {
     for (const calculation of date === "2026-09-09" && timezone === "Europe/Berlin"
       ? JSON.parse(listProfiles()).methods.map((m) => m.id)
       : ["calc.mwl@1", "calc.umm_al_qura@1"]) {
@@ -62,7 +63,7 @@ try {
         timezone,
         profiles: { calculation, fiqh: "fiqh.hanafi_abu_hanifa@1" },
         ramadan: false,
-        window_profile: "shafii_draft",
+        window_profile,
         high_latitude: "angle_based",
         adjustments_minutes: { maghrib: 10 },
       };
@@ -81,6 +82,7 @@ try {
       assert.deepEqual(JSON.parse(calculateSolarEvents(json)), wasm.solar);
       assert.equal(JSON.parse(calculateRange(json, 2)).length, 2);
     }
+  }
   }
   assert.throws(() => calculateDay("{}"));
   assert.throws(() =>

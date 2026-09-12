@@ -210,7 +210,7 @@ fn calculate_day_without_windows(request: &Request) -> Result<DayResult> {
         ),
         ("isha", "method_twilight_convention", isha),
     ];
-    let mut warnings=vec!["Draft profiles: provider-attributed conventions; not authority-verified.".into(),"Fiqh selection currently determines Asr only. The optional Shafi‘i window profile is separate; full school variants are not implemented.".into(),"Standard -0.833° horizon; no terrain, elevation or weather model. Dhuhr uses transit without an automatic precautionary delay.".into()];
+    let mut warnings=vec!["Draft profiles: provider-attributed conventions; not authority-verified.".into(),"Fiqh selection currently determines Asr only. Window profiles are separate draft school accounts; unmodeled signs and full legal exceptions remain explicit.".into(),"Standard -0.833° horizon; no terrain, elevation or weather model. Dhuhr uses transit without an automatic precautionary delay.".into()];
     let mut prayers = Vec::new();
     for (name, criterion, rule) in plan {
         let primary = rules::evaluate(&rule, midnight, lat, lon);
@@ -338,10 +338,10 @@ fn calculate_day_without_windows(request: &Request) -> Result<DayResult> {
     if method.ramadan_minutes.is_none() {
         normalized.ramadan = None;
     }
-    let canonical=serde_json::to_vec(&serde_json::json!({"encoding":"prayertime-fingerprint-v1","request":normalized,"engine":env!("CARGO_PKG_VERSION"),"astronomy":astronomy::MODEL,"tzdb":civil::tzdb_version(),"profiles":package,"window_definition":windows::DEFINITION})).map_err(|e|Error::new("SERIALIZATION_ERROR",e.to_string()))?;
+    let canonical=serde_json::to_vec(&serde_json::json!({"encoding":"prayertime-fingerprint-v1","request":normalized,"engine":env!("CARGO_PKG_VERSION"),"astronomy":astronomy::MODEL,"tzdb":civil::tzdb_version(),"profiles":package,"window_definition":windows::DEFINITIONS})).map_err(|e|Error::new("SERIALIZATION_ERROR",e.to_string()))?;
     let fingerprint = format!("sha256:{:x}", Sha256::digest(canonical));
     Ok(DayResult {
-        schema_version: "0.2.0".into(),
+        schema_version: "0.3.0".into(),
         engine_version: env!("CARGO_PKG_VERSION").into(),
         astronomy_model: astronomy::MODEL.into(),
         timezone_database: civil::tzdb_version(),

@@ -1,0 +1,74 @@
+{
+  "id": "windows.hanbali_third@1",
+  "name": "Hanbali · two shadows / first third · draft",
+  "status": "draft_unreviewed",
+  "summary": "This named account is separate from the other Hanbali option. Necessity time requires a recognized excuse.",
+  "sources": [
+    "https://islamqa.org/hanbali/thehanbalimadhhab/118344/"
+  ],
+  "source_titles": [
+    "The Hanbali Madhhab · prayer times"
+  ],
+  "windows": [
+    {
+      "prayer": "fajr",
+      "start": "true_dawn",
+      "absolute_end": "sunrise",
+      "preferred_guidance": "Praying Fajr early is recommended.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": null
+    },
+    {
+      "prayer": "dhuhr",
+      "start": "after_transit",
+      "absolute_end": "one_shadow",
+      "preferred_guidance": "Pray Dhuhr early, except for delaying in excessive heat. The app does not infer heat conditions.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": null
+    },
+    {
+      "prayer": "asr",
+      "start": "one_shadow",
+      "absolute_end": "sunset",
+      "preferred_guidance": "This Hanbali account ends ordinary Asr at two shadows; necessity time then continues to sunset.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "two_shadows",
+      "necessity_from": "two_shadows",
+      "necessity_until": "sunset",
+      "disliked_after": null
+    },
+    {
+      "prayer": "maghrib",
+      "start": "sunset",
+      "absolute_end": "red_twilight_proxy",
+      "preferred_guidance": "This account prefers Maghrib before stars appear and marks later delay as disliked. Star visibility is not modeled.",
+      "preferred_from": null,
+      "preferred_until": "stars_visible",
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": "stars_visible"
+    },
+    {
+      "prayer": "isha",
+      "start": "red_twilight_proxy",
+      "absolute_end": "next_true_dawn",
+      "preferred_guidance": "This Hanbali account ends ordinary Isha at the first third of the sunset-to-dawn night, then necessity time continues to dawn.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "first_third_of_night",
+      "necessity_from": "first_third_of_night",
+      "necessity_until": "next_true_dawn",
+      "disliked_after": null
+    }
+  ]
+}

@@ -1246,5 +1246,225 @@
   "An outer end does not mean every part of the interval is equally recommended. Asr and Isha have calculated preferred endpoints. Fajr’s brightness endpoint is shown without a clock time; Dhuhr and Maghrib have early-performance guidance. Choice and necessity subwindows remain unspecified.": [
     "Die äußerste Grenze bedeutet nicht, dass jeder Teil des Zeitfensters gleichermaßen empfohlen ist. Für Asr und Ischa werden bevorzugte Endpunkte berechnet. Fajrs Helligkeitsgrenze wird ohne Uhrzeit angezeigt; für Dhuhr und Maghrib gibt es Hinweise zum frühen Gebet. Weitere Wahl- und Notzeitfenster sind nicht festgelegt.",
     "الحد النهائي لا يعني تساوي أجزاء الفترة في الأفضلية. تُحسب نهايتا الوقت المختار للعصر والعشاء. ويُعرض حد الإسفار للفجر دون ساعة محددة، مع إرشادات التبكير للظهر والمغرب. ولم تُحدَّد فترات الاختيار والضرورة الفرعية الأخرى."
+  ],
+  "Hanafi · Abu Hanifa / white twilight · draft": [
+    "Hanafitisch · Abu Hanifa / weiße Dämmerung · Entwurf",
+    "حنفي · أبو حنيفة / الشفق الأبيض · مسودة"
+  ],
+  "Hanafi · Sahibayn / red twilight · draft": [
+    "Hanafitisch · Sahibayn / rote Dämmerung · Entwurf",
+    "حنفي · الصاحبان / الشفق الأحمر · مسودة"
+  ],
+  "Maliki · Risalah commentary · draft": [
+    "Malikitisch · Risala-Kommentar · Entwurf",
+    "مالكي · شرح الرسالة · مسودة"
+  ],
+  "Hanbali · Umdat al-Fiqh / half-night · draft": [
+    "Hanbalitisch · Umdat al-Fiqh / halbe Nacht · Entwurf",
+    "حنبلي · عمدة الفقه / نصف الليل · مسودة"
+  ],
+  "Hanbali · two shadows / first third · draft": [
+    "Hanbalitisch · zwei Schatten / erstes Drittel · Entwurf",
+    "حنبلي · المثلان / الثلث الأول · مسودة"
+  ],
+  "Half of sunset to the following dawn": [
+    "Hälfte der Zeit von Sonnenuntergang bis zur folgenden Morgendämmerung",
+    "نصف المدة من الغروب إلى الفجر التالي"
+  ],
+  "End of white twilight": [
+    "Ende der weißen Dämmerung",
+    "غياب الشفق الأبيض"
+  ],
+  "Sunlight becomes yellow or weak": [
+    "Sonnenlicht wird gelb oder schwach",
+    "اصفرار ضوء الشمس أو ضعفه"
+  ],
+  "Stars become visible": [
+    "Sterne werden sichtbar",
+    "ظهور النجوم"
+  ],
+  "Time for Maghrib preparation and prayer": [
+    "Zeit für Vorbereitung und Maghrib-Gebet",
+    "مدة التحضير لصلاة المغرب وأدائها"
+  ],
+  "Before the final portion reserved for Asr": [
+    "Vor dem letzten, Asr vorbehaltenen Zeitabschnitt",
+    "قبل الجزء الأخير المختص بالعصر"
+  ],
+  "Before the final portion reserved for Isha": [
+    "Vor dem letzten, Ischa vorbehaltenen Zeitabschnitt",
+    "قبل الجزء الأخير المختص بالعشاء"
+  ],
+  "White twilight needs its own validated mapping; the timetable Isha angle is not reused.": [
+    "Weiße Dämmerung benötigt ein eigenes geprüftes Modell; der Ischa-Winkel des Zeitplans wird nicht übernommen.",
+    "يتطلب الشفق الأبيض نموذجاً مستقلاً مُتحقَّقاً منه؛ ولا تُستخدم زاوية العشاء في الجدول بدلاً منه."
+  ],
+  "No clock time: yellowing depends on observation and atmospheric conditions.": [
+    "Keine Uhrzeit: Gelbfärbung hängt von Beobachtung und atmosphärischen Bedingungen ab.",
+    "لا توجد ساعة محددة: يعتمد الاصفرار على الرصد وظروف الغلاف الجوي."
+  ],
+  "No clock time: star visibility is not modeled.": [
+    "Keine Uhrzeit: Die Sichtbarkeit von Sternen wird nicht modelliert.",
+    "لا توجد ساعة محددة: لم تُنمذَج رؤية النجوم."
+  ],
+  "No clock time: the required preparation or prayer duration is not specified.": [
+    "Keine Uhrzeit: Die erforderliche Vorbereitungs- oder Gebetsdauer ist nicht festgelegt.",
+    "لا توجد ساعة محددة: لم تُحدَّد مدة التحضير أو الصلاة المطلوبة."
+  ],
+  "Choose a prayer-window profile in Calculation to show its school-specific boundaries.": [
+    "Wähle unter Berechnung ein Gebetszeitfensterprofil, um die Grenzen dieser Rechtsschule anzuzeigen.",
+    "اختر ملف فترات الصلاة في إعدادات الحساب لعرض حدود المذهب المختار."
+  ],
+  "Window profiles are independent of the timetable Asr convention. Dawn and red twilight use provisional angle proxies. Unmodeled signs remain unavailable; these draft accounts need qualified review.": [
+    "Die Zeitfensterprofile sind unabhängig von der Asr-Konvention des Zeitplans. Morgendämmerung und rote Abenddämmerung werden vorläufig durch Winkel angenähert. Nicht modellierte Zeichen bleiben ohne Uhrzeit; diese Entwürfe benötigen fachkundige Prüfung.",
+    "ملفات الفترات مستقلة عن طريقة العصر في الجدول. تُقرَّب علامتا الفجر والشفق الأحمر بزوايا مؤقتة. وتبقى العلامات غير المنمذجة دون وقت محسوب؛ وتحتاج هذه المسودات إلى مراجعة أهل الاختصاص."
+  ],
+  "Preferred from": [
+    "Bevorzugt ab",
+    "الوقت المستحب من"
+  ],
+  "Ordinary time until": [
+    "Reguläre Zeit bis",
+    "الوقت الاختياري حتى"
+  ],
+  "Disliked delay after": [
+    "Verpönter Aufschub nach",
+    "تُكره المماطلة بعد"
+  ],
+  "Necessity time from": [
+    "Notzeit ab",
+    "وقت الضرورة من"
+  ],
+  "Necessity time until": [
+    "Notzeit bis",
+    "وقت الضرورة حتى"
+  ],
+  "Outer end (conditional)": [
+    "Äußerste Grenze (bedingt)",
+    "الحد النهائي (مشروط)"
+  ],
+  "Necessity time requires a recognized excuse; it is not an ordinary extension for everyone. Reserved prayer time and ordering requirements still apply.": [
+    "Die Notzeit setzt einen anerkannten Entschuldigungsgrund voraus; sie verlängert die reguläre Zeit nicht für alle. Vorbehaltene Gebetszeiten und die vorgeschriebene Reihenfolge gelten weiterhin.",
+    "يشترط لوقت الضرورة عذر معتبر؛ وليس تمديداً عادياً للجميع. وتظل أحكام الوقت المختص وترتيب الصلوات سارية."
+  ],
+  "Preferred, ordinary, disliked-delay and necessity boundaries have different meanings. Read the selected account’s guidance; a missing boundary does not extend the permitted period.": [
+    "Bevorzugte Zeit, reguläre Zeit, verpönter Aufschub und Notzeit haben unterschiedliche Bedeutungen. Beachte die Hinweise des gewählten Profils; eine fehlende Grenze verlängert die erlaubte Zeit nicht.",
+    "تختلف معاني حدود الاستحباب والاختيار وكراهة التأخير والضرورة. اقرأ إرشادات القول المختار؛ فغياب حد محسوب لا يمدد الوقت المسموح."
+  ],
+  "Fiqh selection currently determines Asr only. Window profiles are separate draft school accounts; unmodeled signs and full legal exceptions remain explicit.": [
+    "Die Fiqh-Auswahl bestimmt derzeit nur Asr. Zeitfensterprofile sind separate Entwürfe bestimmter Rechtsschulauffassungen; nicht modellierte Zeichen und rechtliche Ausnahmen bleiben ausdrücklich gekennzeichnet.",
+    "يحدد اختيار الفقه العصر فقط حالياً. ملفات الفترات مسودات مستقلة لأقوال مذهبية محددة؛ وتظل العلامات غير المنمذجة والاستثناءات الفقهية موضَّحة."
+  ],
+  "One-shadow Asr; preferred endpoints at two shadows and the first third of the night. Brightness remains an unmodeled sign.": [
+    "Asr bei einfacher Schattenlänge; bevorzugte Grenzen bei doppelter Schattenlänge und dem ersten Nachtdrittel. Helligkeit bleibt ein nicht modelliertes Zeichen.",
+    "العصر عند المثل؛ وحدّا الوقت المختار عند المثلين وثلث الليل الأول. ويبقى الإسفار علامة غير منمذجة."
+  ],
+  "Two-shadow Asr and white-twilight Isha. White twilight has no validated mapping in this draft; its boundary stays unavailable.": [
+    "Asr bei doppelter Schattenlänge und Ischa bei weißer Dämmerung. Für weiße Dämmerung liegt kein geprüftes Modell vor; die Grenze bleibt ohne Uhrzeit.",
+    "العصر عند المثلين والعشاء عند غياب الشفق الأبيض. لا تتضمن المسودة نموذجاً مُتحقَّقاً منه للشفق الأبيض؛ فيبقى حدّه دون وقت محسوب."
+  ],
+  "One-shadow Asr and red-twilight Isha. The selected Isha angle is a provisional red-twilight proxy.": [
+    "Asr bei einfacher Schattenlänge und Ischa bei roter Dämmerung. Der gewählte Ischa-Winkel dient als vorläufige Näherung für die rote Dämmerung.",
+    "العصر عند المثل والعشاء عند غياب الشفق الأحمر. زاوية العشاء المختارة تقريب مؤقت للشفق الأحمر."
+  ],
+  "Named Risalah/commentary boundaries are kept distinct. Unmodeled brightness, prayer durations and reserved final intervals stay unavailable. This is not a complete shared-time validity model.": [
+    "Die benannten Grenzen der Risala und ihres Kommentars bleiben getrennt. Nicht modellierte Helligkeit, Gebetsdauern und vorbehaltene Schlussabschnitte bleiben ohne Uhrzeit. Dies ist kein vollständiges Gültigkeitsmodell für gemeinsame Gebetszeiten.",
+    "تُحفظ حدود الرسالة وشرحها متميزة. وتبقى الإضاءة ومدد الصلاة والأجزاء الأخيرة المختصة غير المنمذجة دون وقت محسوب. وليس هذا نموذجاً كاملاً لصحة الصلاة في الأوقات المشتركة."
+  ],
+  "This named account is separate from the other Hanbali option. Necessity time requires a recognized excuse.": [
+    "Diese benannte Auffassung ist von der anderen hanbalitischen Option getrennt. Die Notzeit setzt einen anerkannten Entschuldigungsgrund voraus.",
+    "هذا القول المحدد مستقل عن الخيار الحنبلي الآخر. ويشترط لوقت الضرورة عذر معتبر."
+  ],
+  "SeekersGuidance · Hanafi prayer-time guidance": [
+    "SeekersGuidance · hanafitische Gebetszeithinweise",
+    "SeekersGuidance · إرشادات أوقات الصلاة الحنفية"
+  ],
+  "SeekersGuidance · Hanafi half-night threshold": [
+    "SeekersGuidance · hanafitische Halb-Nacht-Grenze",
+    "SeekersGuidance · حد نصف الليل عند الحنفية"
+  ],
+  "Darul Iftaa · red and white twilight opinions": [
+    "Darul Iftaa · rote und weiße Dämmerung",
+    "دار الإفتاء · أقوال الشفق الأحمر والأبيض"
+  ],
+  "Umdat al-Fiqh · prayer times": [
+    "Umdat al-Fiqh · Gebetszeiten",
+    "عمدة الفقه · أوقات الصلاة"
+  ],
+  "The Hanbali Madhhab · prayer times": [
+    "The Hanbali Madhhab · Gebetszeiten",
+    "The Hanbali Madhhab · أوقات الصلاة"
+  ],
+  "Brightness marks the recommended Fajr period, allowing enough time to perform and, if needed, repeat the prayer before sunrise. No duration or brightness model is assumed.": [
+    "Helligkeit kennzeichnet die empfohlene Fajr-Zeit; vor Sonnenaufgang muss genug Zeit zum Beten und gegebenenfalls Wiederholen bleiben. Weder Dauer noch Helligkeitsmodell werden angenommen.",
+    "يُستحب الإسفار بالفجر مع بقاء وقت كافٍ لأداء الصلاة وإعادتها عند الحاجة قبل الشروق. ولا تُفترض مدة أو نمذجة للإضاءة."
+  ],
+  "Cooling and congregation can affect the recommended Dhuhr time. The app does not infer weather or a universal preferred cutoff.": [
+    "Abkühlung und Gemeinschaftsgebet können die empfohlene Dhuhr-Zeit beeinflussen. Die App nimmt weder Wetter noch eine allgemeine bevorzugte Endgrenze an.",
+    "قد يؤثر الإبراد والجماعة في وقت الظهر المستحب. ولا يستنتج التطبيق الطقس أو حداً موحداً لنهاية الاستحباب."
+  ],
+  "Avoid delaying Asr until the sunlight weakens. This disliked-delay sign is not replaced by a fixed solar angle.": [
+    "Vermeide es, Asr bis zur Abschwächung des Sonnenlichts aufzuschieben. Dieses Zeichen für verpönten Aufschub wird nicht durch einen festen Sonnenwinkel ersetzt.",
+    "يُتجنب تأخير العصر حتى يضعف ضوء الشمس. ولا تُستبدل علامة كراهة التأخير بزاوية شمسية ثابتة."
+  ],
+  "Pray Maghrib promptly. Star visibility marks a disliked delay in this account; the app does not model visibility.": [
+    "Bete Maghrib zeitnah. Sichtbare Sterne kennzeichnen in dieser Auffassung einen verpönten Aufschub; die App modelliert die Sichtbarkeit nicht.",
+    "تُستحب المبادرة بالمغرب. يدل ظهور النجوم على كراهة التأخير في هذا القول؛ ولا ينمذج التطبيق الرؤية."
+  ],
+  "This account recommends Isha before the first third passes and marks delay beyond half the night as disliked. The outer end is dawn.": [
+    "Diese Auffassung empfiehlt Ischa vor Ablauf des ersten Nachtdrittels und bewertet Aufschub über die halbe Nacht hinaus als verpönt. Die äußerste Grenze ist die Morgendämmerung.",
+    "يوصي هذا القول بأداء العشاء قبل انقضاء الثلث الأول، ويعدّ تأخيرها بعد نصف الليل مكروهاً. والحد النهائي هو الفجر."
+  ],
+  "Early Fajr is best. This profile follows the commentary’s brightening transition into necessity time.": [
+    "Frühes Fajr ist am besten. Dieses Profil folgt dem im Kommentar genannten Übergang zur Notzeit bei zunehmender Helligkeit.",
+    "التبكير بالفجر أفضل. يتبع هذا الملف انتقال الوقت إلى الضرورة عند الإسفار كما في الشرح."
+  ],
+  "Ordinary Dhuhr ends at one shadow. The final portion before sunset is reserved for Asr; its duration is not modeled.": [
+    "Die reguläre Dhuhr-Zeit endet bei einfacher Schattenlänge. Der letzte Abschnitt vor Sonnenuntergang ist Asr vorbehalten; seine Dauer wird nicht modelliert.",
+    "ينتهي وقت الظهر الاختياري عند المثل. ويختص العصر بالجزء الأخير قبل الغروب؛ ولم تُنمذَج مدته."
+  ],
+  "The Risalah’s two-shadow choice endpoint and the commentary’s yellowing necessity transition are recorded separately.": [
+    "Die Zwei-Schatten-Grenze der Wahlzeit in der Risala und der Übergang zur Notzeit bei Gelbfärbung im Kommentar werden getrennt erfasst.",
+    "تُسجَّل نهاية الاختيار عند المثلين في الرسالة والانتقال إلى الضرورة عند الاصفرار في الشرح كلٌّ على حدة."
+  ],
+  "The ordinary Maghrib period allows preparation and prayer. Its duration and the final portion reserved for Isha are not modeled.": [
+    "Die reguläre Maghrib-Zeit umfasst Vorbereitung und Gebet. Ihre Dauer und der letzte, Ischa vorbehaltene Abschnitt werden nicht modelliert.",
+    "يتسع وقت المغرب الاختياري للتحضير والصلاة. ولم تُنمذَج مدته ولا الجزء الأخير المختص بالعشاء."
+  ],
+  "Ordinary Isha ends at the first third; necessity time extends to dawn for a recognized excuse.": [
+    "Die reguläre Ischa-Zeit endet nach dem ersten Nachtdrittel; bei anerkanntem Entschuldigungsgrund reicht die Notzeit bis zur Morgendämmerung.",
+    "ينتهي وقت العشاء الاختياري عند الثلث الأول؛ ويمتد وقت الضرورة إلى الفجر لعذر معتبر."
+  ],
+  "Praying Fajr early is recommended.": [
+    "Frühes Beten von Fajr wird empfohlen.",
+    "يُستحب التبكير بصلاة الفجر."
+  ],
+  "Pray Dhuhr early, except for delaying in excessive heat. The app does not infer heat conditions.": [
+    "Bete Dhuhr früh, außer beim Aufschub wegen starker Hitze. Die App ermittelt keine Hitzebedingungen.",
+    "يُستحب التبكير بالظهر إلا عند الإبراد في شدة الحر. ولا يستنتج التطبيق ظروف الحرارة."
+  ],
+  "This Umdat al-Fiqh account ends ordinary Asr at yellowing, then necessity time continues to sunset. Yellowing is not modeled.": [
+    "Nach dieser Auffassung in Umdat al-Fiqh endet die reguläre Asr-Zeit bei Gelbfärbung; danach reicht die Notzeit bis Sonnenuntergang. Gelbfärbung wird nicht modelliert.",
+    "ينتهي وقت العصر الاختياري عند الاصفرار وفق هذا القول في عمدة الفقه، ثم يمتد وقت الضرورة إلى الغروب. ولم يُنمذَج الاصفرار."
+  ],
+  "This Hanbali account ends ordinary Asr at two shadows; necessity time then continues to sunset.": [
+    "Nach dieser hanbalitischen Auffassung endet die reguläre Asr-Zeit bei doppelter Schattenlänge; danach reicht die Notzeit bis Sonnenuntergang.",
+    "ينتهي وقت العصر الاختياري عند المثلين وفق هذا القول الحنبلي؛ ثم يمتد وقت الضرورة إلى الغروب."
+  ],
+  "Praying Maghrib early is recommended; the outer end is red twilight.": [
+    "Frühes Maghrib wird empfohlen; die äußerste Grenze ist das Ende der roten Dämmerung.",
+    "يُستحب التبكير بالمغرب؛ والحد النهائي هو غياب الشفق الأحمر."
+  ],
+  "This account prefers Maghrib before stars appear and marks later delay as disliked. Star visibility is not modeled.": [
+    "Diese Auffassung bevorzugt Maghrib vor dem Sichtbarwerden der Sterne und bewertet späteren Aufschub als verpönt. Sternsichtbarkeit wird nicht modelliert.",
+    "يُستحب المغرب قبل ظهور النجوم وفق هذا القول ويُكره التأخير بعدها. ولم تُنمذَج رؤية النجوم."
+  ],
+  "This Umdat al-Fiqh account ends ordinary Isha at half the sunset-to-dawn night, then necessity time continues to dawn.": [
+    "Nach dieser Auffassung in Umdat al-Fiqh endet die reguläre Ischa-Zeit nach der Hälfte der Nacht von Sonnenuntergang bis Morgendämmerung; danach reicht die Notzeit bis zur Morgendämmerung.",
+    "ينتهي وقت العشاء الاختياري عند نصف الليل من الغروب إلى الفجر وفق هذا القول في عمدة الفقه، ثم يمتد وقت الضرورة إلى الفجر."
+  ],
+  "This Hanbali account ends ordinary Isha at the first third of the sunset-to-dawn night, then necessity time continues to dawn.": [
+    "Nach dieser hanbalitischen Auffassung endet die reguläre Ischa-Zeit nach dem ersten Drittel der Nacht von Sonnenuntergang bis Morgendämmerung; danach reicht die Notzeit bis zur Morgendämmerung.",
+    "ينتهي وقت العشاء الاختياري عند الثلث الأول من الليل المحسوب من الغروب إلى الفجر وفق هذا القول الحنبلي، ثم يمتد وقت الضرورة إلى الفجر."
   ]
 }

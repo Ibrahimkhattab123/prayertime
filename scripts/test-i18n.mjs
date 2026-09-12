@@ -142,6 +142,26 @@ try {
     const fixed = JSON.parse(calculateDay(JSON.stringify({ ...base, window_profile: "shafii_draft", profiles: { ...base.profiles, calculation: "calc.umm_al_qura@1" }, ramadan: false })));
     const fixedHtml = renderToStaticMarkup(h(LanguageProvider, { initialLanguage: language }, h(PrayerWindows, { day: fixed })));
     assert.ok(fixedHtml.includes(translate("Fixed-minute Isha does not identify the end of red twilight.", language)));
+    for (const profile of ["hanafi_abu_hanifa_draft", "hanafi_sahibayn_draft", "maliki_risala_draft", "hanbali_umdat_draft", "hanbali_third_draft"]) {
+      const schoolDay = JSON.parse(calculateDay(JSON.stringify({ ...base, window_profile: profile })));
+      const schoolHtml = renderToStaticMarkup(h(LanguageProvider, { initialLanguage: language }, h(PrayerWindows, { day: schoolDay })));
+      assert.equal((schoolHtml.match(/class="window-card"/g) ?? []).length, 5);
+      const def = schoolDay.windows.definition;
+      for (const text of [def.name, def.summary, ...def.source_titles, ...schoolDay.windows.windows.map(w=>w.preferred_guidance)]) {
+        assert.ok(messages[text], text);
+        assert.ok(schoolHtml.includes(translate(text,language)), text);
+      }
+      for (const url of def.sources) assert.ok(schoolHtml.includes(url));
+      if (profile.startsWith("hanafi")) {
+        assert.ok(schoolHtml.includes(translate("Disliked delay after",language)));
+        assert.ok(schoolHtml.includes(schoolDay.windows.windows[4].disliked_after.displayed.clock));
+      } else {
+        assert.ok(schoolHtml.includes(translate("Ordinary time until",language)));
+        assert.ok(schoolHtml.includes(translate("Necessity time until",language)));
+        assert.ok(schoolHtml.includes(translate("Outer end (conditional)",language)));
+      }
+      assert.doesNotMatch(schoolHtml, /undefined|Shafi‘i windows/);
+    }
     const html = renderToStaticMarkup(
       h(
         LanguageProvider,

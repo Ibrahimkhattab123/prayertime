@@ -35,6 +35,8 @@ import {
   calculate,
   calculateRange,
   listProfiles,
+  windowProfiles,
+  type WindowProfile,
   defaults,
   today,
   dateLabel as formatDateLabel,
@@ -851,13 +853,8 @@ export default function Home() {
             <Choice
               label="Prayer-window profile"
               value={request.window_profile ?? 'none'}
-              items={[
-                ['none', 'Off'],
-                ['shafii_draft', 'Shafi‘i windows · draft'],
-              ]}
-              onChange={(v) =>
-                edit({ window_profile: v as 'none' | 'shafii_draft' })
-              }
+              items={windowProfiles}
+              onChange={(v) => edit({ window_profile: v as WindowProfile })}
             />
             <p className="field-note">
               Window boundaries are separate from the timetable Asr convention

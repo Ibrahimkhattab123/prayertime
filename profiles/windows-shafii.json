@@ -55,5 +55,15 @@
       "necessity_until": null,
       "preferred_guidance": "The preferred period ends at the first third of the night, measured here from sunset to the following true dawn. The outer boundary remains that following dawn."
     }
+  ],
+  "name": "Shafi‘i windows · draft",
+  "summary": "One-shadow Asr; preferred endpoints at two shadows and the first third of the night. Brightness remains an unmodeled sign.",
+  "source_titles": [
+    "The Ship to Salvation · prayer boundaries",
+    "SeekersGuidance · Isha end and preferred time",
+    "SeekersGuidance · twilight angle limitations",
+    "SeekersGuidance · Asr preferred endpoint",
+    "SeekersGuidance · Fajr preferred endpoint",
+    "Reliance of the Traveller · f2.1–f2.2"
   ]
 }

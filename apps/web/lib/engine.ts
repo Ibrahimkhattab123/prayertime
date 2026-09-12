@@ -1,3 +1,20 @@
+export const windowProfiles: [string, string][] = [
+  ['none', 'Off'],
+  ['shafii_draft', 'Shafi‘i windows · draft'],
+  ['hanafi_abu_hanifa_draft', 'Hanafi · Abu Hanifa / white twilight · draft'],
+  ['hanafi_sahibayn_draft', 'Hanafi · Sahibayn / red twilight · draft'],
+  ['maliki_risala_draft', 'Maliki · Risalah commentary · draft'],
+  ['hanbali_umdat_draft', 'Hanbali · Umdat al-Fiqh / half-night · draft'],
+  ['hanbali_third_draft', 'Hanbali · two shadows / first third · draft'],
+];
+export type WindowProfile =
+  | 'none'
+  | 'shafii_draft'
+  | 'hanafi_abu_hanifa_draft'
+  | 'hanafi_sahibayn_draft'
+  | 'maliki_risala_draft'
+  | 'hanbali_umdat_draft'
+  | 'hanbali_third_draft';
 export type CalculationRequest = {
   date: string;
   location: { latitude_deg: number; longitude_deg: number };
@@ -6,7 +23,7 @@ export type CalculationRequest = {
   high_latitude: string;
   rounding: string;
   ramadan: boolean | null;
-  window_profile?: 'none' | 'shafii_draft';
+  window_profile?: WindowProfile;
   adjustments_minutes: Record<string, number>;
 };
 export type Instant = {
@@ -50,7 +67,10 @@ export type PrayerWindow = {
   status: string;
   start: WindowBoundary;
   absolute_end: WindowBoundary;
+  preferred_from: WindowBoundary | null;
   preferred_until: WindowBoundary | null;
+  disliked_after: WindowBoundary | null;
+  necessity_from: WindowBoundary | null;
   choice_until: WindowBoundary | null;
   necessity_until: WindowBoundary | null;
 };
@@ -66,7 +86,14 @@ export type Day = {
   solar_local: Record<string, Instant | null>;
   solar_night_midpoint: Instant | null;
   windows?: {
-    definition: { id: string; status: string; sources: string[] };
+    definition: {
+      id: string;
+      name: string;
+      summary: string;
+      status: string;
+      sources: string[];
+      source_titles: string[];
+    };
     windows: PrayerWindow[];
   } | null;
   warnings: string[];

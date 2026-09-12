@@ -1,0 +1,74 @@
+{
+  "id": "windows.maliki_risala@1",
+  "name": "Maliki · Risalah commentary · draft",
+  "status": "draft_unreviewed",
+  "summary": "Named Risalah/commentary boundaries are kept distinct. Unmodeled brightness, prayer durations and reserved final intervals stay unavailable. This is not a complete shared-time validity model.",
+  "sources": [
+    "https://www.iium.edu.my/deed/lawbase/risalah_maliki/book08.html"
+  ],
+  "source_titles": [
+    "Maliki Risalah · chapter 8"
+  ],
+  "windows": [
+    {
+      "prayer": "fajr",
+      "start": "true_dawn",
+      "absolute_end": "sunrise",
+      "preferred_guidance": "Early Fajr is best. This profile follows the commentary’s brightening transition into necessity time.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "daylight_brightness",
+      "necessity_from": "daylight_brightness",
+      "necessity_until": "sunrise",
+      "disliked_after": null
+    },
+    {
+      "prayer": "dhuhr",
+      "start": "after_transit",
+      "absolute_end": "sunset_before_asr",
+      "preferred_guidance": "Ordinary Dhuhr ends at one shadow. The final portion before sunset is reserved for Asr; its duration is not modeled.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "one_shadow",
+      "necessity_from": "one_shadow",
+      "necessity_until": "sunset_before_asr",
+      "disliked_after": null
+    },
+    {
+      "prayer": "asr",
+      "start": "one_shadow",
+      "absolute_end": "sunset",
+      "preferred_guidance": "The Risalah’s two-shadow choice endpoint and the commentary’s yellowing necessity transition are recorded separately.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "two_shadows",
+      "necessity_from": "sun_yellowing",
+      "necessity_until": "sunset",
+      "disliked_after": null
+    },
+    {
+      "prayer": "maghrib",
+      "start": "sunset",
+      "absolute_end": "dawn_before_isha",
+      "preferred_guidance": "The ordinary Maghrib period allows preparation and prayer. Its duration and the final portion reserved for Isha are not modeled.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "maghrib_preparation",
+      "necessity_from": "maghrib_preparation",
+      "necessity_until": "dawn_before_isha",
+      "disliked_after": null
+    },
+    {
+      "prayer": "isha",
+      "start": "red_twilight_proxy",
+      "absolute_end": "next_true_dawn",
+      "preferred_guidance": "Ordinary Isha ends at the first third; necessity time extends to dawn for a recognized excuse.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "first_third_of_night",
+      "necessity_from": "first_third_of_night",
+      "necessity_until": "next_true_dawn",
+      "disliked_after": null
+    }
+  ]
+}

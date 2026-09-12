@@ -179,3 +179,187 @@ fn asr_preferred_boundary_solves_two_shadows_and_rounds_only_for_display() {
     assert!(b.raw.is_none());
     assert_eq!(b.status, "unavailable");
 }
+
+#[test]
+fn hanafi_opinions_keep_shadow_twilight_and_dislike_distinct() {
+    let mut r = request("2026-09-12", 52.52, 13.405, "Europe/Berlin");
+    r.window_profile = WindowProfile::HanafiAbuHanifaDraft;
+    let abu = core::calculate_day(&r).unwrap();
+    r.window_profile = WindowProfile::HanafiSahibaynDraft;
+    let sahib = core::calculate_day(&r).unwrap();
+    let a = &abu.windows.as_ref().unwrap().windows;
+    let b = &sahib.windows.as_ref().unwrap().windows;
+    assert!(
+        a[2].start.raw.as_ref().unwrap().unix_seconds
+            > b[2].start.raw.as_ref().unwrap().unix_seconds
+    );
+    assert_eq!(
+        a[4].start.unavailable_reason.as_deref(),
+        Some("WHITE_TWILIGHT_NOT_MODELED")
+    );
+    assert!(b[4].start.raw.is_some());
+    assert_eq!(
+        a[3].absolute_end.unavailable_reason.as_deref(),
+        Some("WHITE_TWILIGHT_NOT_MODELED")
+    );
+    assert!(a[0].preferred_from.as_ref().unwrap().raw.is_none());
+    assert!(a[0].preferred_until.is_none());
+    assert_eq!(
+        a[2].disliked_after
+            .as_ref()
+            .unwrap()
+            .unavailable_reason
+            .as_deref(),
+        Some("SUN_YELLOWING_NOT_MODELED")
+    );
+    assert!(a.iter().all(|w| w.necessity_until.is_none()));
+    assert_eq!(
+        serde_json::to_value(&abu.prayers).unwrap(),
+        serde_json::to_value(&sahib.prayers).unwrap()
+    );
+    assert_ne!(abu.fingerprint, sahib.fingerprint);
+}
+
+#[test]
+fn school_night_boundaries_use_elapsed_sunset_to_dawn_across_dst() {
+    for date in ["2026-03-28", "2026-10-24"] {
+        for (profile, divisor) in [
+            (WindowProfile::MalikiRisalaDraft, 3.0),
+            (WindowProfile::HanbaliUmdatDraft, 2.0),
+            (WindowProfile::HanbaliThirdDraft, 3.0),
+            (WindowProfile::HanafiSahibaynDraft, 2.0),
+        ] {
+            let mut r = request(date, 52.52, 13.405, "Europe/Berlin");
+            r.window_profile = profile;
+            let d = core::calculate_day(&r).unwrap();
+            let w = &d.windows.as_ref().unwrap().windows[4];
+            let dawn = w.absolute_end.raw.as_ref().unwrap().unix_seconds;
+            let sunset = d.solar["sunset"].instant().unwrap();
+            let boundary = if profile == WindowProfile::HanafiSahibaynDraft {
+                w.disliked_after.as_ref().unwrap()
+            } else {
+                w.choice_until.as_ref().unwrap()
+            };
+            assert!(
+                (boundary.raw.as_ref().unwrap().unix_seconds
+                    - (sunset + (dawn - sunset) / divisor))
+                    .abs()
+                    < 1e-6
+            );
+            assert_ne!(
+                boundary.raw.as_ref().unwrap().unix_seconds,
+                d.solar_night_midpoint.as_ref().unwrap().unix_seconds
+            );
+            if profile != WindowProfile::HanafiSahibaynDraft {
+                assert_eq!(
+                    boundary.raw.as_ref().unwrap().unix_seconds,
+                    w.necessity_from
+                        .as_ref()
+                        .unwrap()
+                        .raw
+                        .as_ref()
+                        .unwrap()
+                        .unix_seconds
+                );
+                assert_eq!(
+                    w.necessity_until
+                        .as_ref()
+                        .unwrap()
+                        .raw
+                        .as_ref()
+                        .unwrap()
+                        .unix_seconds,
+                    dawn
+                );
+            }
+            r.adjustments_minutes.insert("maghrib".into(), 30.0);
+            r.adjustments_minutes.insert("fajr".into(), -15.0);
+            let adjusted = core::calculate_day(&r).unwrap();
+            assert_eq!(
+                serde_json::to_value(&d.windows).unwrap(),
+                serde_json::to_value(&adjusted.windows).unwrap()
+            );
+        }
+    }
+}
+
+#[test]
+fn maliki_reserved_time_and_hanbali_variants_are_not_conflated() {
+    let mut r = request("2026-09-12", 52.52, 13.405, "Europe/Berlin");
+    r.window_profile = WindowProfile::MalikiRisalaDraft;
+    let d = core::calculate_day(&r).unwrap();
+    let w = &d.windows.as_ref().unwrap().windows;
+    for i in [1, 3] {
+        assert!(w[i].start.raw.is_some());
+        assert!(w[i].absolute_end.raw.is_none());
+        assert_eq!(
+            w[i].absolute_end.unavailable_reason.as_deref(),
+            Some("PRAYER_DURATION_NOT_SPECIFIED")
+        );
+    }
+    assert!(w[2].choice_until.as_ref().unwrap().raw.is_some());
+    assert!(w[2].necessity_from.as_ref().unwrap().raw.is_none());
+    r.window_profile = WindowProfile::HanbaliUmdatDraft;
+    let u = core::calculate_day(&r).unwrap();
+    r.window_profile = WindowProfile::HanbaliThirdDraft;
+    let t = core::calculate_day(&r).unwrap();
+    let u = &u.windows.as_ref().unwrap().windows;
+    let t = &t.windows.as_ref().unwrap().windows;
+    assert!(u[2].choice_until.as_ref().unwrap().raw.is_none());
+    assert!(t[2].choice_until.as_ref().unwrap().raw.is_some());
+    assert!(
+        u[4].choice_until
+            .as_ref()
+            .unwrap()
+            .raw
+            .as_ref()
+            .unwrap()
+            .unix_seconds
+            > t[4]
+                .choice_until
+                .as_ref()
+                .unwrap()
+                .raw
+                .as_ref()
+                .unwrap()
+                .unix_seconds
+    );
+    assert_eq!(
+        t[3].preferred_until
+            .as_ref()
+            .unwrap()
+            .unavailable_reason
+            .as_deref(),
+        Some("STAR_VISIBILITY_NOT_MODELED")
+    );
+}
+
+#[test]
+fn window_catalog_schema_and_polar_partial_results_agree() {
+    let schema: serde_json::Value =
+        serde_json::from_str(include_str!("../../../profiles/request.schema.json")).unwrap();
+    let profiles = schema["properties"]["window_profile"]["enum"]
+        .as_array()
+        .unwrap();
+    assert_eq!(profiles.len(), core::windows::DEFINITIONS.len() + 1);
+    let mut ids = std::collections::BTreeSet::new();
+    for profile in profiles {
+        let mut r = request("2026-06-21", 69.65, 18.96, "Europe/Oslo");
+        r.window_profile = serde_json::from_value(profile.clone()).unwrap();
+        let d = core::calculate_day(&r).unwrap();
+        if profile == "none" {
+            assert!(d.windows.is_none());
+            continue;
+        }
+        let schedule = d.windows.unwrap();
+        assert!(ids.insert(schedule.definition.id));
+        assert_eq!(
+            schedule.definition.sources.len(),
+            schedule.definition.source_titles.len()
+        );
+        assert!(schedule.windows[1].start.raw.is_some());
+        assert!(schedule.windows[0].absolute_end.raw.is_none());
+        assert!(schedule.windows[4].absolute_end.raw.is_none());
+    }
+    assert!(core::parse_request(r#"{"date":"2026-09-12","location":{"latitude_deg":0,"longitude_deg":0},"timezone":"UTC","window_profile":"unknown"}"#).is_err());
+}
