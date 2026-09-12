@@ -143,13 +143,60 @@ Updates wait for an explicit Update now action. Activation is blocked while othe
 
 The existing Sites deployment supports public access and a custom domain. Connect a domain only after obtaining its actual hostname and configuring the DNS records supplied by the host. Changing origins does not migrate installed apps or local settings: choose the permanent domain before asking users to install broadly.
 
-For Cloudflare Pages, build with Node 22.13+ using:
+### Deploy to Cloudflare Pages
+
+Live website: **https://prayertime-3cl.pages.dev/**
+
+Run these commands in your local terminal, not in the Cloudflare dashboard. Use Node.js 22.13 or newer.
+
+1. Install dependencies and build from the repository root:
 
 ```sh
+cd ~/projects/prayertime
 npm ci --prefix apps/web
 npm --prefix apps/web run build
 ```
 
-Publish the root `dist/` directory as a static Pages project over HTTPS. The repository contains the built prayer-engine WASM, so this frontend build does not require Rust. Rebuild WASM with the project scripts whenever the Rust core changes. No server, database or API secrets are required for hosting this build.
+2. Log in to Cloudflare. Complete the authorization in the browser that opens:
+
+```sh
+cd apps/web
+npx wrangler login
+```
+
+3. For a new setup only, create the Pages project and enter `main` when asked for the production branch. The existing `prayertime` project has already been created; skip this step when updating it:
+
+```sh
+npx wrangler pages project create prayertime
+```
+
+4. From `apps/web`, deploy the built website:
+
+```sh
+npx wrangler pages deploy ../../dist --project-name prayertime --branch main
+```
+
+The root `dist/` directory contains the static website. Wrangler prints a URL for each deployment; use **https://prayertime-3cl.pages.dev/** as the stable production address for this project.
+
+For later updates, rebuild and deploy:
+
+```sh
+cd ~/projects/prayertime
+npm --prefix apps/web run build
+cd apps/web
+npx wrangler pages deploy ../../dist --project-name prayertime --branch main
+```
+
+Run `npm ci --prefix apps/web` from the repository root before building if dependencies have changed. The repository contains the built prayer-engine WASM, so this frontend build does not require Rust. Rebuild WASM with the project scripts whenever the Rust core changes. No server, database or API secrets are required for hosting this build.
+
+### Install on a phone
+
+1. Open https://prayertime-3cl.pages.dev/ on your phone.
+2. On Android, tap **Install PrayerTime** and follow the prompts. On iPhone, open the site in **Safari → Share → Add to Home Screen → Add**.
+3. Wait for **Ready offline**, then open the installed app in airplane mode to check offline access. New city searches still require internet.
+
+The user confirmed that the deployed site opens correctly. Separate Android/iPhone installation and offline persistence checks remain to be completed.
+
+To connect a domain you own, open **Cloudflare → Workers & Pages → prayertime → Custom domains → Set up a domain** and follow the DNS instructions. Install from your final domain: settings and installations from another address do not transfer automatically.
 
 Run `node scripts/prepare-icons.mjs` after changing the SVG icon (requires the web dependencies). Run `scripts/check.sh` for the complete validation suite. Native home-screen widgets remain a separate Android/iOS development stage.
