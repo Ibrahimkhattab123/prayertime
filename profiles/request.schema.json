@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "PrayerTime 0.2 request",
+  "title": "PrayerTime 0.3 request",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -135,10 +135,15 @@
     "window_profile": {
       "enum": [
         "none",
-        "shafii_draft"
+        "shafii_draft",
+        "hanafi_abu_hanifa_draft",
+        "hanafi_sahibayn_draft",
+        "maliki_risala_draft",
+        "hanbali_umdat_draft",
+        "hanbali_third_draft"
       ],
       "default": "none",
-      "description": "Optional draft Shafii windows, independent of the timetable Asr convention"
+      "description": "Optional named draft school account, independent of the timetable Asr convention"
     }
   },
   "allOf": [

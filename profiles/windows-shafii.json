@@ -1,16 +1,69 @@
 {
-  "id": "windows.shafii@1",
+  "id": "windows.shafii@2",
   "status": "draft_unreviewed",
   "sources": [
     "https://islamqa.org/shafii/qibla-shafii/33839/",
     "https://seekersguidance.org/answers/prayer-shafii-fiqh/when-does-the-time-for-isha-end/",
-    "https://seekersguidance.org/answers/prayer-shafii-fiqh/at-which-angle-do-fajr-and-isha-start-respectively/"
+    "https://seekersguidance.org/answers/prayer-shafii-fiqh/at-which-angle-do-fajr-and-isha-start-respectively/",
+    "https://seekersguidance.org/answers/prayer-shafii-fiqh/following-a-madhhab-and-asr-time/",
+    "https://seekersguidance.org/answers/shafii-fiqh/what-is-correct-time-for-fajr-and-sunrise/",
+    "https://www.talibeilm.net/uploads/4/7/1/3/4713847/reliance_of_the_traveller_umdat_al-salik.pdf#page=47"
   ],
   "windows": [
-    {"prayer":"fajr","start":"true_dawn","absolute_end":"sunrise","preferred_until":null,"choice_until":null,"necessity_until":null},
-    {"prayer":"dhuhr","start":"after_transit","absolute_end":"one_shadow","preferred_until":null,"choice_until":null,"necessity_until":null},
-    {"prayer":"asr","start":"one_shadow","absolute_end":"sunset","preferred_until":null,"choice_until":null,"necessity_until":null},
-    {"prayer":"maghrib","start":"sunset","absolute_end":"red_twilight_proxy","preferred_until":null,"choice_until":null,"necessity_until":null},
-    {"prayer":"isha","start":"red_twilight_proxy","absolute_end":"next_true_dawn","preferred_until":"first_third_of_night","choice_until":null,"necessity_until":null}
+    {
+      "prayer": "fajr",
+      "start": "true_dawn",
+      "absolute_end": "sunrise",
+      "preferred_until": "daylight_brightness",
+      "choice_until": null,
+      "necessity_until": null,
+      "preferred_guidance": "The preferred period ends as daylight becomes bright (isfar), before sunrise. This draft has no validated brightness model, so it does not assign that sign a clock time or substitute the sunrise boundary."
+    },
+    {
+      "prayer": "dhuhr",
+      "start": "after_transit",
+      "absolute_end": "one_shadow",
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_until": null,
+      "preferred_guidance": "Pray promptly after the time enters, allowing for the necessary preparation. This early-performance recommendation is not a separate fixed-minute deadline; the one-shadow boundary remains the outer end."
+    },
+    {
+      "prayer": "asr",
+      "start": "one_shadow",
+      "absolute_end": "sunset",
+      "preferred_until": "two_shadows",
+      "choice_until": null,
+      "necessity_until": null,
+      "preferred_guidance": "The preferred period ends at the noon shadow plus twice the object’s height. The later permissible period continues to sunset. This two-shadow endpoint does not change the one-shadow start in this Shafi‘i profile."
+    },
+    {
+      "prayer": "maghrib",
+      "start": "sunset",
+      "absolute_end": "red_twilight_proxy",
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_until": null,
+      "preferred_guidance": "Pray promptly after sunset with the necessary preparation. No universal minute cutoff is assigned to this recommendation. The extended-time opinion used here retains the end of red twilight as the outer boundary."
+    },
+    {
+      "prayer": "isha",
+      "start": "red_twilight_proxy",
+      "absolute_end": "next_true_dawn",
+      "preferred_until": "first_third_of_night",
+      "choice_until": null,
+      "necessity_until": null,
+      "preferred_guidance": "The preferred period ends at the first third of the night, measured here from sunset to the following true dawn. The outer boundary remains that following dawn."
+    }
+  ],
+  "name": "Shafi‘i windows · draft",
+  "summary": "One-shadow Asr; preferred endpoints at two shadows and the first third of the night. Brightness remains an unmodeled sign.",
+  "source_titles": [
+    "The Ship to Salvation · prayer boundaries",
+    "SeekersGuidance · Isha end and preferred time",
+    "SeekersGuidance · twilight angle limitations",
+    "SeekersGuidance · Asr preferred endpoint",
+    "SeekersGuidance · Fajr preferred endpoint",
+    "Reliance of the Traveller · f2.1–f2.2"
   ]
 }

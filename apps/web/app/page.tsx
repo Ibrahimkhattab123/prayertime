@@ -35,6 +35,8 @@ import {
   calculate,
   calculateRange,
   listProfiles,
+  windowProfiles,
+  type WindowProfile,
   defaults,
   today,
   dateLabel as formatDateLabel,
@@ -60,6 +62,7 @@ import { hijriDateLabel as formatHijriDate } from '@/lib/hijri';
 import { Localized, LanguagePicker, useLanguage } from '@/components/language';
 import { localeFor, translate } from '@/lib/i18n';
 import { completeConfiguration, CalculationRevision } from '@/lib/automatic';
+import { PwaControls } from '@/components/pwa-controls';
 import { ThemePicker } from '@/components/theme-picker';
 import { PrayerWindows } from '@/components/prayer-windows';
 import { fiqhExplanation, fiqhSources } from '@/lib/fiqh';
@@ -401,30 +404,6 @@ export default function Home() {
       window.removeEventListener('offline', online);
     };
   }, [apply]);
-  useEffect(() => {
-    if (
-      !('serviceWorker' in navigator) ||
-      process.env.NODE_ENV !== 'production'
-    )
-      return;
-    const onMessage = (e: MessageEvent) => {
-      if (e.data?.type === 'OFFLINE_READY') setOfflineReady(true);
-    };
-    navigator.serviceWorker.addEventListener('message', onMessage);
-    navigator.serviceWorker
-      .register('/sw.js')
-      .then(async (reg) => {
-        const worker = reg.active ?? reg.waiting;
-        worker?.postMessage({ type: 'CHECK_READY' });
-      })
-      .catch(() =>
-        setNotice(
-          'Offline installation failed. Calculation still works while this page is open.',
-        ),
-      );
-    return () =>
-      navigator.serviceWorker.removeEventListener('message', onMessage);
-  }, []);
   const edit = (patch: Partial<CalculationRequest>) => {
     setRequest((r) => ({ ...r, ...patch }));
     setNotice('');
@@ -653,6 +632,11 @@ export default function Home() {
             <span className="version">0.1 · Development alpha</span>
           </div>
         </header>
+        <PwaControls
+          onReady={setOfflineReady}
+          onError={setNotice}
+          updateDisabled={Boolean(dirty || busy || locationBusy)}
+        />
         <section className="intro">
           <div>
             <p className="eyebrow">YOUR DAILY TIMETABLE</p>
@@ -851,13 +835,8 @@ export default function Home() {
             <Choice
               label="Prayer-window profile"
               value={request.window_profile ?? 'none'}
-              items={[
-                ['none', 'Off'],
-                ['shafii_draft', 'Shafi‘i windows · draft'],
-              ]}
-              onChange={(v) =>
-                edit({ window_profile: v as 'none' | 'shafii_draft' })
-              }
+              items={windowProfiles}
+              onChange={(v) => edit({ window_profile: v as WindowProfile })}
             />
             <p className="field-note">
               Window boundaries are separate from the timetable Asr convention

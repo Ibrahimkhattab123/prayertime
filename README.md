@@ -18,7 +18,7 @@ Offline assets install on the production build's first successful load. The head
 
 City searches go to [Open-Meteo](https://open-meteo.com/en/docs/geocoding-api) with [GeoNames](https://www.geonames.org/) attribution; the service returns each city's IANA timezone. New city searches need internet, while starter cities and your 20 most recently selected places remain available offline. The free endpoint is for noncommercial use and is subject to [Open-Meteo's usage limits and terms](https://open-meteo.com/en/terms).
 
-GPS and manual coordinate detection use bundled [tzf-wasm](https://github.com/ringsaturn/tzf-wasm) timezone boundaries on your device; the app does not send these coordinates to the city-search service. This adds about 9 MB of uncompressed offline assets. The boundary data is simplified to roughly 111-metre precision; check the visible zone near a boundary and use the override when needed. The Rust engine applies date-specific timezone rules and daylight saving time. GPS still depends on device support and permission. Close all app tabs and reopen the app to activate an installed update.
+GPS and manual coordinate detection use bundled [tzf-wasm](https://github.com/ringsaturn/tzf-wasm) timezone boundaries on your device; the app does not send these coordinates to the city-search service. This adds about 9 MB of uncompressed offline assets. The boundary data is simplified to roughly 111-metre precision; check the visible zone near a boundary and use the override when needed. The Rust engine applies date-specific timezone rules and daylight saving time. GPS still depends on device support and permission. When a new version is ready, use Update now after closing other PrayerTime tabs or app windows. Initial upgrades from versions without this button require closing all app tabs once.
 
 ## Native CLI
 
@@ -115,10 +115,41 @@ Choose English, Deutsch or العربية in the header. The preference is saved
 Completed configuration edits automatically recalculate after a 300 ms typing delay. Incomplete fields retain the last result; validation messages explain rejected inputs. Changing configuration invalidates earlier calculations and monthly results so they cannot overwrite a newer request. The Recalculate button remains available for retrying.
 
 
-### Prayer windows (M4, first increment)
+### Prayer windows (M4)
 
-In **Calculation → Prayer-window profile**, select **Shafi‘i windows · draft**, then open **Windows**. The opt-in profile shows five starts and outer ends, plus Isha’s preferred first-third boundary. The CLI and WASM accept `"window_profile": "shafii_draft"`; omitted or `"none"` preserves the timetable-only mode. Results use schema 0.2.0.
+In **Calculation → Prayer-window profile**, choose a named draft account, then open **Windows**. There are six options:
 
-This reference profile uses one-shadow Asr independently of the timetable Asr setting. Dawn and red twilight use the selected method’s angles as provisional proxies, not verified observations. Fixed-minute Isha leaves the red-twilight boundary unavailable. The first third runs from raw sunset to the next civil date’s raw dawn; daylight-saving changes are handled in UTC. All endpoints retain raw and displayed instants. User timetable offsets cannot move them.
+- Shafi‘i
+- Hanafi: Abu Hanifa / white twilight
+- Hanafi: Sahibayn / red twilight
+- Maliki: Risalah commentary
+- Hanbali: Umdat al-Fiqh / half-night
+- Hanbali: two shadows / first third
 
-A missing endpoint leaves other endpoints visible. Estimates and conflicting boundary order are explicit. Null preferred/choice/necessity fields mean unspecified. Only Isha’s preferred endpoint is supplied in this increment; other subwindows, shared intervals and additional schools remain deferred. The profile is a research draft requiring qualified review, with source links embedded in `profiles/windows-shafii.json` and shown in the app.
+The selector is independent of the timetable Asr convention. Each profile includes sources and its own preferred, ordinary, disliked-delay and necessity boundaries. Necessity is explicitly conditional. Source disagreements are exposed as named accounts rather than silently combined into a universal school rule. These remain research drafts, not reviewed religious determinations.
+
+The CLI/WASM request accepts `window_profile`: `shafii_draft`, `hanafi_abu_hanifa_draft`, `hanafi_sahibayn_draft`, `maliki_risala_draft`, `hanbali_umdat_draft` or `hanbali_third_draft`. Omitted or `none` disables windows. Result schema and engine are 0.3.0. Old saved Shafi‘i selections continue to work.
+
+All calculated boundaries retain raw and displayed instants. Fractions use raw sunset to the next civil date’s dawn, including DST changes. User timetable offsets never move window boundaries. Unknown brightness, white-twilight mapping, yellowing, star visibility and prayer durations remain explicitly unavailable; no angle or duration is invented. In particular, the reserved final intervals in the Maliki account are not replaced by unrestricted sunset/dawn deadlines. Fixed-minute Isha does not resolve red twilight. Null optional fields mean unspecified.
+
+Sources are embedded in the `profiles/windows-*.json` files and linked in the app. German/Arabic text and offline calculation cover all six accounts. Full shared-time validity rules, personal-excuse adjudication and Ja‘fari profiles remain future work.
+
+
+## Phone installation and public hosting
+
+The production app includes 192/512 px icons, a maskable Android icon, an Apple touch icon, standalone metadata, and an Install PrayerTime button with English, German and Arabic instructions. Android browsers can show their native install prompt; iPhone users can use Safari → Share → Add to Home Screen. Wait for Ready offline before disconnecting. Settings remain on the device; new city searches require internet.
+
+Updates wait for an explicit Update now action. Activation is blocked while other app windows are open, and the button is disabled while configuration changes or calculations are pending. Automated tests cover worker caching and update lifecycle; physical Android/iPhone installation, airplane-mode relaunch, and settings persistence still require device testing.
+
+The existing Sites deployment supports public access and a custom domain. Connect a domain only after obtaining its actual hostname and configuring the DNS records supplied by the host. Changing origins does not migrate installed apps or local settings: choose the permanent domain before asking users to install broadly.
+
+For Cloudflare Pages, build with Node 22.13+ using:
+
+```sh
+npm ci --prefix apps/web
+npm --prefix apps/web run build
+```
+
+Publish the root `dist/` directory as a static Pages project over HTTPS. The repository contains the built prayer-engine WASM, so this frontend build does not require Rust. Rebuild WASM with the project scripts whenever the Rust core changes. No server, database or API secrets are required for hosting this build.
+
+Run `node scripts/prepare-icons.mjs` after changing the SVG icon (requires the web dependencies). Run `scripts/check.sh` for the complete validation suite. Native home-screen widgets remain a separate Android/iOS development stage.

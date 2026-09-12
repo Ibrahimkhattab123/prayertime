@@ -1,0 +1,78 @@
+{
+  "id": "windows.hanafi_sahibayn@1",
+  "name": "Hanafi · Sahibayn / red twilight · draft",
+  "status": "draft_unreviewed",
+  "summary": "One-shadow Asr and red-twilight Isha. The selected Isha angle is a provisional red-twilight proxy.",
+  "sources": [
+    "https://seekersguidance.org/answers/hanafi-fiqh/what-are-the-times-for-each-prayer-that-a-prayer-is-valid-in/",
+    "https://seekersguidance.org/answers/hanafi-fiqh/delaying-isha-until-shortly-before-fajr/",
+    "https://daruliftaa.com/salat-prayer/times-for-eisha-fajr-prayers-at-extreme-latitudes/"
+  ],
+  "source_titles": [
+    "SeekersGuidance · Hanafi prayer-time guidance",
+    "SeekersGuidance · Hanafi half-night threshold",
+    "Darul Iftaa · red and white twilight opinions"
+  ],
+  "windows": [
+    {
+      "prayer": "fajr",
+      "start": "true_dawn",
+      "absolute_end": "sunrise",
+      "preferred_guidance": "Brightness marks the recommended Fajr period, allowing enough time to perform and, if needed, repeat the prayer before sunrise. No duration or brightness model is assumed.",
+      "preferred_from": "daylight_brightness",
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": null
+    },
+    {
+      "prayer": "dhuhr",
+      "start": "after_transit",
+      "absolute_end": "one_shadow",
+      "preferred_guidance": "Cooling and congregation can affect the recommended Dhuhr time. The app does not infer weather or a universal preferred cutoff.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": null
+    },
+    {
+      "prayer": "asr",
+      "start": "one_shadow",
+      "absolute_end": "sunset",
+      "preferred_guidance": "Avoid delaying Asr until the sunlight weakens. This disliked-delay sign is not replaced by a fixed solar angle.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": "sun_yellowing"
+    },
+    {
+      "prayer": "maghrib",
+      "start": "sunset",
+      "absolute_end": "red_twilight_proxy",
+      "preferred_guidance": "Pray Maghrib promptly. Star visibility marks a disliked delay in this account; the app does not model visibility.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": "stars_visible"
+    },
+    {
+      "prayer": "isha",
+      "start": "red_twilight_proxy",
+      "absolute_end": "next_true_dawn",
+      "preferred_guidance": "This account recommends Isha before the first third passes and marks delay beyond half the night as disliked. The outer end is dawn.",
+      "preferred_from": null,
+      "preferred_until": "first_third_of_night",
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": "half_of_night"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "windows.hanbali_umdat@1",
+  "name": "Hanbali · Umdat al-Fiqh / half-night · draft",
+  "status": "draft_unreviewed",
+  "summary": "This named account is separate from the other Hanbali option. Necessity time requires a recognized excuse.",
+  "sources": [
+    "https://islamland.com/uploads/books/commentary-on-umdat-alfiqh-reliable-source-of-fiqh_eng.pdf#page=126"
+  ],
+  "source_titles": [
+    "Umdat al-Fiqh · prayer times"
+  ],
+  "windows": [
+    {
+      "prayer": "fajr",
+      "start": "true_dawn",
+      "absolute_end": "sunrise",
+      "preferred_guidance": "Praying Fajr early is recommended.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": null
+    },
+    {
+      "prayer": "dhuhr",
+      "start": "after_transit",
+      "absolute_end": "one_shadow",
+      "preferred_guidance": "Pray Dhuhr early, except for delaying in excessive heat. The app does not infer heat conditions.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": null
+    },
+    {
+      "prayer": "asr",
+      "start": "one_shadow",
+      "absolute_end": "sunset",
+      "preferred_guidance": "This Umdat al-Fiqh account ends ordinary Asr at yellowing, then necessity time continues to sunset. Yellowing is not modeled.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "sun_yellowing",
+      "necessity_from": "sun_yellowing",
+      "necessity_until": "sunset",
+      "disliked_after": null
+    },
+    {
+      "prayer": "maghrib",
+      "start": "sunset",
+      "absolute_end": "red_twilight_proxy",
+      "preferred_guidance": "Praying Maghrib early is recommended; the outer end is red twilight.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": null,
+      "necessity_from": null,
+      "necessity_until": null,
+      "disliked_after": null
+    },
+    {
+      "prayer": "isha",
+      "start": "red_twilight_proxy",
+      "absolute_end": "next_true_dawn",
+      "preferred_guidance": "This Umdat al-Fiqh account ends ordinary Isha at half the sunset-to-dawn night, then necessity time continues to dawn.",
+      "preferred_from": null,
+      "preferred_until": null,
+      "choice_until": "half_of_night",
+      "necessity_from": "half_of_night",
+      "necessity_until": "next_true_dawn",
+      "disliked_after": null
+    }
+  ]
+}
