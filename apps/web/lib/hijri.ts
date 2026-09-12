@@ -1,7 +1,7 @@
 /** Display-only conversion of the selected civil date; never determines Ramadan rules. */
-export function hijriDateLabel(date: string): string {
+export function hijriDateLabel(date: string, locale = 'en-GB'): string {
   try {
-    const formatter = new Intl.DateTimeFormat('en-GB', {
+    const formatter = new Intl.DateTimeFormat(locale, {
       calendar: 'islamic-umalqura',
       timeZone: 'UTC',
       day: 'numeric',

@@ -10,7 +10,7 @@ The production app has already been built in `dist/`:
 ./scripts/start.sh
 ```
 
-Open **http://localhost:8080**. Search for a city and select a result, or choose **Use my location**. Both fill the coordinates and timezone automatically. Then select the method and Asr convention and calculate. The default location is Berlin; it is an editable example, not a detected location. Manual coordinates and timezone overrides are available under **Coordinates & timezone override**.
+Open **http://localhost:8080**. Search for a city and select a result, or choose **Use my location**. Both fill the coordinates and timezone automatically. Then select the method and Asr convention; valid changes recalculate automatically after a brief typing delay. The default location is Berlin; it is an editable example, not a detected location. Manual coordinates and timezone overrides are available under **Coordinates & timezone override**.
 
 The browser provides daily and monthly timetables, missing/estimated statuses, calculation explanations, JSON/CSV exports, saved settings, optional geolocation, and an offline service worker. Browser geolocation needs localhost or HTTPS. The date defaults to today in the selected saved timezone; the calculation core never reads the clock.
 
@@ -107,3 +107,9 @@ The 14 added regional presets are checked against the dated provider snapshot in
 The month table shows each Gregorian date with its Umm al-Qura Hijri equivalent, including in CSV exports. The header theme selector supports System, Light and Dark; your preference is stored separately from calculation settings. Green (`#076849`) and gold (`#dfaf2b`) accent actions and navigation while reading surfaces use neutral theme colors. Theme checks exercise pre-paint selection, unavailable storage and text contrast in both palettes.
 
 Prayer explanations also include a sourced Sunni fiqh overview. This educational text distinguishes start signs and selected school differences; it does not implement complete legal windows, change the numerical engine or infer an Isha criterion from the Asr selector.
+
+## Languages and automatic updates
+
+Choose English, Deutsch or العربية in the header. The preference is saved on this device. Arabic uses right-to-left layout; Gregorian and Hijri dates use the selected locale. Labels, messages, method names, calculation explanations and fiqh overviews have bundled German and Arabic translations and remain available offline. Raw JSON, calculation identifiers, timezone IDs and input values retain their canonical form. City searches ask the provider for the selected language.
+
+Completed configuration edits automatically recalculate after a 300 ms typing delay. Incomplete fields retain the last result; validation messages explain rejected inputs. Changing configuration invalidates earlier calculations and monthly results so they cannot overwrite a newer request. The Recalculate button remains available for retrying.

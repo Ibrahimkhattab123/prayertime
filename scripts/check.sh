@@ -12,6 +12,7 @@ node scripts/prepare-timezone.mjs
 node scripts/test-location.mjs
 node scripts/test-explanations.mjs
 node scripts/test-theme.mjs
+node scripts/test-i18n.mjs
 npm --prefix apps/web run typecheck
 npm --prefix apps/web run build
 node scripts/test-offline.mjs

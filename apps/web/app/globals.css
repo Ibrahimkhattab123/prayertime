@@ -1107,3 +1107,64 @@ header {
     display: none;
   }
 }
+
+.header-meta {
+  flex-wrap: wrap;
+}
+html[lang='ar'] body {
+  font-family: Tahoma, 'Segoe UI', sans-serif;
+}
+html[lang='ar'] h1 {
+  font-family: inherit;
+  letter-spacing: normal;
+}
+html[dir='rtl'] .eyebrow {
+  letter-spacing: normal;
+}
+html[dir='rtl'] .up-next {
+  border-left: 0;
+  border-right: 2px solid var(--brand-gold);
+  padding-left: 0;
+  padding-right: 24px;
+}
+html[dir='rtl'] .time-block {
+  margin-left: 0;
+  margin-right: auto;
+}
+html[dir='rtl'] .time-block strong,
+html[dir='rtl'] td,
+html[dir='rtl'] input[type='number'],
+html[dir='rtl'] input[type='date'] {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+html[dir='rtl'] .prayer-group.is-next {
+  border-left: 0;
+  border-right: 3px solid var(--brand-gold);
+  padding-left: 16px;
+  padding-right: 13px;
+}
+html[dir='rtl'] .explanation {
+  margin-left: 0;
+  margin-right: 36px;
+}
+html[dir='rtl'] .explanation-body .fiqh-note {
+  border-left: 0;
+  border-right: 2px solid var(--brand-gold);
+  padding-left: 0;
+  padding-right: 14px;
+}
+html[dir='rtl'] .month-date time,
+html[dir='rtl'] .month-date span,
+html[dir='rtl'] th:first-child,
+html[dir='rtl'] .field button {
+  text-align: right;
+}
+html[dir='rtl'] .date-navigation svg {
+  transform: scaleX(-1);
+}
+html[dir='rtl'] .raw-record pre,
+html[dir='rtl'] .fingerprint {
+  direction: ltr;
+  text-align: left;
+}

@@ -38,6 +38,7 @@ jobs:
       - run: node scripts/test-location.mjs
       - run: node scripts/test-explanations.mjs
       - run: node scripts/test-theme.mjs
+      - run: node scripts/test-i18n.mjs
       - run: npm --prefix apps/web run typecheck
       - run: npm --prefix apps/web run build
       - run: node scripts/test-offline.mjs

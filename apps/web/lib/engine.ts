@@ -126,8 +126,8 @@ export function today(timezone: string) {
     return new Date().toISOString().slice(0, 10);
   }
 }
-export function dateLabel(date: string) {
-  return new Intl.DateTimeFormat('en-GB', {
+export function dateLabel(date: string, locale = 'en-GB') {
+  return new Intl.DateTimeFormat(locale, {
     weekday: 'long',
     day: 'numeric',
     month: 'long',

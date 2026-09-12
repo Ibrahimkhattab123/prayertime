@@ -1,4 +1,5 @@
 'use client';
+import { Localized } from '@/components/language';
 import { useEffect, useState } from 'react';
 import {
   THEME_KEY,
@@ -36,23 +37,25 @@ export function ThemePicker() {
     return () => window.removeEventListener('storage', sync);
   }, []);
   return (
-    <label className="theme-picker">
-      <span>Theme</span>
-      <select
-        aria-label="Colour theme"
-        value={preference ?? 'system'}
-        onChange={(e) => {
-          const next = themePreference(e.target.value);
-          setPreference(next);
-          try {
-            localStorage.setItem(THEME_KEY, next);
-          } catch {}
-        }}
-      >
-        <option value="system">System</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </label>
+    <Localized>
+      <label className="theme-picker">
+        <span>Theme</span>
+        <select
+          aria-label="Colour theme"
+          value={preference ?? 'system'}
+          onChange={(e) => {
+            const next = themePreference(e.target.value);
+            setPreference(next);
+            try {
+              localStorage.setItem(THEME_KEY, next);
+            } catch {}
+          }}
+        >
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+    </Localized>
   );
 }

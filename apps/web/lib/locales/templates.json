@@ -1,0 +1,118 @@
+{
+  "{0}° below the horizon": [
+    "{0}° unter dem Horizont",
+    "{0}° تحت الأفق"
+  ],
+  "Noon shadow + {0} × object height": [
+    "Mittagsschatten + {0} × Objekthöhe",
+    "ظل الزوال + {0} × طول الجسم"
+  ],
+  "{0} minutes after raw solar sunset": [
+    "{0} Minuten nach dem rohen Sonnenuntergang",
+    "{0} دقيقة بعد الغروب الشمسي الخام"
+  ],
+  "{0}{1} minutes": [
+    "{0}{1} Minuten",
+    "{0}{1} دقيقة"
+  ],
+  "{0} selected. Timezone set to {1}. Your timetable updates automatically.": [
+    "{0} ausgewählt. Zeitzone: {1}. Der Kalender wird automatisch aktualisiert.",
+    "تم اختيار {0}. المنطقة الزمنية: {1}. يُحدَّث الجدول تلقائيًا."
+  ],
+  "Could not load the calculator or saved settings: {0}": [
+    "Berechnung oder gespeicherte Einstellungen konnten nicht geladen werden: {0}",
+    "تعذّر تحميل المحرك أو الإعدادات المحفوظة: {0}"
+  ],
+  "Timezone set to {0}. This location overlaps timezone boundaries; review the timezone under manual overrides.": [
+    "Zeitzone auf {0} gesetzt. Hier überschneiden sich Zeitzonengrenzen; prüfen Sie die manuelle Einstellung.",
+    "ضُبطت المنطقة الزمنية على {0}. يتداخل هذا الموقع مع حدود مناطق زمنية؛ راجع التعيين اليدوي."
+  ],
+  "Location and timezone ({0}) detected. Your timetable updates automatically.": [
+    "Standort und Zeitzone ({0}) ermittelt. Der Kalender aktualisiert sich automatisch.",
+    "حُدد الموقع والمنطقة الزمنية ({0}). يُحدَّث الجدول تلقائيًا."
+  ],
+  "Timezone lookup failed: {0} You can retry or enter a timezone below.": [
+    "Zeitzonenbestimmung fehlgeschlagen: {0} Versuchen Sie es erneut oder geben Sie unten eine Zone ein.",
+    "فشل تحديد المنطقة الزمنية: {0} يمكنك المحاولة مجددًا أو إدخال منطقة أدناه."
+  ],
+  "Unavailable: {0}": [
+    "Nicht verfügbar: {0}",
+    "غير متاح: {0}"
+  ],
+  "{0}° for Isha": [
+    "{0}° für Ischa",
+    "{0}° للعشاء"
+  ],
+  "{0} minutes after raw sunset for Isha": [
+    "{0} Minuten nach rohem Sonnenuntergang für Ischa",
+    "{0} دقيقة بعد الغروب الخام للعشاء"
+  ],
+  "Missing twilight uses {0} estimation.": [
+    "Fehlende Dämmerung wird mit {0} geschätzt.",
+    "يُقدّر غياب الفجر أو الشفق باستخدام {0}."
+  ],
+  "Fajr uses the selected method’s {0}° solar-depression convention: the centre of the Sun must reach {1}° below the horizon while rising before sunrise. This angle is a computational proxy for true dawn; the app does not observe the sky or measure its brightness.": [
+    "Fadschr verwendet den Senkungswinkel {0}° der gewählten Methode: Die Sonnenmitte muss beim Aufsteigen vor Sonnenaufgang {1}° unter dem Horizont erreichen. Der Winkel ist eine rechnerische Annäherung an die wahre Morgendämmerung; die App beobachtet weder Himmel noch Helligkeit.",
+    "يستخدم الفجر زاوية الانخفاض {0}° بحسب الطريقة المختارة: يجب أن يبلغ مركز الشمس {1}° تحت الأفق أثناء ارتفاعه قبل الشروق. الزاوية تمثيل حسابي للفجر الصادق؛ فلا يرصد التطبيق السماء ولا يقيس سطوعها."
+  ],
+  "Asr uses a shadow factor of {0}. For a vertical object, the required shadow is its noon shadow plus {1} times its height. Factor 1 is the shared Shafi‘i, Maliki and Hanbali convention, also used by the Hanafi Sahibayn choice; factor 2 is the Hanafi Abu Hanifa choice. The noon shadow is included, so this does not simply mean a total shadow of one or two object heights.": [
+    "Asr verwendet Schattenfaktor {0}. Bei einem senkrechten Objekt ist der Zielschatten sein Mittagsschatten plus {1}-mal seine Höhe. Faktor 1 gilt gemeinsam bei Schafiiten, Malikiten und Hanbaliten sowie der hanafitischen Sahibayn-Auswahl; Faktor 2 bei Abu Hanifa. Der Mittagsschatten wird also mitgezählt, nicht nur eine Gesamtlänge von einer oder zwei Objekthöhen.",
+    "يستخدم العصر معامل ظل {0}. للجسم العمودي، الظل المطلوب هو ظل الزوال مضافًا إليه {1} من طول الجسم. المعامل 1 مشترك بين الشافعية والمالكية والحنابلة، وكذلك اختيار الصاحبين؛ والمعامل 2 لاختيار أبي حنيفة. يُضاف ظل الزوال، فلا يُقصد مجرد طول كلي للظل يساوي طول الجسم أو مثليه."
+  ],
+  "Isha uses a fixed interval of {0} minutes after raw astronomical sunset, rather than an evening twilight angle. For Umm al-Qura style, the explicitly selected Ramadan setting chooses 120 minutes instead of 90. Gulf and Qatar use 90 minutes in either case. The displayed Hijri date does not choose this setting.": [
+    "Ischa verwendet ein festes Intervall von {0} Minuten nach dem rohen astronomischen Sonnenuntergang statt eines Dämmerungswinkels. Bei der Umm-al-Qura-Konvention wählt die ausdrückliche Ramadan-Einstellung 120 statt 90 Minuten. Golf und Katar verwenden in beiden Fällen 90 Minuten. Das angezeigte Hidschri-Datum bestimmt diese Einstellung nicht.",
+    "يستخدم العشاء فترة ثابتة قدرها {0} دقيقة بعد الغروب الفلكي الخام بدلًا من زاوية للشفق. في أسلوب أم القرى يحدد اختيار رمضان الصريح 120 دقيقة بدلًا من 90. وتستخدم طريقتا الخليج وقطر 90 دقيقة في الحالتين. لا يحدد التاريخ الهجري المعروض هذا الإعداد."
+  ],
+  "Isha uses the selected method’s {0}° solar-depression convention: the centre of the Sun must reach {1}° below the horizon while descending after sunset. This is a numerical twilight convention, not a direct observation of red or white shafaq.": [
+    "Ischa verwendet den Senkungswinkel {0}° der gewählten Methode: Die Sonnenmitte muss beim Absinken nach Sonnenuntergang {1}° unter den Horizont gelangen. Dies ist eine numerische Dämmerungskonvention, keine direkte Beobachtung roten oder weißen Schafaqs.",
+    "يستخدم العشاء زاوية الانخفاض {0}° للطريقة المختارة: يجب أن يبلغ مركز الشمس {1}° تحت الأفق أثناء هبوطه بعد الغروب. هذا معيار عددي للشفق وليس رصدًا مباشرًا للشفق الأحمر أو الأبيض."
+  ],
+  "The calculation uses latitude {0}° and longitude {1}° for {2}. East longitudes are positive. The engine selects the solar cycle whose transit belongs to that civil date in {3}.": [
+    "Berechnet wird für Breitengrad {0}° und Längengrad {1}° am {2}. Östliche Längengrade sind positiv. Der Motor wählt den Sonnenzyklus, dessen Transit in {3} auf dieses bürgerliche Datum fällt.",
+    "يستخدم الحساب خط العرض {0}° وخط الطول {1}° ليوم {2}. خطوط الطول الشرقية موجبة. يختار المحرك الدورة الشمسية التي يقع زوالها ضمن هذا التاريخ المدني في {3}."
+  ],
+  "The target solar altitude is h = arctan[1 / ({0} + tan(|φ − δ|))], where φ is latitude and δ is the recalculated solar declination. This is the engine’s standard shadow approximation; it updates δ as it refines the event time.": [
+    "Die Zielhöhe ist h = arctan[1 / ({0} + tan(|φ − δ|))]. φ ist der Breitengrad und δ die neu berechnete Sonnendeklination. Dies ist die Standard-Schattennäherung des Motors; δ wird bei der Zeitverfeinerung aktualisiert.",
+    "الارتفاع المستهدف هو h = arctan[1 / ({0} + tan(|φ − δ|))]، حيث φ خط العرض وδ الميل الشمسي المعاد حسابه. هذا تقريب الظل القياسي في المحرك؛ ويُحدّث δ أثناء تدقيق وقت الحدث."
+  ],
+  "For {0}, the hour angle H follows cos(H) = [sin(h) − sin(φ) sin(δ)] / [cos(φ) cos(δ)]. Angles are in degrees. H / 15 gives hours from solar transit: {1}.": [
+    "Für {0} gilt der Stundenwinkel H aus cos(H) = [sin(h) − sin(φ) sin(δ)] / [cos(φ) cos(δ)]. Winkel sind in Grad. H / 15 ergibt Stunden ab Sonnentransit: {1}.",
+    "لحساب {0} تحقق زاوية الساعة H المعادلة cos(H) = [sin(h) − sin(φ) sin(δ)] / [cos(φ) cos(δ)]. الزوايا بالدرجات. تمثل H / 15 الساعات عن الزوال: {1}."
+  ],
+  "After solving sunset at h = −0.833°, the engine adds {0} × 60 seconds to the raw sunset instant. Changing the displayed Maghrib time with a user adjustment cannot move this Isha base.": [
+    "Nach Bestimmung des Sonnenuntergangs bei h = −0,833° addiert der Motor {0} × 60 Sekunden zum rohen Sonnenuntergang. Eine manuelle Änderung der angezeigten Maghrib-Zeit verschiebt diese Ischa-Grundlage nicht.",
+    "بعد حساب الغروب عند h = ‎−0.833° يضيف المحرك {0} × 60 ثانية إلى وقت الغروب الخام. ولا يغير تعديل المستخدم لوقت المغرب المعروض أساس حساب العشاء."
+  ],
+  "{0}, the solar declination is {1}° and the equation of time is {2} minutes.{3}": [
+    "{0} beträgt die Sonnendeklination {1}° und die Zeitgleichung {2} Minuten.{3}",
+    "{0}، يبلغ الميل الشمسي {1}° ومعادلة الزمن {2} دقيقة.{3}"
+  ],
+  " The target solar altitude is {0}°.": [
+    " Die Zielhöhe der Sonne beträgt {0}°.",
+    " ارتفاع الشمس المستهدف هو {0}°."
+  ],
+  "The primary solar solver converged in {0} iterations.": [
+    "Der primäre Sonnenlöser konvergierte nach {0} Iterationen.",
+    "تقارب الحل الشمسي الأساسي بعد {0} تكرارات."
+  ],
+  "The requested angle event is absent. The selected {0} policy uses {1}. Its duration is {2} seconds and the fraction is {3}.": [
+    "Das gewünschte Winkelereignis tritt nicht ein. Die gewählte Regel {0} verwendet {1}. Die Dauer beträgt {2} Sekunden, der Anteil {3}.",
+    "لا يتحقق حدث الزاوية المطلوبة. تستخدم السياسة المختارة {0} الفترة من {1}. تبلغ مدتها {2} ثانية والنسبة {3}."
+  ],
+  "The raw UTC instant is preserved. Any listed timetable adjustment is then added in absolute minutes. The engine converts the result using {0} and its date-specific UTC offset, including daylight saving time when applicable. Finally, the display is {1}. Rounded values never feed back into the astronomical calculation.": [
+    "Der rohe UTC-Zeitpunkt bleibt erhalten. Aufgeführte Zeitkorrekturen werden anschließend in absoluten Minuten addiert. Die Umrechnung erfolgt mit {0} und dem datumsabhängigen UTC-Versatz einschließlich Sommerzeit, falls zutreffend. Zuletzt wird die Anzeige {1}. Gerundete Werte fließen niemals in die astronomische Berechnung zurück.",
+    "يُحفظ الوقت الخام بتوقيت UTC، ثم تُضاف تعديلات الجدول بالدقائق المطلقة. يحوّل المحرك النتيجة باستخدام {0} وإزاحة UTC الخاصة بالتاريخ، بما فيها التوقيت الصيفي عند انطباقه. أخيرًا يكون العرض {1}. لا تعود القيم المقرّبة إلى الحساب الفلكي."
+  ],
+  "{0}h {1}m": [
+    "{0} Std. {1} Min.",
+    "{0} س {1} د"
+  ],
+  "{0} is estimated from a night fraction because its requested solar event is absent.": [
+    "{0} wird aus einem Nachtanteil geschätzt, da das gewünschte Sonnenereignis fehlt.",
+    "يُقدّر {0} من نسبة الليل لغياب الحدث الشمسي المطلوب."
+  ],
+  "Unknown IANA timezone: {0}": [
+    "Unbekannte IANA-Zeitzone: {0}",
+    "منطقة IANA الزمنية غير معروفة: {0}"
+  ]
+}

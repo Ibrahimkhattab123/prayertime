@@ -218,6 +218,7 @@ export async function searchCities(
   query: string,
   signal: AbortSignal,
   fetcher: typeof fetch = fetch,
+  language: string = 'en',
 ): Promise<Place[]> {
   const name = query.trim();
   if (name.length < 2) return [];
@@ -225,7 +226,7 @@ export async function searchCities(
   url.search = new URLSearchParams({
     name,
     count: '10',
-    language: 'en',
+    language,
     format: 'json',
   }).toString();
   const response = await fetcher(url, {

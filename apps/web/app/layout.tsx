@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { themeBootstrap } from '@/lib/theme';
+import { LanguageProvider } from '@/components/language';
 export const metadata: Metadata = {
   title: 'PrayerTime · Daily prayer timetable',
   description:
@@ -15,7 +16,9 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

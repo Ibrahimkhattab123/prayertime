@@ -1,4 +1,5 @@
 'use client';
+import { Localized, useLanguage } from '@/components/language';
 import { useEffect, useRef, useState } from 'react';
 import {
   Combobox,
@@ -29,6 +30,7 @@ export function CitySearch({
   onSelect: (place: Place) => void;
   onSearchStart: () => void;
 }) {
+  const { language } = useLanguage();
   const [query, setQuery] = useState(value ? placeLabel(value) : '');
   const [open, setOpen] = useState(false);
   const [results, setResults] = useState<Place[]>([]);
@@ -68,7 +70,12 @@ export function CitySearch({
         controller.abort();
       }, 8000);
       try {
-        const found = await searchCities(query, controller.signal);
+        const found = await searchCities(
+          query,
+          controller.signal,
+          fetch,
+          language,
+        );
         if (id === generation.current && !controller.signal.aborted)
           setResults(found);
       } catch (e) {
@@ -90,7 +97,7 @@ export function CitySearch({
       clearTimeout(delay);
       controller.abort();
     };
-  }, [query, open, offline, value?.id, selectedLabel]);
+  }, [query, open, offline, value?.id, selectedLabel, language]);
   const local = filterPlaces(
     places,
     value && query === placeLabel(value) ? '' : query,
@@ -107,87 +114,89 @@ export function CitySearch({
     onSelect(p);
   }
   return (
-    <div
-      className="city-search"
-      onKeyDown={(event) => {
-        if (
-          event.key === 'Enter' &&
-          event.target instanceof HTMLInputElement &&
-          !event.nativeEvent.isComposing
-        )
-          event.preventDefault();
-      }}
-    >
-      <label htmlFor="city-search">Search city</label>
-      <Combobox<Place>
-        autoHighlight
-        disabled={disabled}
-        items={items}
-        filteredItems={items}
-        filter={null}
-        value={value}
-        inputValue={query}
-        open={open}
-        onOpenChange={setOpen}
-        onValueChange={select}
-        itemToStringLabel={placeLabel}
-        isItemEqualToValue={(a, b) => a.id === b.id}
-        onInputValueChange={(text, details) => {
-          if (details.reason === 'input-change') {
-            ++generation.current;
-            abort.current?.abort();
-            setQuery(text);
-            setResults([]);
-            setOpen(true);
-            onSearchStart();
-          }
+    <Localized>
+      <div
+        className="city-search"
+        onKeyDown={(event) => {
+          if (
+            event.key === 'Enter' &&
+            event.target instanceof HTMLInputElement &&
+            !event.nativeEvent.isComposing
+          )
+            event.preventDefault();
         }}
       >
-        <ComboboxInput
+        <label htmlFor="city-search">Search city</label>
+        <Combobox<Place>
+          autoHighlight
           disabled={disabled}
-          id="city-search"
-          placeholder="City or town, e.g. Hamburg"
-          autoComplete="off"
-          showClear={false}
-          aria-describedby="city-search-help"
-        />
-        <ComboboxContent>
-          <div className="city-search-status" role="status">
-            {loading
-              ? 'Searching…'
-              : message ||
-                (items.length
-                  ? 'Select a city to set coordinates and timezone.'
-                  : query.trim().length < 2
-                    ? 'Type at least two letters.'
-                    : 'No cities found. Try a nearby town or add a country.')}
-          </div>
-          <ComboboxList>
-            {(p: Place) => (
-              <ComboboxItem key={p.id} value={p}>
-                <span>
-                  <strong>{p.name}</strong>
-                  <small>
-                    {[p.region, p.country].filter(Boolean).join(', ') ||
-                      `${p.latitude.toFixed(4)}, ${p.longitude.toFixed(4)} · ${p.timezone}`}
-                  </small>
-                </span>
-              </ComboboxItem>
-            )}
-          </ComboboxList>
-        </ComboboxContent>
-      </Combobox>
-      <p id="city-search-help" className="field-note">
-        Search by{' '}
-        <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">
-          Open-Meteo
-        </a>{' '}
-        /{' '}
-        <a href="https://www.geonames.org/" target="_blank" rel="noreferrer">
-          GeoNames
-        </a>
-        . City queries use the internet.
-      </p>
-    </div>
+          items={items}
+          filteredItems={items}
+          filter={null}
+          value={value}
+          inputValue={query}
+          open={open}
+          onOpenChange={setOpen}
+          onValueChange={select}
+          itemToStringLabel={placeLabel}
+          isItemEqualToValue={(a, b) => a.id === b.id}
+          onInputValueChange={(text, details) => {
+            if (details.reason === 'input-change') {
+              ++generation.current;
+              abort.current?.abort();
+              setQuery(text);
+              setResults([]);
+              setOpen(true);
+              onSearchStart();
+            }
+          }}
+        >
+          <ComboboxInput
+            disabled={disabled}
+            id="city-search"
+            placeholder="City or town, e.g. Hamburg"
+            autoComplete="off"
+            showClear={false}
+            aria-describedby="city-search-help"
+          />
+          <ComboboxContent>
+            <div className="city-search-status" role="status">
+              {loading
+                ? 'Searching…'
+                : message ||
+                  (items.length
+                    ? 'Select a city to set coordinates and timezone.'
+                    : query.trim().length < 2
+                      ? 'Type at least two letters.'
+                      : 'No cities found. Try a nearby town or add a country.')}
+            </div>
+            <ComboboxList>
+              {(p: Place) => (
+                <ComboboxItem key={p.id} value={p}>
+                  <span>
+                    <strong>{p.name}</strong>
+                    <small>
+                      {[p.region, p.country].filter(Boolean).join(', ') ||
+                        `${p.latitude.toFixed(4)}, ${p.longitude.toFixed(4)} · ${p.timezone}`}
+                    </small>
+                  </span>
+                </ComboboxItem>
+              )}
+            </ComboboxList>
+          </ComboboxContent>
+        </Combobox>
+        <p id="city-search-help" className="field-note">
+          Search by{' '}
+          <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">
+            Open-Meteo
+          </a>{' '}
+          /{' '}
+          <a href="https://www.geonames.org/" target="_blank" rel="noreferrer">
+            GeoNames
+          </a>
+          . City queries use the internet.
+        </p>
+      </div>
+    </Localized>
   );
 }
