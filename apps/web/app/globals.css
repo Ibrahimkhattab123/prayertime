@@ -1553,3 +1553,20 @@ html[dir='rtl'] .fingerprint {
   .solar-markers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 html[dir='rtl'] .date-navigation svg { transform: scaleX(-1); }
+
+.prayer-reminders {
+  margin-block: 0 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  scroll-margin-top: 12px;
+}
+.prayer-reminders > summary { display: flex; align-items: center; gap: 7px; cursor: pointer; font-weight: 600; color: var(--link); }
+.prayer-reminders > summary::after { content: '+'; margin-inline-start: auto; }
+.prayer-reminders[open] > summary::after { content: '−'; }
+.reminder-settings { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; margin-block: 12px; }
+.reminder-settings > div { display: grid; gap: 8px; justify-items: start; align-content: start; }
+.reminder-settings select { border: 1px solid var(--border); border-radius: 8px; padding: 7px; background: var(--background); }
+.reminder-settings audio { width: min(100%, 320px); }
+.reminder-settings a { color: var(--link); text-decoration: underline; }

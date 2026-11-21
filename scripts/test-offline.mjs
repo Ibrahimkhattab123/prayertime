@@ -116,3 +116,29 @@ for (const path of stored.keys()) {
 console.log(
   `Offline service-worker contract: ${stored.size} production assets cached and returned with network disabled.`,
 );
+
+let shown;
+self.registration = { async showNotification(title, options) { shown = { title, options }; } };
+async function notify(data) {
+  let pending;
+  handlers.get("push")({ data: { json: () => data }, waitUntil: (p) => (pending = p) });
+  await pending;
+}
+await notify({ title: "Prayer time", body: "Open PrayerTime", tag: "foreign" });
+assert.equal(shown, undefined);
+await notify({ title: "Prayer time · Fajr", body: "Open PrayerTime", tag: "prayer-123" });
+assert.equal(shown.title, "Prayer time · Fajr");
+assert.equal(shown.options.tag, "prayer-123");
+let destination;
+let closed = false;
+self.clients.matchAll = async () => [];
+self.clients.openWindow = async (url) => { destination = url; };
+let opening;
+handlers.get("notificationclick")({
+  notification: { data: shown.options.data, close: () => { closed = true; } },
+  waitUntil: (p) => (opening = p),
+});
+await opening;
+assert.equal(closed, true);
+assert.equal(destination, "https://prayertime.test/?adhan=1#prayer-reminders");
+console.log("Prayer push contract: validated notification and Adhan deep link.");

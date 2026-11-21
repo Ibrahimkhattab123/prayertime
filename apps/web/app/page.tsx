@@ -67,6 +67,7 @@ import { hijriDateLabel as formatHijriDate } from '@/lib/hijri';
 import { Localized, LanguagePicker, useLanguage } from '@/components/language';
 import { localeFor, translate } from '@/lib/i18n';
 import { completeConfiguration, CalculationRevision } from '@/lib/automatic';
+import { PrayerReminders } from '@/components/prayer-reminders';
 import { PwaControls } from '@/components/pwa-controls';
 import { ThemePicker } from '@/components/theme-picker';
 import { SolarClock } from '@/components/solar/clock';
@@ -723,6 +724,7 @@ export default function Home() {
             <Settings2 size={18} /> Settings
           </button>
         </section>
+        {day && <PrayerReminders request={day.request} />}
         <div className={`workspace ${settingsOpen ? 'has-settings' : ''}`}>
           <form
             className="settings"

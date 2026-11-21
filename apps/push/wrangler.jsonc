@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "prayertime-push",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-21",
+  "vars": {
+    "APP_ORIGIN": "https://prayertime-3cl.pages.dev"
+  },
+  "observability": { "enabled": true, "head_sampling_rate": 0.1, "traces": { "enabled": true } },
+  "durable_objects": {
+    "bindings": [{ "name": "REMINDERS", "class_name": "PrayerReminders" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["PrayerReminders"] }],
+  "ratelimits": [{ "name": "SUBSCRIPTION_LIMIT", "namespace_id": "1001", "simple": { "limit": 20, "period": 60 } }]
+}

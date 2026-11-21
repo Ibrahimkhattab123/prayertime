@@ -1118,5 +1118,23 @@
   "The engine accounts for changing solar declination when solving for Asr.": [
     "Die Berechnung berücksichtigt die Veränderung der Sonnendeklination bis zum Asr-Zeitpunkt.",
     "يأخذ الحساب تغيّر ميل الشمس في الحسبان عند تحديد وقت العصر."
-  ]
+  ],
+  "Reminders and Adhan": ["Erinnerungen und Azan","التذكيرات والأذان"],
+  "Prayer reminders": ["Gebetserinnerungen","تذكيرات الصلاة"],
+  "Receive a push notification at each of your five prayer times. Enabling this shares your prayer calculation settings and push subscription with the reminder service.": ["Erhalte zu jeder der fünf Gebetszeiten eine Push-Nachricht. Beim Aktivieren werden deine Berechnungseinstellungen und dein Push-Abonnement an den Erinnerungsdienst übertragen.","تلقَّ إشعارًا عند دخول وقت كل صلاة من الصلوات الخمس. عند التفعيل، تُرسل إعدادات حساب الصلاة واشتراك الإشعارات إلى خدمة التذكير."],
+  "The reminder service is unavailable.": ["Der Erinnerungsdienst ist nicht verfügbar.","خدمة التذكيرات غير متاحة."],
+  "On iPhone, add PrayerTime to your Home Screen and open it there to enable notifications.": ["Füge PrayerTime auf dem iPhone zum Home-Bildschirm hinzu und öffne es dort, um Benachrichtigungen zu aktivieren.","على iPhone، أضف PrayerTime إلى الشاشة الرئيسية وافتحه من هناك لتفعيل الإشعارات."],
+  "Turn off reminders": ["Erinnerungen ausschalten","إيقاف التذكيرات"],
+  "Enable prayer reminders": ["Gebetserinnerungen aktivieren","تفعيل تذكيرات الصلاة"],
+  "Sunni Adhan": ["Sunnitischer Azan","الأذان السني"],
+  "Recording": ["Aufnahme","التسجيل"],
+  "Play Adhan": ["Azan abspielen","تشغيل الأذان"],
+  "Recordings from PrayTimes": ["Aufnahmen von PrayTimes","التسجيلات من PrayTimes"],
+  "Could not update prayer reminders. Reopen PrayerTime while online to retry.": ["Erinnerungen konnten nicht aktualisiert werden. Öffne PrayerTime erneut mit Internetverbindung.","تعذّر تحديث تذكيرات الصلاة. أعد فتح PrayerTime أثناء الاتصال بالإنترنت."],
+  "Prayer reminders turned off.": ["Gebetserinnerungen ausgeschaltet.","تم إيقاف تذكيرات الصلاة."],
+  "Allow notifications in your device settings to enable reminders.": ["Erlaube Benachrichtigungen in den Geräteeinstellungen, um Erinnerungen zu aktivieren.","اسمح بالإشعارات في إعدادات الجهاز لتفعيل التذكيرات."],
+  "Wait until PrayerTime is ready offline, then try again.": ["Warte, bis PrayerTime offline bereit ist, und versuche es erneut.","انتظر حتى يصبح PrayerTime جاهزًا للعمل دون اتصال ثم حاول مجددًا."],
+  "Prayer reminders turned on.": ["Gebetserinnerungen aktiviert.","تم تفعيل تذكيرات الصلاة."],
+  "Could not change prayer reminders. Check your connection and try again.": ["Erinnerungen konnten nicht geändert werden. Prüfe die Verbindung und versuche es erneut.","تعذّر تغيير تذكيرات الصلاة. تحقق من الاتصال وحاول مجددًا."],
+  "Could not play the Adhan. Check your connection and try again.": ["Der Azan konnte nicht abgespielt werden. Prüfe die Verbindung und versuche es erneut.","تعذّر تشغيل الأذان. تحقق من الاتصال وحاول مجددًا."]
 }

@@ -33,6 +33,28 @@ if(event.data?.type==='ACTIVATE_UPDATE')event.waitUntil((async()=>{
   await self.skipWaiting();
 })());
 });
+self.addEventListener('push',event=>{
+let message;
+try { message=event.data?.json(); } catch { return; }
+if(typeof message?.title!=='string'||typeof message.body!=='string'||!/^prayer-[0-9]+$/.test(message.tag))return;
+event.waitUntil(self.registration.showNotification(message.title,{
+  body:message.body,tag:message.tag,icon:'/icons/icon-192.png',data:{type:'PRAYER_REMINDER'}
+}));
+});
+self.addEventListener('notificationclick',event=>{
+if(event.notification.data?.type!=='PRAYER_REMINDER')return;
+event.notification.close();
+event.waitUntil((async()=>{
+  const url=new URL('/?adhan=1#prayer-reminders',self.location.origin).href;
+  const windows=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+  const client=windows.find(window=>new URL(window.url).origin===self.location.origin);
+  if(client){
+    const destination=await client.navigate(url).catch(()=>null);
+    if(destination){await destination.focus();return;}
+  }
+  await self.clients.openWindow(url);
+})());
+});
 self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method!=='GET'||url.origin!==self.location.origin)return;
 if(event.request.mode==='navigate'){event.respondWith((async()=>{const cached=await (await caches.open(CACHE)).match('/');return cached??fetch(event.request);})());return;}
 if(ASSETS.includes(url.pathname)){event.respondWith((async()=>{const cache=await caches.open(CACHE);return await cache.match(url.pathname)??fetch(event.request);})());}
