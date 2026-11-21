@@ -7,7 +7,11 @@ export function calculateRange(request: string, days: number): string;
 
 export function calculateSolarEvents(request: string): string;
 
+export function civilDayBounds(date: string, zone: string): Float64Array;
+
 export function listProfiles(): string;
+
+export function solarPosition(unix: number, latitude: number, longitude: number): Float64Array;
 
 export function validateConfiguration(request: string): string;
 
@@ -18,7 +22,9 @@ export interface InitOutput {
     readonly calculateDay: (a: number, b: number) => [number, number, number, number];
     readonly calculateRange: (a: number, b: number, c: number) => [number, number, number, number];
     readonly calculateSolarEvents: (a: number, b: number) => [number, number, number, number];
+    readonly civilDayBounds: (a: number, b: number, c: number, d: number) => [number, number, number, number];
     readonly listProfiles: () => [number, number];
+    readonly solarPosition: (a: number, b: number, c: number) => [number, number, number, number];
     readonly validateConfiguration: (a: number, b: number) => [number, number, number, number];
     readonly __wbindgen_externrefs: WebAssembly.Table;
     readonly __wbindgen_malloc: (a: number, b: number) => number;

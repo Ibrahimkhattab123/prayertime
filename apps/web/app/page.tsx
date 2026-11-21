@@ -20,6 +20,11 @@ import {
   Info,
   LoaderCircle,
   ArrowUpRight,
+  CalendarDays,
+  Clock3,
+  House,
+  Settings2,
+  ListChecks,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -64,6 +69,7 @@ import { localeFor, translate } from '@/lib/i18n';
 import { completeConfiguration, CalculationRevision } from '@/lib/automatic';
 import { PwaControls } from '@/components/pwa-controls';
 import { ThemePicker } from '@/components/theme-picker';
+import { SolarClock } from '@/components/solar/clock';
 import { PrayerWindows } from '@/components/prayer-windows';
 import { fiqhExplanation, fiqhSources } from '@/lib/fiqh';
 const STORAGE = 'prayertime-settings-v1';
@@ -273,6 +279,12 @@ export default function Home() {
   const [offline, setOffline] = useState(false);
   const [offlineReady, setOfflineReady] = useState(false);
   const [mode, setMode] = useState('daily');
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [neighborDays, setNeighborDays] = useState<{
+    source: Day;
+    prayers: Prayer[];
+  } | null>(null);
+  const previousCivil = useRef<{ zone: string; date: string } | null>(null);
   const [calendar, setCalendar] = useState<Day[] | null>(null);
   const [calendarBusy, setCalendarBusy] = useState(false);
   const [calendarError, setCalendarError] = useState('');
@@ -298,6 +310,7 @@ export default function Home() {
         longitude_deg: place.longitude,
       },
       timezone: place.timezone,
+      date: r.date === today(r.timezone) ? today(place.timezone) : r.date,
     }));
     setNotice(
       `${place.name} selected. Timezone set to ${place.timezone}. Your timetable updates automatically.`,
@@ -425,14 +438,69 @@ export default function Home() {
   const resultMethod = profiles?.methods.find(
     (m) => m.id === day?.request.profiles.calculation,
   );
+  const civilToday = now ? today(request.timezone) : null;
+  const liveDate = Boolean(civilToday && day?.request.date === civilToday);
+  useEffect(() => {
+    if (!ready || !civilToday || !request.timezone) return;
+    const previous = previousCivil.current;
+    previousCivil.current = { zone: request.timezone, date: civilToday };
+    if (
+      previous?.zone === request.timezone &&
+      previous.date !== civilToday &&
+      request.date === previous.date
+    )
+      setRequest((r) => ({ ...r, date: civilToday }));
+  }, [ready, civilToday, request.date, request.timezone, setRequest]);
+  useEffect(() => {
+    if (!day || !liveDate) return;
+    let active = true;
+    const neighbors = [-1, 1]
+      .map((offset) => changeDate(day.request.date, offset))
+      .filter((date) => date >= '1900-01-01' && date <= '2100-12-31');
+    void Promise.allSettled(
+      neighbors.map((date) => calculate({ ...day.request, date })),
+    ).then((results) => {
+      if (active)
+        setNeighborDays({
+          source: day,
+          prayers: results.flatMap((result) =>
+            result.status === 'fulfilled' ? result.value.prayers : [],
+          ),
+        });
+    });
+    return () => {
+      active = false;
+    };
+  }, [day, liveDate]);
   const next =
-    day && day.request.date === today(day.request.timezone)
-      ? nextPrayer(day.prayers, now)
+    day && liveDate
+      ? nextPrayer(
+          neighborDays?.source === day
+            ? [...day.prayers, ...neighborDays.prayers]
+            : day.prayers,
+          now,
+        )
       : null;
   const remaining = next?.adjusted
-    ? Math.max(0, Math.floor(next.adjusted.unix_seconds - now))
+    ? Math.max(0, Math.ceil(next.adjusted.unix_seconds - now))
     : 0;
-  const countdown = `${Math.floor(remaining / 3600)}h ${Math.floor((remaining % 3600) / 60)}m`;
+  const countdown = [
+    Math.floor(remaining / 3600),
+    Math.floor(remaining / 60) % 60,
+    remaining % 60,
+  ]
+    .map((part) => String(part).padStart(2, '0'))
+    .join(':');
+  const goToday = () => {
+    const date = today(request.timezone);
+    if (request.date === date) return;
+    const r = { ...request, date };
+    setRequest(r);
+    void apply(r).catch(() => {});
+  };
+  const asrConvention = profiles?.fiqh.find(
+    (profile) => profile.id === day?.request.profiles.fiqh,
+  );
   const navigate = async (delta: number) => {
     if (!day || calculationBlocked) return;
     const r = { ...request, date: changeDate(day.request.date, delta) };
@@ -462,6 +530,7 @@ export default function Home() {
         ...r,
         location: { latitude_deg: latitude, longitude_deg: longitude },
         timezone: match.timezone,
+        date: r.date === today(r.timezone) ? today(match.timezone) : r.date,
       }));
       setNotice(
         match.candidates.length > 1
@@ -610,7 +679,7 @@ export default function Home() {
   }, [ready]);
   return (
     <Localized>
-      <main className="shell">
+      <main className="shell prayer-app">
         <header>
           <a className="brand" href="/" aria-label="PrayerTime home">
             <span className="brand-symbol">
@@ -629,7 +698,6 @@ export default function Home() {
                   ? 'Ready offline'
                   : 'On-device calculation'}
             </span>
-            <span className="version">0.1 · Development alpha</span>
           </div>
         </header>
         <PwaControls
@@ -639,26 +707,27 @@ export default function Home() {
         />
         <section className="intro">
           <div>
-            <p className="eyebrow">YOUR DAILY TIMETABLE</p>
+            <p className="eyebrow">
+              <MapPin size={14} /> <span>{place}</span>
+            </p>
             <h1>A day, in prayer.</h1>
-            <p>Local calculations. Clear methods. Every time explained.</p>
+            <p>Follow the sun through the five daily prayers.</p>
           </div>
-          {next && (
-            <div className="up-next">
-              <p>UP NEXT</p>
-              <strong>
-                {names[next.name]} <span>{next.displayed?.clock}</span>
-              </strong>
-              <span>
-                in {countdown}
-                {next.status === 'estimated' ? ' · estimated' : ''}
-              </span>
-            </div>
-          )}
+          <button
+            type="button"
+            className="settings-toggle"
+            aria-controls="prayer-settings"
+            aria-expanded={settingsOpen}
+            onClick={() => setSettingsOpen((open) => !open)}
+          >
+            <Settings2 size={18} /> Settings
+          </button>
         </section>
-        <div className="workspace">
+        <div className={`workspace ${settingsOpen ? 'has-settings' : ''}`}>
           <form
             className="settings"
+            id="prayer-settings"
+            hidden={!settingsOpen}
             onSubmit={(e) => {
               e.preventDefault();
               if (busy || locationBusy || !ready || !request.timezone) return;
@@ -1021,20 +1090,24 @@ export default function Home() {
               <Tabs value={mode} onValueChange={setMode}>
                 <div className="schedule-toolbar">
                   <TabsList>
-                    <TabsTrigger value="daily">Day</TabsTrigger>
-                    <TabsTrigger value="month">Month</TabsTrigger>
-                    <TabsTrigger value="windows">Windows</TabsTrigger>
-                    <TabsTrigger value="research">Details</TabsTrigger>
+                    <TabsTrigger value="daily">
+                      <House size={17} /> Day
+                    </TabsTrigger>
+                    <TabsTrigger value="month">
+                      <CalendarDays size={17} /> Month
+                    </TabsTrigger>
+                    <TabsTrigger value="windows">
+                      <Clock3 size={17} /> Windows
+                    </TabsTrigger>
+                    <TabsTrigger value="research">
+                      <ListChecks size={17} /> Details
+                    </TabsTrigger>
                   </TabsList>
                   <Button
                     variant="ghost"
                     size="sm"
                     disabled={!day || calculationBlocked}
-                    onClick={() => {
-                      const r = { ...request, date: today(request.timezone) };
-                      setRequest(r);
-                      void apply(r).catch(() => {});
-                    }}
+                    onClick={goToday}
                   >
                     Today
                   </Button>
@@ -1042,47 +1115,114 @@ export default function Home() {
                 {mode === 'daily' && (
                   <TabsContent value="daily" aria-label="Daily timetable">
                     {day ? (
-                      day.prayers.map((p, index) => (
-                        <div
-                          className={`prayer-group ${next?.name === p.name ? 'is-next' : ''}`}
-                          key={p.name}
-                        >
-                          <div className="prayer">
-                            <span className="prayer-index">0{index + 1}</span>
-                            <div>
-                              <h3>
-                                {names[p.name]}{' '}
-                                {next?.name === p.name && (
-                                  <span className="next-tag">NEXT</span>
-                                )}
-                              </h3>
-                              <span className="prayer-subtitle">
-                                {subtitles[p.name]}
-                              </span>
+                      <>
+                        <div className="daily-layout">
+                          <SolarClock
+                            result={day}
+                            now={now}
+                            liveDate={liveDate}
+                            onToday={goToday}
+                            convention={asrConvention}
+                          />
+                          <aside
+                            className="day-panel"
+                            aria-label="Daily prayer times"
+                          >
+                            <section className="countdown-card">
+                              <p>
+                                <Clock3 size={15} /> Next prayer
+                              </p>
+                              {next ? (
+                                <>
+                                  <h3>{names[next.name]}</h3>
+                                  <time dir="ltr">{countdown}</time>
+                                  <span>
+                                    {next.displayed
+                                      ? day.request.rounding === 'none'
+                                        ? next.displayed.local.slice(11, 19)
+                                        : next.displayed.clock
+                                      : '—'}{' '}
+                                    {next.displayed &&
+                                      next.displayed.date >
+                                        day.request.date && (
+                                        <span>Tomorrow</span>
+                                      )}
+                                  </span>
+                                </>
+                              ) : (
+                                <span>
+                                  {liveDate
+                                    ? 'No upcoming time available'
+                                    : 'Countdown available for today'}
+                                </span>
+                              )}
+                            </section>
+                            <div className="day-panel-list">
+                              <h3>Prayer times</h3>
+                              {day.prayers.map((p) => (
+                                <div
+                                  key={p.name}
+                                  className={`compact-prayer ${next === p ? 'is-next' : ''}`}
+                                >
+                                  <span>{names[p.name]}</span>
+                                  <b dir="ltr">
+                                    {p.displayed
+                                      ? day.request.rounding === 'none'
+                                        ? p.displayed.local.slice(11, 19)
+                                        : p.displayed.clock
+                                      : '—'}
+                                    <DayOffset instant={p.displayed} />
+                                    {p.status === 'estimated' && '*'}
+                                  </b>
+                                </div>
+                              ))}
                             </div>
-                            <div className="time-block">
-                              <strong>
-                                {p.displayed
-                                  ? day.request.rounding === 'none'
-                                    ? p.displayed.local.slice(11, 19)
-                                    : p.displayed.clock
-                                  : '—'}
-                              </strong>
-                              <DayOffset instant={p.displayed} />
-                              <span className={`basis ${p.status}`}>
-                                {p.status === 'astronomical'
-                                  ? 'Calculated'
-                                  : p.status === 'derived'
-                                    ? 'Fixed interval'
-                                    : p.status === 'estimated'
-                                      ? 'Estimated'
-                                      : 'Unavailable'}
-                              </span>
-                            </div>
-                          </div>
-                          <Explanation p={p} day={day} />
+                          </aside>
                         </div>
-                      ))
+                        <details className="daily-details">
+                          <summary>Prayer time explanations</summary>
+                          {day.prayers.map((p) => (
+                            <div
+                              className={`prayer-group ${next === p ? 'is-next' : ''}`}
+                              key={p.name}
+                            >
+                              <div className="prayer">
+                                <div>
+                                  <h3>
+                                    {names[p.name]}{' '}
+                                    {next === p && (
+                                      <span className="next-tag">NEXT</span>
+                                    )}
+                                  </h3>
+                                  <span className="prayer-subtitle">
+                                    {subtitles[p.name]}
+                                  </span>
+                                </div>
+                                <div className="time-block">
+                                  <strong>
+                                    {p.displayed
+                                      ? day.request.rounding === 'none'
+                                        ? p.displayed.local.slice(11, 19)
+                                        : p.displayed.clock
+                                      : '—'}
+                                  </strong>
+                                  <DayOffset instant={p.displayed} />
+                                  <span className={`basis ${p.status}`}>
+                                    {p.status === 'astronomical'
+                                      ? 'Calculated'
+                                      : p.status === 'derived'
+                                        ? 'Fixed interval'
+                                        : p.status === 'estimated'
+                                          ? 'Estimated'
+                                          : 'Unavailable'}
+                                  </span>
+                                </div>
+                              </div>
+                              <Explanation p={p} day={day} />
+                            </div>
+                          ))}
+                        </details>
+                      </>
                     ) : (
                       <p className="empty-state">
                         {busy

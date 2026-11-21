@@ -1276,3 +1276,280 @@ html[dir='rtl'] .fingerprint {
 .pwa-install-dialog li + li {
   margin-top: 0.5rem;
 }
+
+/* PrayerTime solar dashboard */
+:root {
+  --background: #f8f5ed;
+  --foreground: #182e32;
+  --card: #fffdf8;
+  --muted: #eeeae0;
+  --border: #ddd7c9;
+  --brand-gold: #c7a46a;
+  --brand-green: #146b5b;
+}
+.dark {
+  --background: #0b2025;
+  --foreground: #f4efe3;
+  --card: #102c30;
+  --popover: #153438;
+  --muted: #18383c;
+  --muted-foreground: #b4c7c6;
+  --border: #355055;
+  --input: #486368;
+  --ring: #d3b37b;
+  --gold-text: #e6c78b;
+  --link: #a8d4bd;
+  --highlight: #1c3d3e;
+}
+.prayer-app {
+  max-width: 1440px;
+  padding-inline: clamp(16px, 4vw, 64px);
+}
+.prayer-app > header {
+  border-top: 0;
+  padding-block: 16px;
+}
+.prayer-app .brand {
+  font-family: Georgia, serif;
+  text-decoration: none;
+}
+.prayer-app .brand-symbol {
+  background: #102c30;
+  width: 42px;
+  height: 42px;
+}
+.prayer-app .header-meta { gap: 14px; }
+.prayer-app .local-status { font-size: .77rem; }
+.prayer-app .intro { padding-block: 24px 22px; align-items: end; }
+.prayer-app .intro .eyebrow {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 5px;
+  letter-spacing: .04em;
+  font-size: .84rem;
+}
+.prayer-app .intro h1 { font-size: clamp(2.65rem, 5vw, 4.3rem); }
+.prayer-app .intro p:last-child { margin-top: 6px; }
+.prayer-app .workspace { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.prayer-app .workspace.has-settings { grid-template-columns: minmax(230px, 282px) minmax(0, 1fr); }
+.prayer-app .settings[hidden] { display: none; }
+.prayer-app .schedule { padding: clamp(12px, 2vw, 24px); border-radius: 20px; }
+.prayer-app .schedule-heading h2 { font-family: Georgia, serif; font-weight: 500; font-size: clamp(1.15rem, 2vw, 1.55rem); }
+.prayer-app .schedule-heading .eyebrow { margin-bottom: 5px; letter-spacing: .08em; line-height: 1.25; }
+.prayer-app .hijri-date { margin-top: .25rem; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.prayer-app .hijri-date p { font-size: .87rem; }
+.prayer-app .schedule-toolbar { margin-bottom: 8px; padding-block: 10px; }
+.prayer-app .schedule-toolbar [role='tablist'] { height: auto; }
+.prayer-app .schedule-toolbar [role='tab'] { padding: 7px 12px; }
+.prayer-app .schedule-toolbar [role='tab'][aria-selected='true'] { color: var(--link); }
+.settings-toggle,
+.solar-now {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 7px 12px;
+  color: var(--foreground);
+  background: var(--card);
+  font-size: .875rem;
+  font-weight: 600;
+  min-height: 40px;
+}
+.settings-toggle:hover,
+.settings-toggle[aria-expanded='true'],
+.solar-now:hover:enabled { background: var(--highlight); }
+.daily-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(216px, 25%);
+  gap: 16px;
+  align-items: start;
+}
+.solar-clock, .day-panel { min-width: 0; }
+.solar-stage {
+  border-radius: 17px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #0a202a;
+  color: #f5eee1;
+  border: 1px solid #426167;
+}
+.solar-stage-header {
+  position: relative;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding: 12px 16px 0;
+  min-height: 67px;
+}
+.stage-time { display: grid; justify-items: center; color: #dfd4b9; line-height: 1.1; gap: 4px; }
+.stage-time time {
+  font-family: Georgia, serif;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  color: #f8eee0;
+  font-variant-numeric: tabular-nums;
+}
+.stage-time > span { font-size: .78rem; letter-spacing: .03em; }
+.clock-mode {
+  position: absolute;
+  inset-inline-start: 12px;
+  inset-block-start: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  border: 1px solid #577077;
+  border-radius: 100px;
+  color: #f0e6d1;
+  background: #17343f;
+  font-size: .75rem;
+  padding-inline: 9px;
+}
+.clock-mode > span { width: 6px; height: 6px; border-radius: 50%; background: #e6c187; }
+.clock-mode.is-live > span { background: #8bdeb2; }
+.solar-scene { display: block; width: 100%; height: auto; }
+.scene-compass { font-family: Georgia, serif; letter-spacing: .08em; direction: ltr; }
+.solar-markers {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px 10px 10px;
+}
+.solar-marker {
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  padding: 7px 2px;
+  color: #c5d6d4;
+  font-size: .81rem;
+  line-height: 1.25;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.solar-marker > span { overflow-wrap: anywhere; text-align: center; }
+.solar-marker strong { font-size: clamp(.83rem, 1.5vw, 1.13rem); font-weight: 600; font-variant-numeric: tabular-nums; }
+.solar-marker svg { color: #c8af7f; margin-bottom: 3px; }
+.solar-marker.is-current, .solar-marker:not(:disabled):hover {
+  border-color: #a78d61;
+  background: #25434a;
+  color: #ffedbe;
+}
+.solar-marker:disabled { cursor: default; opacity: .66; }
+.solar-marker sup { font-size: .68em; margin-inline-start: .12em; }
+.solar-controls {
+  color: var(--foreground);
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 10px 14px;
+}
+.solar-controls-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.solar-controls-heading label, .solar-education summary { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.solar-controls-heading label svg, .solar-education svg { color: var(--link); }
+.solar-now:disabled { opacity: .6; cursor: default; }
+#solar-time-slider { display: block; width: 100%; margin: 10px 0 0; height: 24px; accent-color: var(--brand-green); cursor: ew-resize; }
+.dark #solar-time-slider { accent-color: #e3c38a; }
+#solar-time-slider:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; border-radius: 5px; }
+.solar-scale { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted-foreground); }
+.solar-education { margin-top: 8px; border-top: 1px solid var(--border); }
+.solar-education summary { min-height: 36px; cursor: pointer; }
+.solar-education summary::after { content: '+'; margin-inline-start: auto; color: var(--link); }
+.solar-education[open] summary::after { content: '−'; }
+.solar-info { display: grid; gap: 8px; color: var(--muted-foreground); }
+.solar-info dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-block: 5px; }
+.solar-info dl > div { background: var(--muted); border-radius: 7px; padding: 7px; overflow-wrap: anywhere; }
+.solar-info dd { color: var(--foreground); text-align: start; font-weight: 650; }
+.day-panel { display: grid; gap: 12px; }
+.countdown-card {
+  background: radial-gradient(ellipse at 85% 0%, #22524d, #102b30 70%);
+  color: #fcf1de;
+  border-radius: 14px;
+  padding: 16px 18px;
+  border: 1px solid #536d67;
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+}
+.countdown-card p { display: flex; align-items: center; gap: 7px; color: #bcd5cc; font-weight: 600; }
+.countdown-card h3 { font-family: Georgia, serif; font-size: 1.7rem; }
+.countdown-card time {
+  font-family: Georgia, serif;
+  font-size: clamp(1.6rem, 3.3vw, 2.6rem);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  color: #ead096;
+}
+.countdown-card > span { color: #d6dfd9; }
+.day-panel-list { border: 1px solid var(--border); border-radius: 14px; padding: 12px; }
+.day-panel-list h3 { font-size: .9rem; font-weight: 650; padding: 3px 6px 7px; }
+.compact-prayer { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 6px; border-top: 1px solid var(--border); }
+.compact-prayer.is-next { color: var(--link); background: var(--highlight); border-radius: 6px; }
+.compact-prayer b { font-variant-numeric: tabular-nums; }
+.daily-details { margin-top: 15px; border-top: 1px solid var(--border); padding-top: 12px; }
+.daily-details > summary { cursor: pointer; font-weight: 600; color: var(--link); }
+
+@media (max-width: 1100px) {
+  .has-settings .daily-layout { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 830px) {
+  .prayer-app .workspace.has-settings { grid-template-columns: minmax(0, 1fr); }
+  .daily-layout { grid-template-columns: minmax(0, 1fr); }
+  .day-panel { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+}
+@media (max-width: 550px) {
+  .prayer-app { padding-inline: 10px; padding-bottom: 78px; }
+  .prayer-app > header { flex-direction: row; align-items: center; padding-block: 10px; gap: 6px; }
+  .prayer-app .brand { font-size: 1.2rem; gap: 6px; }
+  .prayer-app .brand-symbol { width: 31px; height: 31px; }
+  .prayer-app .brand-symbol svg { width: 17px; }
+  .prayer-app .header-meta { gap: 5px; justify-content: end; }
+  .prayer-app .theme-picker { margin: 0; }
+  .prayer-app .theme-picker > span, .prayer-app .local-status { display: none; }
+  .prayer-app .theme-picker select { max-width: 86px; padding-inline: 3px; font-size: .77rem; min-height: 34px; }
+  .prayer-app .intro { padding-block: 14px; gap: 8px; }
+  .prayer-app .intro h1 { font-size: clamp(1.7rem, 8vw, 2.65rem); }
+  .prayer-app .intro p:last-child { font-size: .84rem; }
+  .settings-toggle { padding-inline: 6px; gap: 4px; font-size: .78rem; }
+  .settings-toggle svg { width: 14px; }
+  .prayer-app .schedule-heading { align-items: flex-start; }
+  .prayer-app .schedule-heading .eyebrow, .prayer-app .hijri-date small { display: none; }
+  .prayer-app .schedule-toolbar { padding: 0; border: none; margin: 0; justify-content: end; }
+  .prayer-app .schedule-toolbar > button { min-height: 30px; }
+  .prayer-app .schedule-toolbar [role='tablist'] {
+    position: fixed;
+    z-index: 15;
+    inset: auto 0 0;
+    width: 100%;
+    padding: 5px 8px max(6px, env(safe-area-inset-bottom));
+    border-radius: 0;
+    border-top: 1px solid var(--border);
+    background: var(--card);
+    box-shadow: 0 -5px 20px #07202612;
+  }
+  .prayer-app .schedule-toolbar [role='tab'] { display: grid; justify-items: center; padding: 4px 1px; font-size: .76rem; }
+  .prayer-app .schedule-toolbar [role='tab'][aria-selected='true'] { background: var(--highlight); }
+  .solar-stage-header { min-height: 54px; padding-top: 8px; }
+  .solar-markers { padding: 2px 4px 6px; gap: 1px; }
+  .solar-marker { padding-block: 4px; font-size: .69rem; }
+  .solar-marker strong { font-size: .76rem; }
+  .solar-marker svg { width: 13px; }
+  .solar-controls { padding-inline: 10px; }
+  .day-panel { grid-template-columns: minmax(0, 1fr); }
+  .countdown-card { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+  .countdown-card p { grid-column: 1 / -1; }
+  .countdown-card > span { grid-column: 2; }
+  .solar-info dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prayer-app .solar-clock *, .prayer-app .schedule-toolbar * { transition: none; }
+}
+@media (min-width: 950px) {
+  .solar-scene { max-height: 45vh; }
+}
+@media (max-width: 400px) {
+  .solar-markers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+html[dir='rtl'] .date-navigation svg { transform: scaleX(-1); }

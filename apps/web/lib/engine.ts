@@ -74,6 +74,9 @@ export type PrayerWindow = {
   choice_until: WindowBoundary | null;
   necessity_until: WindowBoundary | null;
 };
+export type SolarEvent =
+  | { status: 'occurs'; unix_seconds: number; target_altitude_deg: number | null }
+  | { status: 'missing'; reason: string };
 export type Day = {
   request: CalculationRequest;
   fingerprint: string;
@@ -82,7 +85,7 @@ export type Day = {
   astronomy_model: string;
   profile_package: string;
   prayers: Prayer[];
-  solar: Record<string, unknown>;
+  solar: Partial<Record<string, SolarEvent>>;
   solar_local: Record<string, Instant | null>;
   solar_night_midpoint: Instant | null;
   windows?: {
@@ -120,6 +123,8 @@ type Wasm = {
   calculateRange: (r: string, n: number) => string;
   validateConfiguration: (r: string) => string;
   listProfiles: () => string;
+  solarPosition: (unix: number, latitude: number, longitude: number) => Float64Array;
+  civilDayBounds: (date: string, timezone: string) => Float64Array;
 };
 let engine: Promise<Wasm> | undefined;
 export function loadEngine() {

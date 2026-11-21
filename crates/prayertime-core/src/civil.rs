@@ -107,3 +107,23 @@ pub fn tzdb_version() -> String {
         jiff_tzdb::VERSION.unwrap_or("unknown")
     )
 }
+
+/// Absolute instants of consecutive local midnights. A DST day need not be 24 hours.
+pub fn day_bounds(value: &str, zone: &str) -> Result<[f64; 2]> {
+    let day = date(value)?;
+    let tz = timezone(zone)?;
+    let midnight = |d: Date| {
+        d.at(0, 0, 0, 0)
+            .to_zoned(tz.clone())
+            .map(|z| z.timestamp().as_second() as f64)
+            .map_err(|e| Error::new("CIVIL_DATE_UNAVAILABLE", e.to_string()))
+    };
+    let bounds = [midnight(day)?, midnight(shifted(day, 1)?)?];
+    if bounds[1] <= bounds[0] {
+        return Err(Error::new(
+            "CIVIL_DATE_UNAVAILABLE",
+            "Civil date was skipped",
+        ));
+    }
+    Ok(bounds)
+}

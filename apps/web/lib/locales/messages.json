@@ -1088,5 +1088,35 @@
     "Warte auf „Offline bereit“, bevor du die Verbindung trennst. Neue Städtesuchen benötigen weiterhin Internet.",
     "انتظر ظهور «جاهز دون اتصال» قبل قطع الاتصال. البحث عن مدن جديدة يتطلب الإنترنت."
   ],
-  "Close": ["Schließen", "إغلاق"]
+  "Close": ["Schließen", "إغلاق"],
+  "Follow the sun through the five daily prayers.": ["Folge der Sonne durch die fünf täglichen Gebete.", "تابع مسار الشمس عبر الصلوات الخمس."],
+  "Solar clock": ["Sonnenuhr", "الساعة الشمسية"],
+  "Live": ["Live", "مباشر"],
+  "Simulation": ["Simulation", "محاكاة"],
+  "Prayer markers": ["Gebetsmarken", "علامات أوقات الصلاة"],
+  "Explore the day": ["Tagesverlauf erkunden", "استكشف أوقات اليوم"],
+  "Now": ["Jetzt", "الآن"],
+  "Understand Prayer Times": ["Gebetszeiten verstehen", "فهم أوقات الصلاة"],
+  "Object height": ["Objekthöhe", "ارتفاع الجسم"],
+  "Shadow length": ["Schattenlänge", "طول الظل"],
+  "Noon shadow": ["Mittagsschatten", "ظل الزوال"],
+  "Asr shadow threshold": ["Asr-Schattenlänge", "طول الظل عند دخول العصر"],
+  "After solar transit, the Asr criterion is the noon shadow plus the object height multiplied by the selected Asr factor.": ["Nach dem Sonnendurchgang beginnt Asr, wenn der Schatten dem Mittagsschatten plus der Objekthöhe mal dem gewählten Asr-Faktor entspricht.", "بعد الزوال، يبدأ العصر عندما يساوي طول الظل ظل الزوال مضافًا إليه ارتفاع الجسم مضروبًا في معامل العصر المختار."],
+  "Azimuth is measured clockwise from true north. Below the geometric horizon there is no direct shadow.": ["Der Azimut wird im Uhrzeigersinn ab geografisch Nord gemessen. Unter dem geometrischen Horizont entsteht kein direkter Sonnenschatten.", "يُقاس السمت مع عقارب الساعة من الشمال الحقيقي. تحت الأفق الهندسي لا يوجد ظل شمسي مباشر."],
+  "Solar visualization unavailable": ["Sonnenvisualisierung nicht verfügbar", "عرض الشمس غير متاح"],
+  "Preparing solar visualization…": ["Sonnenvisualisierung wird geladen…", "جارٍ تحميل عرض الشمس…"],
+  "Daily prayer times": ["Tägliche Gebetszeiten", "أوقات الصلاة اليومية"],
+  "Prayer times": ["Gebetszeiten", "أوقات الصلاة"],
+  "Prayer time explanations": ["Erläuterungen zu den Gebetszeiten", "شرح أوقات الصلاة"],
+  "No upcoming time available": ["Keine kommende Gebetszeit verfügbar", "وقت الصلاة التالية غير متاح"],
+  "Countdown available for today": ["Countdown für den heutigen Tag verfügbar", "العد التنازلي متاح لليوم الحالي"],
+  "Tomorrow": ["Morgen", "غدًا"],
+  "Settings": ["Einstellungen", "الإعدادات"],
+  "Next prayer": ["Nächstes Gebet", "الصلاة التالية"],
+  "Solar altitude": ["Sonnenhöhe", "ارتفاع الشمس"],
+  "Solar azimuth": ["Sonnenazimut", "سمت الشمس"],
+  "The engine accounts for changing solar declination when solving for Asr.": [
+    "Die Berechnung berücksichtigt die Veränderung der Sonnendeklination bis zum Asr-Zeitpunkt.",
+    "يأخذ الحساب تغيّر ميل الشمس في الحسبان عند تحديد وقت العصر."
+  ]
 }

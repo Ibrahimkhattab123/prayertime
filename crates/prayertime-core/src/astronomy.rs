@@ -195,6 +195,21 @@ pub fn altitude(unix: f64, lat: Latitude, lon: Longitude) -> f64 {
         .to_degrees()
 }
 
+/// Geometric altitude and azimuth clockwise from true north, in degrees.
+pub fn horizontal_position(unix: f64, lat: Latitude, lon: Longitude) -> [f64; 2] {
+    let c = coordinates(unix);
+    let utc_hour = unix.rem_euclid(86400.0) / 3600.0;
+    let h = 15.0 * (utc_hour + lon.0 / 15.0 + c.equation_of_time_hours - 12.0);
+    let dec = c.declination_deg;
+    let east = -cos(dec) * sin(h);
+    let north = cos(lat.0) * sin(dec) - sin(lat.0) * cos(dec) * cos(h);
+    let up = sin(lat.0) * sin(dec) + cos(lat.0) * cos(dec) * cos(h);
+    [
+        up.clamp(-1.0, 1.0).asin().to_degrees(),
+        east.atan2(north).to_degrees().rem_euclid(360.0),
+    ]
+}
+
 // At seasonal boundaries noon geometry may report no crossing although the
 // evolving declination produces one. Search the actual altitude equation before
 // declaring absence; fixed-point iteration alone cannot certify absence.

@@ -29,3 +29,16 @@ pub fn validate(request: &str) -> Result<String, JsValue> {
 pub fn list_profiles() -> String {
     core::profiles::BASELINE.into()
 }
+
+#[wasm_bindgen(js_name=solarPosition)]
+pub fn solar_position(unix: f64, latitude: f64, longitude: f64) -> Result<Vec<f64>, JsValue> {
+    core::civil::timestamp(unix).map_err(err)?;
+    let lat = core::astronomy::Latitude::new(latitude).map_err(err)?;
+    let lon = core::astronomy::Longitude::new(longitude).map_err(err)?;
+    Ok(core::astronomy::horizontal_position(unix, lat, lon).into())
+}
+
+#[wasm_bindgen(js_name=civilDayBounds)]
+pub fn civil_day_bounds(date: &str, zone: &str) -> Result<Vec<f64>, JsValue> {
+    Ok(core::civil::day_bounds(date, zone).map_err(err)?.into())
+}
