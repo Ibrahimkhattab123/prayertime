@@ -20,6 +20,7 @@ import {
   selectedSolarTime,
   shadowLength,
   sliderEnd,
+  sunIsVisible,
   timeTravelKey,
   timeTravelSlider,
   type SolarDay,
@@ -160,6 +161,7 @@ function InteractiveClock({
 }) {
   const { language } = useLanguage();
   const t = (value: string) => translate(value, language);
+  const [showReading, setShowReading] = useState(false);
   const live = simulation === null && liveDate;
   const currentTime = useLiveTime(live, now);
   const selectedTime = selectedSolarTime(day, currentTime, live, simulation);
@@ -253,6 +255,16 @@ function InteractiveClock({
     if (!liveDate) onToday();
   };
 
+  const readings = useMemo(
+    () =>
+      new Intl.NumberFormat(localeFor(language), {
+        maximumFractionDigits: 1,
+      }),
+    [language],
+  );
+  const length = shadowLength(position.altitude);
+  const sunlight = sunIsVisible(position.altitude);
+
   return (
     <section className="solar-clock" aria-label={t('Solar clock')}>
       <div className="solar-stage">
@@ -267,7 +279,41 @@ function InteractiveClock({
             {active && <span>{t(active.label)}</span>}
           </div>
         </div>
-        <SolarScene day={day} position={position} markers={markers} />
+        <SolarScene
+          day={day}
+          position={position}
+          markers={markers}
+          time={selectedTime}
+          sunLabel={t('Solar position')}
+          expanded={showReading && sunlight}
+          onToggle={() => setShowReading((open) => !open)}
+        />
+        <section
+          id="solar-position-reading"
+          className="sun-reading"
+          aria-label={t('Solar position')}
+          hidden={!showReading || !sunlight}
+        >
+          <h3>{t('Solar position')}</h3>
+          <dl>
+            <div>
+              <dt>{t('Solar altitude')}</dt>
+              <dd>{readings.format(position.altitude)}°</dd>
+            </div>
+            <div>
+              <dt>{t('Solar azimuth')}</dt>
+              <dd>{readings.format(position.azimuth)}°</dd>
+            </div>
+            <div>
+              <dt>{t('Shadow length')}</dt>
+              <dd>{length === null ? '—' : `${readings.format(length)} m`}</dd>
+            </div>
+            <div>
+              <dt>{t('Prayer phase')}</dt>
+              <dd>{active ? t(active.label) : '—'}</dd>
+            </div>
+          </dl>
+        </section>
         <section className="solar-markers" aria-label={t('Prayer markers')}>
           {events.map(
             ({

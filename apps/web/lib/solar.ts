@@ -50,7 +50,7 @@ export const objectHeight = 1.75;
 const horizonTolerance = 0.0001;
 export const sunIsVisible = (altitude: number) =>
   altitude >= horizon - horizonTolerance;
-export const ground = { x: 400, y: 338, radius: 260, tilt: 0.3 };
+export const ground = { x: 400, y: 338, radius: 290, tilt: 0.3 };
 
 export function shadowLength(altitude: number, height = objectHeight) {
   return altitude > 0 ? height / Math.tan(radians(altitude)) : null;
@@ -91,7 +91,7 @@ export function projectShadow(position: SolarPosition): Point | null {
   if (!vector) return null;
   const distance = Math.hypot(vector.x, vector.y);
   const limit = ground.radius - 22;
-  const pixelsPerMeter = 66 / objectHeight;
+  const pixelsPerMeter = 100 / objectHeight;
   const scale =
     distance > 0
       ? (limit * Math.tanh((distance * pixelsPerMeter) / limit)) / distance
@@ -165,4 +165,21 @@ export function selectedSolarTime(
   if (live) return Math.max(day.start, Math.min(day.end, now));
   if (simulation !== null) return timeTravelUnix(day, simulation);
   return day.transit ?? (day.start + day.end) / 2;
+}
+
+const smooth = (start: number, end: number, value: number) => {
+  const progress = Math.max(0, Math.min(1, (value - start) / (end - start)));
+  return progress * progress * (3 - 2 * progress);
+};
+
+export function solarLighting(altitude: number, secondsFromTransit: number) {
+  const daylight = smooth(-7, 9, altitude);
+  const evening = smooth(-3600, 3600, secondsFromTransit);
+  const warmth = smooth(-13, -2, altitude) * (1 - smooth(0, 24, altitude));
+  return {
+    daylight,
+    warmth,
+    evening,
+    stars: 1 - smooth(-17, -5, altitude),
+  };
 }

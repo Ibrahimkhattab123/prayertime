@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import init, { calculateDay, civilDayBounds, solarPosition } from '../apps/web/public/wasm/prayertime.js';
 import {
-  asrShadowThreshold, createSolarDay, ground, horizon, objectHeight, projectShadow, projectSun,
+  asrShadowThreshold, createSolarDay, ground, horizon, solarLighting, objectHeight, projectShadow, projectSun,
   selectedSolarTime, shadowLength, shadowVector, sunIsVisible, timeTravelKey, timeTravelSlider, timeTravelUnix, trajectory,
 } from '../apps/web/lib/solar.ts';
 
@@ -120,3 +120,29 @@ assert.ok(polarDay.position(polarDay.start).altitude > 0);
 assert.equal(projectShadow(polarNight.position(polarNight.transit)), null);
 
 console.log('Solar checks passed: crossings, transit, azimuth, shadow, Asr, date, location, DST and polar days.');
+
+// November afternoon in Munich must still read as daytime.
+const munich = createSolarDay(result({
+  date: '2026-11-21',
+  location: { latitude_deg: 48.1374, longitude_deg: 11.5755 },
+}), engine);
+const afternoon = Date.parse('2026-11-21T14:41:00+01:00') / 1000;
+const position = munich.position(afternoon);
+const light = solarLighting(position.altitude, afternoon - munich.transit);
+assert.ok(light.daylight > 0.75);
+assert.ok(light.evening > 0.9);
+assert.equal(light.stars, 0);
+assert.equal(solarLighting(-18, -20000).daylight, 0);
+assert.equal(solarLighting(-18, 20000).stars, 1);
+assert.ok(solarLighting(0, -12000).warmth > 0.8);
+assert.ok(solarLighting(0, -12000).evening < solarLighting(0, 12000).evening);
+const projected = projectSun(position);
+const groundShadow = projectShadow(position);
+assert.ok(projected.x > ground.x && groundShadow.x < 0);
+const azimuth = position.azimuth * Math.PI / 180;
+const shadowX = groundShadow.x;
+const shadowNorth = groundShadow.y / ground.tilt;
+const shadowMagnitude = Math.hypot(shadowX, shadowNorth);
+close(shadowX / shadowMagnitude, Math.sin(azimuth));
+close(shadowNorth / shadowMagnitude, -Math.cos(azimuth));
+console.log(`Munich at 14:41: altitude ${position.altitude.toFixed(1)}°, azimuth ${position.azimuth.toFixed(1)}°, shadow ${shadowLength(position.altitude).toFixed(1)} m.`);

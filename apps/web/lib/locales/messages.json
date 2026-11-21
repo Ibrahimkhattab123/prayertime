@@ -1136,5 +1136,7 @@
   "Wait until PrayerTime is ready offline, then try again.": ["Warte, bis PrayerTime offline bereit ist, und versuche es erneut.","انتظر حتى يصبح PrayerTime جاهزًا للعمل دون اتصال ثم حاول مجددًا."],
   "Prayer reminders turned on.": ["Gebetserinnerungen aktiviert.","تم تفعيل تذكيرات الصلاة."],
   "Could not change prayer reminders. Check your connection and try again.": ["Erinnerungen konnten nicht geändert werden. Prüfe die Verbindung und versuche es erneut.","تعذّر تغيير تذكيرات الصلاة. تحقق من الاتصال وحاول مجددًا."],
-  "Could not play the Adhan. Check your connection and try again.": ["Der Azan konnte nicht abgespielt werden. Prüfe die Verbindung und versuche es erneut.","تعذّر تشغيل الأذان. تحقق من الاتصال وحاول مجددًا."]
+  "Could not play the Adhan. Check your connection and try again.": ["Der Azan konnte nicht abgespielt werden. Prüfe die Verbindung und versuche es erneut.","تعذّر تشغيل الأذان. تحقق من الاتصال وحاول مجددًا."],
+  "Solar position": ["Sonnenposition","موضع الشمس"],
+  "Prayer phase": ["Gebetsphase","مرحلة الصلاة"]
 }

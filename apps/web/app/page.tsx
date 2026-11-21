@@ -1089,7 +1089,7 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <Tabs value={mode} onValueChange={setMode}>
+              <Tabs className="schedule-tabs" value={mode} onValueChange={setMode}>
                 <div className="schedule-toolbar">
                   <TabsList>
                     <TabsTrigger value="daily">

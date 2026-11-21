@@ -1339,6 +1339,8 @@ html[dir='rtl'] .fingerprint {
 .prayer-app .schedule-heading .eyebrow { margin-bottom: 5px; letter-spacing: .08em; line-height: 1.25; }
 .prayer-app .hijri-date { margin-top: .25rem; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .prayer-app .hijri-date p { font-size: .87rem; }
+.schedule-tabs { display: grid; grid-template-columns: minmax(0, 1fr); }
+.schedule-tabs > [role='tabpanel'], .schedule-tabs .table-scroll { min-width: 0; width: 100%; }
 .prayer-app .schedule-toolbar { margin-bottom: 8px; padding-block: 10px; }
 .prayer-app .schedule-toolbar [role='tablist'] { height: auto; }
 .prayer-app .schedule-toolbar [role='tab'] { padding: 7px 12px; }
@@ -1410,6 +1412,13 @@ html[dir='rtl'] .fingerprint {
 .clock-mode > span { width: 6px; height: 6px; border-radius: 50%; background: #e6c187; }
 .clock-mode.is-live > span { background: #8bdeb2; }
 .solar-scene { display: block; width: 100%; height: auto; }
+.scene-sun[role='button'] { cursor: pointer; outline: none; }
+.scene-sun:focus-visible .sun-target { stroke: #fff; stroke-width: 3; }
+.sun-reading { margin: 0; padding: 10px 14px 14px; background: var(--card); color: var(--foreground); border-top: 1px solid var(--border); }
+.sun-reading h3 { font-size: .95rem; font-weight: 650; }
+.sun-reading dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 16px; margin-block: 7px 0; }
+.sun-reading dt { color: var(--muted-foreground); font-size: .8rem; }
+.sun-reading dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; unicode-bidi: isolate; }
 .scene-compass { font-family: Georgia, serif; letter-spacing: .08em; direction: ltr; }
 .solar-markers {
   display: grid;
@@ -1514,6 +1523,7 @@ html[dir='rtl'] .fingerprint {
   .prayer-app .intro p:last-child { font-size: .84rem; }
   .settings-toggle { padding-inline: 6px; gap: 4px; font-size: .78rem; }
   .settings-toggle svg { width: 14px; }
+  .prayer-app .schedule { padding-inline: 8px; }
   .prayer-app .schedule-heading { align-items: flex-start; }
   .prayer-app .schedule-heading .eyebrow, .prayer-app .hijri-date small { display: none; }
   .prayer-app .schedule-toolbar { padding: 0; border: none; margin: 0; justify-content: end; }
