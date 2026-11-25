@@ -245,6 +245,45 @@ export function PrayerReminders({ request }: { request: CalculationRequest }) {
     }
   };
 
+  const testNotification = async () => {
+    const local = readPreference();
+    if (!local?.enabled || busy || !online) return;
+    setBusy(true);
+    setStatus('');
+    try {
+      await updates.current;
+      const response = await fetch(api + '/subscription/test', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + local.key },
+        signal: AbortSignal.timeout(20000),
+      });
+      if (response.ok) {
+        setStatus(
+          'The push service accepted the test. Check your notifications.',
+        );
+      } else if (response.status === 404 || response.status === 410) {
+        setStatus(
+          'This device is no longer registered. Turn reminders off, then turn them on again.',
+        );
+      } else if (response.status === 429) {
+        setStatus('Wait one minute before sending another test.');
+      } else {
+        const result = (await response.json()) as { providerStatus?: number };
+        setStatus(
+          result.providerStatus === 401 || result.providerStatus === 403
+            ? 'The push service rejected this subscription. Turn reminders off, then turn them on again.'
+            : 'The reminder service could not send the test. Try again shortly.',
+        );
+      }
+    } catch {
+      setStatus(
+        'The reminder service could not send the test. Try again shortly.',
+      );
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const play = () => {
     if (!audio.current) return;
     const url = 'https://praytimes.org/audio/sunni/' + selected + '.mp3';
@@ -295,6 +334,16 @@ export function PrayerReminders({ request }: { request: CalculationRequest }) {
           >
             {t(enabled ? 'Turn off reminders' : 'Enable prayer reminders')}
           </Button>
+          {enabled && (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => void testNotification()}
+              disabled={busy || !online}
+            >
+              {t('Send test notification')}
+            </Button>
+          )}
         </div>
         <div>
           <h2>{t('Sunni Adhan')}</h2>

@@ -1138,5 +1138,11 @@
   "Could not change prayer reminders. Check your connection and try again.": ["Erinnerungen konnten nicht geändert werden. Prüfe die Verbindung und versuche es erneut.","تعذّر تغيير تذكيرات الصلاة. تحقق من الاتصال وحاول مجددًا."],
   "Could not play the Adhan. Check your connection and try again.": ["Der Azan konnte nicht abgespielt werden. Prüfe die Verbindung und versuche es erneut.","تعذّر تشغيل الأذان. تحقق من الاتصال وحاول مجددًا."],
   "Solar position": ["Sonnenposition","موضع الشمس"],
-  "Prayer phase": ["Gebetsphase","مرحلة الصلاة"]
+  "Prayer phase": ["Gebetsphase","مرحلة الصلاة"],
+  "Send test notification": ["Testbenachrichtigung senden","إرسال إشعار اختبار"],
+  "The push service accepted the test. Check your notifications.": ["Der Push-Dienst hat den Test angenommen. Prüfe deine Mitteilungen.","قبلت خدمة الإشعارات الاختبار. تحقق من إشعاراتك."],
+  "This device is no longer registered. Turn reminders off, then turn them on again.": ["Dieses Gerät ist nicht mehr registriert. Schalte die Erinnerungen aus und wieder ein.","لم يعد هذا الجهاز مسجلاً. أوقف التذكيرات ثم فعّلها مجددًا."],
+  "Wait one minute before sending another test.": ["Warte eine Minute, bevor du einen weiteren Test sendest.","انتظر دقيقة قبل إرسال اختبار آخر."],
+  "The push service rejected this subscription. Turn reminders off, then turn them on again.": ["Der Push-Dienst hat dieses Abo abgelehnt. Schalte die Erinnerungen aus und wieder ein.","رفضت خدمة الإشعارات هذا الاشتراك. أوقف التذكيرات ثم فعّلها مجددًا."],
+  "The reminder service could not send the test. Try again shortly.": ["Der Erinnerungsdienst konnte den Test nicht senden. Versuche es gleich erneut.","تعذّر إرسال إشعار الاختبار. حاول مجددًا بعد قليل."]
 }

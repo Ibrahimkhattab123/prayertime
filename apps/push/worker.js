@@ -23,6 +23,57 @@ export class PrayerReminders extends DurableObject {
     });
   }
 
+  async send(subscription, message, ttl) {
+    const payload = await buildPushPayload(
+      { data: message, options: { ttl, urgency: "high" } },
+      subscription,
+      {
+        subject: this.env.VAPID_SUBJECT,
+        publicKey: this.env.VAPID_PUBLIC_KEY,
+        privateKey: this.env.VAPID_PRIVATE_KEY,
+      },
+    );
+    const response = await fetch(subscription.endpoint, {
+      ...payload,
+      redirect: "error",
+      signal: AbortSignal.timeout(10000),
+    });
+    await response.body?.cancel();
+    return response.status;
+  }
+
+  async testNotification() {
+    const now = Date.now();
+    const result = await this.ctx.storage.transaction(async (txn) => {
+      const record = await txn.get("registration");
+      if (!record) return { status: 404 };
+      const lastTest = await txn.get("lastTest");
+      if (lastTest && now - lastTest < 60000) return { status: 429 };
+      await txn.put("lastTest", now);
+      return { record };
+    });
+    if (!result.record) return result;
+    const { subscription, language } = result.record;
+    const titles = {
+      en: "PrayerTime test notification",
+      de: "PrayerTime-Testbenachrichtigung",
+      ar: "إشعار اختبار من PrayerTime",
+    };
+    const instruction = notificationFor({ time: now, names: [] }, language);
+    try {
+      const providerStatus = await this.send(
+        subscription,
+        { ...instruction, title: titles[language] },
+        120,
+      );
+      if (providerStatus >= 200 && providerStatus < 300) return { status: 200 };
+      if ([404, 410].includes(providerStatus)) return { status: 410 };
+      return { status: 502, providerStatus };
+    } catch {
+      return { status: 502 };
+    }
+  }
+
   async alarm() {
     const record = await this.ctx.storage.get("registration");
     if (!record) return;
@@ -31,29 +82,16 @@ export class PrayerReminders extends DurableObject {
     let discard = false;
     let retry = false;
     if (event.names.length && now - event.time < grace && event.time <= now) {
-      const payload = await buildPushPayload(
-        {
-          data: JSON.stringify(notificationFor(event, language)),
-          options: { ttl: Math.max(1, Math.ceil((event.time + grace - now) / 1000)) },
-        },
-        subscription,
-        {
-          subject: this.env.VAPID_SUBJECT,
-          publicKey: this.env.VAPID_PUBLIC_KEY,
-          privateKey: this.env.VAPID_PRIVATE_KEY,
-        },
-      );
       try {
-        const response = await fetch(subscription.endpoint, {
-          ...payload,
-          redirect: "error",
-          signal: AbortSignal.timeout(10000),
-        });
-        await response.body?.cancel();
-        discard = [404, 410].includes(response.status);
-        retry = response.status === 429 || response.status >= 500;
-        if (!response.ok && !discard && !retry)
-          console.warn("Push service rejected a prayer notification", response.status);
+        const status = await this.send(
+          subscription,
+          notificationFor(event, language),
+          Math.max(1, Math.ceil((event.time + grace - now) / 1000)),
+        );
+        discard = [404, 410].includes(status);
+        retry = status === 429 || status >= 500;
+        if (status >= 400 && !discard && !retry)
+          console.warn("Push service rejected a prayer notification", status);
       } catch {
         retry = true;
       }
@@ -102,7 +140,7 @@ export default {
       return new Response(null, { status: 403 });
     const headers = {
       "Access-Control-Allow-Origin": env.APP_ORIGIN,
-      "Access-Control-Allow-Methods": "GET, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Authorization, Content-Type",
       "Cache-Control": "no-store",
       Vary: "Origin",
@@ -115,7 +153,8 @@ export default {
         return reply({ error: "Unavailable" }, 503);
       return reply({ publicKey: env.VAPID_PUBLIC_KEY });
     }
-    if (pathname !== "/subscription" || !["PUT", "DELETE"].includes(request.method))
+    const isTest = pathname === "/subscription/test" && request.method === "POST";
+    if (!isTest && (pathname !== "/subscription" || !["PUT", "DELETE"].includes(request.method)))
       return reply({ error: "Not found" }, 404);
     const capability = request.headers.get("Authorization")?.match(/^Bearer ([a-f0-9]{64})$/)?.[1];
     if (!capability) return reply({ error: "Invalid registration key" }, 401);
@@ -124,6 +163,10 @@ export default {
     });
     if (!success) return reply({ error: "Too many requests" }, 429);
     const stub = env.REMINDERS.getByName(capability);
+    if (isTest) {
+      const { status, providerStatus } = await stub.testNotification();
+      return reply({ accepted: status === 200, providerStatus }, status);
+    }
     if (request.method === "DELETE") {
       await stub.remove();
       return new Response(null, { status: 204, headers });
