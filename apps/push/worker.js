@@ -35,7 +35,7 @@ export class PrayerReminders extends DurableObject {
     );
     const response = await fetch(subscription.endpoint, {
       ...payload,
-      redirect: "error",
+      redirect: "manual",
       signal: AbortSignal.timeout(10000),
     });
     await response.body?.cancel();
